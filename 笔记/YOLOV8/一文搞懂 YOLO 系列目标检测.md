@@ -1,5 +1,3 @@
-> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 [blog.csdn.net](https://blog.csdn.net/qq_45591302/article/details/139843795?ops_request_misc=%257B%2522request%255Fid%2522%253A%25222a977ec65afdd46bcce61e8c7168c0cb%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=2a977ec65afdd46bcce61e8c7168c0cb&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-139843795-null-null.142^v102^pc_search_result_base1&utm_term=yolo%E5%B0%8F%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B&spm=1018.2226.3001.4187)
-
 > **目标检测入门精品文章**
 
  **本文介绍目标检测基础概念，算法发展历史，YOLOV8 环境配置，数据集标注，模型评估指标，改进策略。帮助小白从入门到精通。**
@@ -475,4 +473,3 @@ make_yolo_dataset(images_folder, labels_folder, output_folder)
 
 ![](https://i-blog.csdnimg.cn/direct/de0ed4a333de442f915013dc39591367.png)
 
-持续更新中。。。。。
