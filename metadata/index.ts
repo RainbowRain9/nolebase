@@ -9,7 +9,7 @@ export const include = ['笔记', '生活']
 /** Repo */
 export const githubRepoLink = 'https://github.com/RainbowRain9/nolebase'
 /** Notion */
-export const notionLink = 'https://tarry-hour-fda.notion.site/integrated-learning-area'
+export const discordLink = 'https://tarry-hour-fda.notion.site/integrated-learning-area'
 
 /** 无协议前缀域名 */
 export const plainTargetDomain = 'note.rainbowrain.top'

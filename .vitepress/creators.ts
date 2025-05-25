@@ -1,5 +1,5 @@
 export interface SocialEntry {
-  type: 'github' | 'notion' | 'email'
+  type: 'github' | 'twitter' | 'email'
   icon: string
   link: string
 }
@@ -16,18 +16,18 @@ export interface Creator {
   emailAliases?: string[]
 }
 
-const getAvatarUrl = (name: string) => `https://github.com/RainbowRain9.png`
+const getAvatarUrl = (name: string) => `https://github.com/${name}.png`
+
 
 export const creators: Creator[] = [
   {
     name: '彩虹雨',
     avatar: '',
-    username: 'RainbowRain',
+    username: 'RainbowRain9',
     title: 'RainbowRain',
     desc: '前后端开发，小程序开发，无人机目标检测',
     links: [
-      { type: 'github', icon: 'github', link: 'https://github.com/RainbowRain9' },
-      { type: 'notion', icon: 'notion', link: 'https://tarry-hour-fda.notion.site/integrated-learning-area' },
+      { type: 'github', icon: 'github', link: 'https://github.com/RainbowRain9' }
     ],
     nameAliases: ['rainbowrain', '彩虹雨', 'RainbowRain'],
     emailAliases: ['rainbowrain9@qq.com'],

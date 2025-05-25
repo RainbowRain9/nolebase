@@ -48,3 +48,9 @@ components.d.ts
 # Logs
 
 *.log
+
+# Memory
+
+# Mery.json
+
+memory.json
