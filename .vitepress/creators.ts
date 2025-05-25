@@ -1,5 +1,5 @@
 export interface SocialEntry {
-  type: 'github' | 'twitter' | 'email'
+  type: 'github' | 'notion' | 'email'
   icon: string
   link: string
 }
@@ -16,34 +16,21 @@ export interface Creator {
   emailAliases?: string[]
 }
 
-const getAvatarUrl = (name: string) => `https://github.com/${name}.png`
+const getAvatarUrl = (name: string) => `https://github.com/RainbowRain9.png`
 
 export const creators: Creator[] = [
   {
-    name: '絢香猫',
+    name: '彩虹雨',
     avatar: '',
-    username: 'nekomeowww',
-    title: 'Nólëbase 原始创作者',
-    desc: '开发者，专注于基础设施维护，数据分析，后端、DevOps 开发',
+    username: 'RainbowRain',
+    title: 'RainbowRain',
+    desc: '前后端开发，小程序开发，无人机目标检测',
     links: [
-      { type: 'github', icon: 'github', link: 'https://github.com/nekomeowww' },
-      { type: 'twitter', icon: 'twitter', link: 'https://twitter.com/ayakaneko' },
+      { type: 'github', icon: 'github', link: 'https://github.com/RainbowRain9' },
+      { type: 'notion', icon: 'notion', link: 'https://tarry-hour-fda.notion.site/integrated-learning-area' },
     ],
-    nameAliases: ['nekomeowww', '绚香猫', '絢香猫', 'Neko Ayaka', 'Ayaka Neko'],
-    emailAliases: ['neko@ayaka.moe'],
-  },
-  {
-    name: '絢香音',
-    avatar: '',
-    username: 'LittleSound',
-    title: 'Nólëbase 原始创作者',
-    desc: '开源开发者，专注于前端，以及前端相关工具库和工具链开发',
-    links: [
-      { type: 'github', icon: 'github', link: 'https://github.com/LittleSound' },
-      { type: 'twitter', icon: 'twitter', link: 'https://twitter.com/OikawaRizumu' },
-    ],
-    nameAliases: ['LittleSound', '绚香音', '絢香音', 'Rizumu Oikawa', 'Rizumu Ayaka', 'Ayaka Rizumu', 'Rizumu'],
-    emailAliases: ['rizumu@ayaka.moe', 'rizumu@oqo.moe'],
+    nameAliases: ['rainbowrain', '彩虹雨', 'RainbowRain'],
+    emailAliases: ['rainbowrain9@qq.com'],
   },
 ].map<Creator>((c) => {
   c.avatar = c.avatar || getAvatarUrl(c.username)
