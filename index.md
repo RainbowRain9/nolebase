@@ -7,7 +7,7 @@ titleTemplate: 软件工程学生的学习与项目记录
 
 hero:
   name: 彩虹雨
-  text: 彩虹绘梦雨润成长\n技术之路步步生辉
+  text: 彩虹绘梦雨润成长  技术之路步步生辉
   tagline: 专注于前后端开发、小程序开发、无人机目标检测等技术领域的学习与实践
   image:
     src: /logo.svg
