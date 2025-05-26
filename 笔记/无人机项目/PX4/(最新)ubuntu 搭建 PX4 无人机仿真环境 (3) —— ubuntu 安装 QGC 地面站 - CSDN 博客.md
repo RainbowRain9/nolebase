@@ -56,7 +56,7 @@ sudo apt install libxcb-xinerama0 libxkbcommon-x11-0 libxcb-cursor0 -y
 -----
 
 打开 [官方教程](https://docs.qgroundcontrol.com/master/en/qgc-user-guide/getting_started/download_and_install.html) ，往下滑找到 **Ubuntu Linux** ，点击下载 **（官网上默认下载最新稳定版）**  
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (3) —— ubuntu 安装 QGC 地面站 - CSDN 博客/a63361ee4542df148dd6ee6a2e2a89f0_MD5.png]]
+![[a63361ee4542df148dd6ee6a2e2a89f0_MD5.png]]
 
 > 如果需要其他版本，可以打开 [releases](https://github.com/mavlink/qgroundcontrol/releases/) 找到自己想要的版本，点击 AppImage 后缀的安装包即可。
 > 
@@ -91,7 +91,7 @@ chmod +x QGroundControl.AppImage
 -------
 
 **错误** 1️⃣：  
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (3) —— ubuntu 安装 QGC 地面站 - CSDN 博客/3f48093b2d0a015454ef61c2bfdd68e4_MD5.png]] 
+![[3f48093b2d0a015454ef61c2bfdd68e4_MD5.png]] 
 **原因是缺少依赖 ，输入下面命令安装即可。**
 
 ```
@@ -110,11 +110,11 @@ sudo apt-get install libsdl2-mixer-2.0-0 libsdl2-image-2.0-0 libsdl2-2.0-0
 **原因是系统的 glibc 库版本低于 QGC 的要求，但是这是系统自带的，不建议升级，所以重新下载低版本的 QGC 就可以了。**
 
 再次运行，成功！（后面就可以双击安装包打开了）  
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (3) —— ubuntu 安装 QGC 地面站 - CSDN 博客/7433ef8d30e478f609ca58a4954f6eb2_MD5.png]]
+![[7433ef8d30e478f609ca58a4954f6eb2_MD5.png]]
 
 **注：** 如果不习惯英文界面在设置里更换  
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (3) —— ubuntu 安装 QGC 地面站 - CSDN 博客/0528d3e40f23e6d027054d9bec74c5c5_MD5.png]] 
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (3) —— ubuntu 安装 QGC 地面站 - CSDN 博客/6613dec5fedf5083f9a70d8708b576f6_MD5.png]]
+![[0528d3e40f23e6d027054d9bec74c5c5_MD5.png]] 
+![[6613dec5fedf5083f9a70d8708b576f6_MD5.png]]
 
 > 如有其他问题，或者发现文章有错误，请在评论区留言  
 > Keep learning！
