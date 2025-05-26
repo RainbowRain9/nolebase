@@ -53,7 +53,7 @@ sudo ./install_geographiclib_datasets.sh  #这步可能需要装一段时间
 ```
 
 **注：如果 10 分钟了都没安装好，可以参考后面安装 GeographicLib datasets 缓慢的章节**  
-![](https://i-blog.csdnimg.cn/blog_migrate/a3f7aa53d218ca22d10e94850e8cb5fe.png#pic_center)
+![[0a46beb936fb500f1a69e8152f89149d_MD5.png]]
 
 *   更新环境：
 
@@ -105,7 +105,7 @@ rosdep install --from-paths src --ignore-src -y  # 安装依赖
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/3a6c238c7aff5b82c2d95d9c8edff7fc.png#pic_center)
+![[4ffbff9d4c930012dd713b54a3309944_MD5.png]]
 
 *   安装 `GeographicLib datasets` ：
 
@@ -128,7 +128,7 @@ catkin build
 
 编译成功
 
-![](https://i-blog.csdnimg.cn/blog_migrate/28a6c48bb7933cf65af9229ac3e6f077.png#pic_center)
+![[10f7047a3359d561ef7c8c98f5ce5d2a_MD5.png]]
 
 *   配置环境
 
@@ -163,7 +163,7 @@ rosinstall_generator --format repos --upstream mavros | tee -a /tmp/mavros.repos
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/13678682bbfd7d5e23c82a9486e033d1.png#pic_center)
+![[0b7c151c91f3aee5a0c60fe2d0a2debb_MD5.png]]
 
 ```
 vcs import src < /tmp/mavlink.repos
@@ -172,14 +172,14 @@ vcs import src < /tmp/mavros.repos
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/a356a940c051313b3f409b4e80b1495a.png#pic_center)
+![[76de88146edc4cf4da5c2e805769e403_MD5.png]]
 
 ```
 rosdep install --from-paths src --ignore-src -y
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/9c3d1a1ba5cc60ad11a896b43f58e023.png#pic_center)
+![[b8a9c20a7c55cc9f2878d071a5570f7e_MD5.png]]
 
 *   安装 `GeographicLib datasets` ：
 
@@ -199,7 +199,7 @@ colcon build # 大概10分钟左右，跟个人配置有关
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/271521a965c75be76f4b372ed5bc30c5.png#pic_center)
+![[df47605d65d9ba61ef100e76188e023b_MD5.png]]
 
 *   配置环境
 
@@ -222,7 +222,7 @@ sudo ./install_geographiclib_datasets.sh
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/6d68a7ed5b811d739639241a53ca657f.png#pic_center)
+![[f8e8560d4e89d8d8cb55fe8b3da36972_MD5.png]]
 
 4. 检测
 -----
@@ -245,16 +245,16 @@ ros2 pkg prefix mavros
 
 如果用方式法一，结果大致如下：  
 **ROS1:**  
-![](https://i-blog.csdnimg.cn/blog_migrate/4e5afab09efd4dfa2d41f3f633eab1ba.png#pic_center)  
+![[738b88516809e7f6747f3aee6f4bf0b8_MD5.png]] 
 **ROS2:**  
-![](https://i-blog.csdnimg.cn/blog_migrate/66bd29b4addfd719903adc361f7acee7.png#pic_center)
+![[8cd4c61462af473d470987b4cbc4ab40_MD5.png]]
 
 如果是方式法二，结果大致如下：
 
-**ROS1:** ![](https://i-blog.csdnimg.cn/blog_migrate/a1c275037ab673ad4831512a95b1c8b1.png#pic_center)  
+**ROS1:** ![[05c9a8d7570f6c2416b5c53422d63d9d_MD5.png]] 
 **ROS2:**
 
-![](https://i-blog.csdnimg.cn/blog_migrate/59b6a02269050110088a560c4fbaeb0e.png#pic_center)
+![[04dda39b56ef61c85253a72ba9473fb1_MD5.png]]
 
 > 如有其他问题，或者发现文章有错误，请在评论区留言  
 > Keep learning！

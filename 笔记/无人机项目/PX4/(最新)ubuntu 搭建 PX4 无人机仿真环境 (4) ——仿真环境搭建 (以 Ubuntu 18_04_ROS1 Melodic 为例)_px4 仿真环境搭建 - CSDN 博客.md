@@ -94,7 +94,7 @@ chmod +x set_executable.sh
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/75e66860eee1c72c5c4e97413c8d0f85.png#pic_center)
+![[14795bed298f5ab22fa898029b442913_MD5.png]]
 
 ### 1.2 安装依赖
 
@@ -134,7 +134,7 @@ gazebo --version
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/fb11a7e037d6278d714aaa4c747e77f9.png#pic_center)
+![[026b615b05944b9eda2e1065b6d6cf9b_MD5.png]]
 
 如果出现 **上图内容**，说明没有安装，直接跳到开始安装这一步。如果出现了 **gazebo 的版本信息** 说明已经安装了，要卸载，命令如下：
 
@@ -164,7 +164,7 @@ gazebo --version
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/b9c09bc2ed63aa0693338078ff03a71a.png#pic_center)
+![[acf0e2dad10571118af4b5bfc2c8fc7e_MD5.png]]
 
 再运行一下 **gazebo** ：
 
@@ -173,7 +173,7 @@ gazebo
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/92abaafbe8211d00872c33e414fa19fd.png#pic_center)
+![[0d0d7c23058f4e1244c5abe9edc00075_MD5.png]]
 
 如果是在虚拟机上，可能出现上图错误，输入以下命令：
 
@@ -191,7 +191,7 @@ gazebo
 ```
 
 出现下图，表示运行成功：  
-![](https://i-blog.csdnimg.cn/blog_migrate/5ac0eb8bf2366dbd8dd53182b361682c.png#pic_center)  
+![[b6fe73d11fc74dcd4531cf8988716a38_MD5.png]] 
 **注：**  
 运行 Gazebo 仿真，可能会缺模型，这时会自动下载，Gazebo 模型服务器在国外，自动下载会比较久，所以我们可以先下载到本地。
 
@@ -219,9 +219,9 @@ make px4_sitl_default gazebo   # 这步可能有点慢，跟 ubuntu 的配置有
 ```
 
 出现下图表示编译成功 😄  
-![](https://i-blog.csdnimg.cn/blog_migrate/a7affb86d0d347e72744f930296224c6.png#pic_center)  
+![[20f1e2930160fcb40987cb3284429c3a_MD5.png]] 
 **注：如果运行后终端有下图报错，这个不影响仿真，不用管也行。这是因为 gazebo 会检查 models 文件夹下是否有 model.config 文件，但是 .git 文件夹不属于 model 文件，那自然也不会有 model.config 文件。如果觉得难受就从其他 model.config 文件复制修改一个过来，或者删掉 .git 文件夹。**  
-![](https://i-blog.csdnimg.cn/blog_migrate/803a09adb662e0fddb2104b098a4c849.png#pic_center)
+![[50aaacb2d637ee3776bbf9219a90bd54_MD5.png]]
 
 3. 配置环境
 -------
@@ -272,7 +272,7 @@ source ~/.bashrc
 ```
 
 关掉终端，再次打开，会跟下图差不多： （这是 PX4 v1.13.2）  
-![](https://i-blog.csdnimg.cn/blog_migrate/490ac168c05ab8d6d2981e1b315d78bd.png#pic_center)
+![[bbdc45540e279820c704ab8a742f1cbc_MD5.png]]
 
 4. 测试
 -----
@@ -284,7 +284,7 @@ roslaunch px4 mavros_posix_sitl.launch
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/15aa6ffb4bb601ddd3701ac09328f7c7.png#pic_center)
+![[5683f4ce09f9ff98255f57b3b7525002_MD5.png]]
 
 打开另一个终端，运行下面命令，查看 MAVROS 与仿真无人机通信状况。**若 connected: True，则通信成功，如果是 false，一般是因为 .bashrc 里的路径写的不对，请仔细检查。**
 
@@ -294,7 +294,7 @@ rostopic echo /mavros/state | grep connected    # 只查看 connected 信息
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/58b2cbe9b4a3d0b95f8e096031fad42a.png#pic_center)
+![[380b228ad56423c11e1a990586cce5fc_MD5.png]]
 
 **到这 PX4 无人机基本仿真环境就搭建完成了，大家可以基于此来拓展自己的仿真。  
 也可以继续看下面教程** 👇
@@ -302,7 +302,7 @@ rostopic echo /mavros/state | grep connected    # 只查看 connected 信息
 [带你玩转 PX4 无人机仿真 (1) —— 运行官方案例（C++）](https://blog.csdn.net/weixin_55944949/article/details/132570487?spm=1001.2014.3001.5501)
 
 **建了个交流群，方便大家交流学习** 😁  
-![](https://i-blog.csdnimg.cn/blog_migrate/dbd07a97ad391accf2fc4b9007e9dc51.jpeg#pic_center)
+![[1932ceba0e5f0448040bb277e74f0fdf_MD5.jpg]]
 
 > 如有其他问题，或者发现文章有错误，请在评论区留言  
 > Keep learning！

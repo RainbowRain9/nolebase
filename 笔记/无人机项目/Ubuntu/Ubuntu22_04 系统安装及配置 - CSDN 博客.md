@@ -59,29 +59,29 @@ updated: 2025-05-24T22:23
 
 # 一、选择 “安装”
 
-![](https://i-blog.csdnimg.cn/blog_migrate/29d4d2f2537ea81a05aebb65d818486b.jpeg)
+![[911fbd3cff368504eb555d422f702875_MD5.jpg]]
 
 # 二、选择 “语言”
 
-![](https://i-blog.csdnimg.cn/blog_migrate/07d2f0c79b8c076ee37e0695909adb6c.jpeg)
+![[35ab8b736884d1fa187a24f583c0fd6e_MD5.jpg]]
 
 选择语言为英文，不管有没有中文，都选英文。主要是字符集等一系列可能引发小问题。
 
 # 三、安装器更新
 
-![](https://i-blog.csdnimg.cn/blog_migrate/6d6a23c007dc39656d7e6b98a9f9215d.jpeg)
+![[82a478f22847347679c648da1aafc642_MD5.jpg]]
 
 这里选择不更新
 
 # 四、键盘布局
 
-![](https://i-blog.csdnimg.cn/blog_migrate/6ad6286be1f238ca13bd18bef83c62b8.jpeg)
+![[61284d6ac5cd4d8f0e1b00109837dc8e_MD5.jpg]]
 
 键盘布局，默认选项。
 
 # 五、选择安装类型
 
-![](https://i-blog.csdnimg.cn/blog_migrate/f370397169f6bbbc21f06a9e7777a313.jpeg)
+![[fb0b4a34641ba1eb7cbbe4ba3dce86bb_MD5.jpg]]
 
 安装版本，选择默认的 server 版，没有选 minimized 版。就不纠结那些默认安装包啥的了。遇到问题再说，减少麻烦。
 
@@ -89,17 +89,17 @@ updated: 2025-05-24T22:23
 
 **方案一：**
 
-![](https://i-blog.csdnimg.cn/blog_migrate/3473b59ed6cf5e517cb66cc4678ce598.jpeg)
+![[74e6fb148239063a28a2e02d3e6b0cb0_MD5.jpg]]
 
 网络配置，这里可以默认，待安装完成后，再进入系统，修改网络配置文件来进行配置静态 IP。(**参考:** 十五、配置静态 IP)
 
 **方案二：**
 
-![](https://i-blog.csdnimg.cn/blog_migrate/436d4d630f30316b56497cc0ba9dde4a.jpeg)
+![[b0717bb5a4525fa9cb4e28016e15ed8e_MD5.jpg]]
 
 也可以在安装过程中，直接配置静态 IP。如上图，选择 “Edit IPv4” 进入如下界面：
 
-![](https://i-blog.csdnimg.cn/blog_migrate/85127f8df17fe33b9aee689492ab4226.jpeg)
+![[29514f432add1d6a7d41e51441e5a733_MD5.jpg]]
 
 在该界面中，配置 IP 相关信息。
 
@@ -160,44 +160,44 @@ updated: 2025-05-24T22:23
 
 # 七、代理设置
 
-![](https://i-blog.csdnimg.cn/blog_migrate/8aa7c9881a67e604fe3feef50d34d8ad.jpeg)
+![[1b1360314a6935a05676958587540593_MD5.jpg]]
 
 默认选项，不设置。
 
 # 八、镜像地址
 
-![](https://i-blog.csdnimg.cn/blog_migrate/06d081d8cba3be82ad16051d8cb20969.jpeg)
+![[8fd3d3cdfb6b057a96c0ee22af77df55_MD5.jpg]]
 
 ​国内也没有被墙，可以不改。不过，最近感觉越来越慢了，可以改成阿里云的：http://mirrors.aliyun.com/ubuntu/
 
-![](https://i-blog.csdnimg.cn/blog_migrate/4538188b5da9291c051850c181869743.jpeg)
+![[e706ca4b7361f7061e2ad50292921a01_MD5.jpg]]
 
 # 九、******磁盘划分******
 
-![](https://i-blog.csdnimg.cn/blog_migrate/d90deeba048fe01fb3d75c116968c700.jpeg)
+![[4d22b568848290df223e3f6026d738ee_MD5.jpg]]
 
 该界面默认设置，不修改。
 默认使用 LVM 逻辑卷，便于后期动态在线调整磁盘空间。
 
-![](https://i-blog.csdnimg.cn/blog_migrate/9083cd3b153c3cb6ce396db29f7f9906.jpeg)
+![[91cb4cbd54bcb344050ab033965def41_MD5.jpg]]
 
 选择 / 分区，然后 Unmount 卸载。
 
 **注意：**不要 Unmount 卸载 /boot 分区，该分区是系统的引导分区。若卸载了，系统就出问题了。
 
-![](https://i-blog.csdnimg.cn/blog_migrate/251f1b9bd70ddd8b0647e219b28ae072.jpeg)
+![[f89e8d0194da0675d1f6a82bd3d41ece_MD5.jpg]]
 
 然后将默认创建的 lv 逻辑卷删除，后面根据自己的需要手动创建 lv 逻辑卷。
 
-![](https://i-blog.csdnimg.cn/blog_migrate/8aee00da8d8102735590767f319bad35.jpeg)
+![[a8fe5ed263dc80f682edfa0cd3410162_MD5.jpg]]
 
 对删除操作进行二次确认
 
-![](https://i-blog.csdnimg.cn/blog_migrate/f2cdde0a02bea161535e00b54e887fe6.jpeg)
+![[04bf67f9084d8d855454249641863c2f_MD5.jpg]]
 
 创建 lv 逻辑卷
 
-![](https://i-blog.csdnimg.cn/blog_migrate/5d31fada972d6a90e1f326241a70191e.jpeg)
+![[06d3b5688ecb57be26acde7d3ba5cb5c_MD5.jpg]]
 
 根据需要填写 lv 逻辑卷的名称、Size 大小、分区格式、加载点目录。
 
@@ -205,25 +205,25 @@ updated: 2025-05-24T22:23
 
 如下，就创建好了 lv 逻辑卷：
 
-![](https://i-blog.csdnimg.cn/blog_migrate/90c54e7a7aedd1b4807c249e945320e8.jpeg)
+![[02a69c1bc4a1de487367907b6375b70d_MD5.jpg]]
 
 下一步，将执行 lv 逻辑卷的数据清理操作（包括格式化），如下：
 
-![](https://i-blog.csdnimg.cn/blog_migrate/49833ea1463b9957bcafe400ab9f4c94.jpeg)
+![[ff869e2e4467f2e5a62f6b174e231a78_MD5.jpg]]
 
 **补充示例：**
 
 如下示例中，总的磁盘空间是 800GB，其中，默认的 /boot 分区占用 2GB，创建了 2 个 lv 逻辑卷，一个是 / ，磁盘空间是 150GB; 另一个 是 /data，磁盘空间是所有剩下的磁盘空间 647.996GB。
 
-![](https://i-blog.csdnimg.cn/blog_migrate/e83313b1c896376c44884103c593b5d4.jpeg)
+![[cba0470fe36ae8807a52aa3ebe48f2c0_MD5.jpg]]
 
 创建 /data 逻辑卷时，加载点选项需要先选择 Other，然后手动输入 / data，如下图：
 
-![](https://i-blog.csdnimg.cn/blog_migrate/2bbe6337591cbc653c5fe83e003bdfb6.jpeg)
+![[c7d6c9d6048efd7e6200f3a4ab3d5d2a_MD5.jpg]]
 
 # 十、设置用户名、主机名、登录密码
 
-![](https://i-blog.csdnimg.cn/blog_migrate/cd63967ff8fdaa4f17a140653729b2da.jpeg)
+![[027f73a979d6bd00630a995e0debc68f_MD5.jpg]]
 
 Your name：是使用在者的名称，没有太多实际意义，但是必须填写。
 Your server's name： 配置服务名
@@ -232,13 +232,13 @@ Password：需要输入两次相同密码，建议密码设置相对复杂些，
 
 # 十一、升级到 Ubuntu Pro
 
-![](https://i-blog.csdnimg.cn/blog_migrate/1075541249dc62cdbcf8373d1f4a3282.jpeg)
+![[ae67270e31df93ca4d7c8da665774b30_MD5.jpg]]
 
 默认跳过即可
 
 # 十二、SSH 设置
 
-![](https://i-blog.csdnimg.cn/blog_migrate/4191cfc71afc327eb429a653590b4bfd.jpeg)
+![[610e49872b89b7caac3acf4aa8c47fac_MD5.jpg]]
 
 默认 Install OpenSSH Server 未选中，通过上 / 下箭头移动到 Install OpenSSH Server 选项，按键盘空格键可以选中该选项。
 
@@ -246,27 +246,27 @@ Password：需要输入两次相同密码，建议密码设置相对复杂些，
 
 # 十三、选装软件包
 
-![](https://i-blog.csdnimg.cn/blog_migrate/ca4f11f33240834d253daaf970822a8b.jpeg)
+![[b303cc61870c725f46c7ec2cf7632159_MD5.jpg]]
 
 可以什么都不选，然后直接安装。
 
 # 十四、开始安装进程
 
-![](https://i-blog.csdnimg.cn/blog_migrate/3474feb7dd73d45216aa634861f1f910.jpeg)
+![[4c28a9f1c7965c3f01e320410aa1ddd9_MD5.jpg]]
 
 然后就是等待安装完成。
 
-![](https://i-blog.csdnimg.cn/blog_migrate/7b88bb8e8ba854e02d0c9a57d22333c2.jpeg)
+![[19ffb1da879937f12f996b475dc3ea9a_MD5.jpg]]
 
 当显示 Installation complete 时，表示安装完成。然后选中 Cancel update and reboot 进行重启系统。
 
 重启就能正常进入系统了。不过我这是虚拟机，正常进入系统之前需要点 Enter 键先移除 iso 镜像，如下图：
 
-![](https://i-blog.csdnimg.cn/blog_migrate/61c03964c099a89c3d6d2d299cee5d92.jpeg)
+![[f7a044fb674aac72bf76aef3ee1a686f_MD5.jpg]]
 
 按 Enter 键进入系统
 
-![](https://i-blog.csdnimg.cn/blog_migrate/a948b860aa7e8e8c036407a9f8e3b185.jpeg)
+![[4e1219dd02909f82ca8bf7158e34ac41_MD5.jpg]]
 
 # 十五、配置静态 IP
 
@@ -279,7 +279,7 @@ ls /etc/netplan
 sudo vi /etc/netplan/00-installer-config.yaml
 修改配置文件以设置静态 IP。以下是一个配置示例：
 
-![](https://i-blog.csdnimg.cn/blog_migrate/2ab7c5f0e25974b96887093a8f057278.jpeg)
+![[3b543ab68156ca80ff8c1e8f2c33733d_MD5.jpg]]
 
 确保将 enp160 替换为你的网络接口名称，192.168.111.194 替换为你想要的静态 IP 地址，/24 是子网掩码（相当于 255.255.255.0），192.168.111.1 是默认网关，8.8.8.8 和 114.114.114.114 是 DNS 服务器地址。
 配置生效：
@@ -298,7 +298,7 @@ ip addr
 
 配置好了静态 IP 后，就可以使用 Linux 客户端工具（如 SecureCRT）来连接该主机了。
 
-![](https://i-blog.csdnimg.cn/blog_migrate/6ebc7adb1acfd6072675508960b3ebcc.png)
+![[bf089895c7550c8ce3b33cbe170fc3df_MD5.png]]
 
 # 十六、设置时区
 

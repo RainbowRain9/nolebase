@@ -56,7 +56,7 @@ sudo apt install libxcb-xinerama0 libxkbcommon-x11-0 libxcb-cursor0 -y
 -----
 
 打开 [官方教程](https://docs.qgroundcontrol.com/master/en/qgc-user-guide/getting_started/download_and_install.html) ，往下滑找到 **Ubuntu Linux** ，点击下载 **（官网上默认下载最新稳定版）**  
-![](https://i-blog.csdnimg.cn/blog_migrate/dea690a63932ff388846a9585fcb88b4.png#pic_center)
+![[a63361ee4542df148dd6ee6a2e2a89f0_MD5.png]]
 
 > 如果需要其他版本，可以打开 [releases](https://github.com/mavlink/qgroundcontrol/releases/) 找到自己想要的版本，点击 AppImage 后缀的安装包即可。
 > 
@@ -91,7 +91,7 @@ chmod +x QGroundControl.AppImage
 -------
 
 **错误** 1️⃣：  
-![](https://i-blog.csdnimg.cn/blog_migrate/0a0fb12c7c2e685add3a25e4ed6bcc75.png#pic_center)  
+![[3f48093b2d0a015454ef61c2bfdd68e4_MD5.png]] 
 **原因是缺少依赖 ，输入下面命令安装即可。**
 
 ```
@@ -110,11 +110,11 @@ sudo apt-get install libsdl2-mixer-2.0-0 libsdl2-image-2.0-0 libsdl2-2.0-0
 **原因是系统的 glibc 库版本低于 QGC 的要求，但是这是系统自带的，不建议升级，所以重新下载低版本的 QGC 就可以了。**
 
 再次运行，成功！（后面就可以双击安装包打开了）  
-![](https://i-blog.csdnimg.cn/blog_migrate/1dc44d42f7a272b5210b758c274af122.png#pic_center)
+![[7433ef8d30e478f609ca58a4954f6eb2_MD5.png]]
 
 **注：** 如果不习惯英文界面在设置里更换  
-![](https://i-blog.csdnimg.cn/blog_migrate/c2c31a060d85c3bc6ad022527be39995.png#pic_center)  
-![](https://i-blog.csdnimg.cn/blog_migrate/ae272a42679fada7361b1c4731a5900b.png#pic_center)
+![[0528d3e40f23e6d027054d9bec74c5c5_MD5.png]] 
+![[6613dec5fedf5083f9a70d8708b576f6_MD5.png]]
 
 > 如有其他问题，或者发现文章有错误，请在评论区留言  
 > Keep learning！

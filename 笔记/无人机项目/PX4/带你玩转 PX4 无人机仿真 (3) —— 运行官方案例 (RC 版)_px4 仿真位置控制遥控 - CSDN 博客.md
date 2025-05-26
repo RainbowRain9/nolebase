@@ -30,17 +30,17 @@
 一. 设置[遥控器](https://so.csdn.net/so/search?q=%E9%81%A5%E6%8E%A7%E5%99%A8&spm=1001.2101.3001.7020)
 -----------------------------------------------------------------------------------------------
 
-![](https://i-blog.csdnimg.cn/blog_migrate/3192efc610d136f371af9f60af76168c.png#pic_center)  
+![[7046eab4a9c779c73926b93a1fc3b657_MD5.png]] 
 **(富斯 i6s 航模遥控器)**
 
 仿真电脑和遥控器通过 Micro USB 数据线 (也就是老版安卓手机的充电线) 连接  
-![](https://i-blog.csdnimg.cn/blog_migrate/3ed3d5f4a739df9f8daa41d8ef6f9916.png#pic_center)  
+![[305f6eda73a35ed98a0fa7c9577a0bbb_MD5.png]] 
 **（仿真电脑与遥控器连接图）**
 
 当在仿真时，打开 QGC，在设置中可以看到多了一个 **游戏手柄** 的界面，如下图所示  
-![](https://i-blog.csdnimg.cn/blog_migrate/2e0d8a71f041d5d2edc60f25a1cd5fcd.png#pic_center)  
+![[be652b9dbdcf0b2d594802913b513074_MD5.png]] 
 点击按钮分配并拨动遥控器上的拨杆，就可以看到所对应的通道，然后为拨杆配置功能。(我的配置如下，仅供参考)  
-![](https://i-blog.csdnimg.cn/blog_migrate/632d24fe4a5ca954c41b91fbaa163968.png#pic_center)
+![[1abd9af37a3c07c5800780da7affa027_MD5.png]]
 
 二. 仿真代码
 -------

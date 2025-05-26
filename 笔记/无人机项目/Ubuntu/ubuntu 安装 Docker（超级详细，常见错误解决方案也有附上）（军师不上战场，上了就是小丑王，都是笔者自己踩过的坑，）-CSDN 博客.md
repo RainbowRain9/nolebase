@@ -23,7 +23,7 @@ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker c
 
 ```
 
- ![](https://i-blog.csdnimg.cn/blog_migrate/05c7acb3a0a8c1ef8c86d552a2ac50f8.png)
+ ![[823f74fed5347e586a78c0f4df88ff2c_MD5.png]]
 
 4. 更新软件源
 --------
@@ -40,11 +40,11 @@ sudo cp /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/a1ef9c6b2a24c868ffec144df4ca7054.png)
+![[7531a78a7df7d5b29de24607551b4f12_MD5.png]]
 
 如果出现下面信息或后面出现类似信息，请自行搜索一下解决方案，一般是源有问题，换个时间有时候又可以了，就比较玄幻，笔者也没搞清楚原因
 
-![](https://i-blog.csdnimg.cn/blog_migrate/ceea2b29e25596339071e427026fab14.png)
+![[46be2af0f4b379b0412242ee4f35b1be_MD5.png]]
 
 5. 安装 docker 依赖
 ---------------
@@ -54,7 +54,7 @@ apt-get install ca-certificates curl gnupg lsb-release
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/0c53b0d7153b8c6b5bff31277e958bc5.png)
+![[2d4cf1e792044d29f2e6a3e33e037140_MD5.png]]
 
 6. 添加 docker 秘钥
 ---------------
@@ -66,7 +66,7 @@ curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key a
 
 看到 ok 就添加成功了，过时警告同上 
 
-![](https://i-blog.csdnimg.cn/blog_migrate/466c9acfaf5888c70ef0df877ccb92ed.png)
+![[cde870e6989fc90cdb78dc2bb89d70e3_MD5.png]]
 
 7. 添加 Docker 软件源
 ----------------
@@ -76,11 +76,11 @@ sudo add-apt-repository "deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/li
 
 ```
 
- 这些必须全部命中![](https://i-blog.csdnimg.cn/blog_migrate/8812335fc9bfc795dec66a2eb7d77652.png)
+ 这些必须全部命中![[4ef4a545e3cbdd1e97da8c59513b3d6a_MD5.png]]
 
  可能会显示下面这条信息，同上不理会
 
-![](https://i-blog.csdnimg.cn/blog_migrate/ce8e87a2e40d84c936462384bd0b408f.png)
+![[bb2fe7a7f8076c598a7d570ef3608003_MD5.png]]
 
 8. 安装 Docker
 ------------
@@ -90,7 +90,7 @@ apt-get install docker-ce docker-ce-cli containerd.io
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/bb9bf699dae3dfc0d4853ad987f8389e.png)
+![[abf0c6a0ff79bde2a72ec2f5b6050559_MD5.png]]
 
  7. 查看是否安装成功
 
@@ -101,7 +101,7 @@ docker --version
 
  能显示版本信息说明，软件是安装成功的
 
- ![](https://i-blog.csdnimg.cn/blog_migrate/99a4eaa057997e45b49c0c33a361ce95.png)
+ ![[98debbe12adf0c29c1e751254dc211a0_MD5.png]]
 
 9. 配置用户组，这样就可以不用每次使用 docker 都要 sudo 了
 -------------------------------------
@@ -111,7 +111,7 @@ sudo usermod -aG docker $USER
 
 ```
 
- ![](https://i-blog.csdnimg.cn/blog_migrate/70d6133c830305e62116274ad82eda25.png)
+ ![[5c42584e7f619ce8de7c8acf3a1fa944_MD5.png]]
 
 10. 重启计算机
 ---------
@@ -128,7 +128,7 @@ systemctl start docker
 
 11.2 出现下面的情况就是启动失败
 
-![](https://i-blog.csdnimg.cn/blog_migrate/a17415fa5653baaa737bce5daf687f24.png)
+![[d7cae38da1c88e26098f5de46a372298_MD5.png]]
 
 11.2.1 查看错误信息：
 
@@ -137,7 +137,7 @@ systemctl status docker
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/1942bcf39f388666fee9b83e98c542a5.png)
+![[6b279f231e0884a4973d9f6135710224_MD5.png]]
 
 11.2.2 如果是这个错误，按如下步骤操作
 
@@ -150,11 +150,11 @@ sudo vim /etc/docker/daemon.json
 
  显示这个界面输入 E
 
-![](https://i-blog.csdnimg.cn/blog_migrate/ad63a0857db2c35ca248a142d6f6ee6a.png)
+![[1c11b4cb7aff76938216d2f20647d98c_MD5.png]]
 
  输入 e 后会跳转到这个界面，里面的内容不一定这样，如果没用的就直接删掉，有用的就留着。按 delete 键可以删除，然后把这个代码粘贴进去
 
-![](https://i-blog.csdnimg.cn/blog_migrate/de42349155c090de4ee5f22b1f7c2ff7.png) 将代码粘贴进去同上图
+![[9b97a3374817d9d39ebc293e5562a350_MD5.png]] 将代码粘贴进去同上图
 
 ```
 {
@@ -165,7 +165,7 @@ sudo vim /etc/docker/daemon.json
 
 然后按 esc 键，直接敲  **:wq!**  左下角会显示，没有空格，不能粘贴，要直接敲
 
-![](https://i-blog.csdnimg.cn/blog_migrate/74a1380b9accf46244ce435500d5b99b.png)
+![[37ddea505bedb986027be4f2fcf290f4_MD5.png]]
 
 12. 安装工具
 --------
@@ -193,7 +193,7 @@ docker images
 
  14.1 如果出现下面的情况，就是启动成功的（不一定有方框外的文件）
 
-![](https://i-blog.csdnimg.cn/blog_migrate/0e7bdb3fd4b72a76cc04e014fd4e8019.png)
+![[74f9aa822b2b6520533be68a2010081f_MD5.png]]
 
 14.2 如果出现下面这种情况，就是启动失败，需要启动 docker
 
@@ -202,7 +202,7 @@ service start docker
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/94ac502b500f74c8093b4f17f54362d9.png)
+![[63377ae1f0d6b0a999e0ecb3ba397b9b_MD5.png]]
 
 15. 用 Docker 运行一下 helloWord，显示下面消息就安装成功了
 ----------------------------------------
@@ -212,4 +212,4 @@ sudo docker run hello-world
 
 ```
 
-![](https://i-blog.csdnimg.cn/blog_migrate/119822e7713c0d6f104f950907bc542b.png)
+![[e9391a3cab0d59e6cd372ee89bb77cad_MD5.png]]
