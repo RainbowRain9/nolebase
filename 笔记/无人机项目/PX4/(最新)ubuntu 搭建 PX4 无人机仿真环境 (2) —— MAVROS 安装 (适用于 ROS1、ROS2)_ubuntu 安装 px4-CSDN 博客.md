@@ -53,7 +53,7 @@ sudo ./install_geographiclib_datasets.sh  #这步可能需要装一段时间
 ```
 
 **注：如果 10 分钟了都没安装好，可以参考后面安装 GeographicLib datasets 缓慢的章节**  
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (2) —— MAVROS 安装 (适用于 ROS1、ROS2)_ubuntu 安装 px4-CSDN 博客/0a46beb936fb500f1a69e8152f89149d_MD5.png]]
+![0a46beb936fb500f1a69e8152f89149d_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505262228581.png)
 
 *   更新环境：
 
@@ -105,7 +105,7 @@ rosdep install --from-paths src --ignore-src -y  # 安装依赖
 
 ```
 
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (2) —— MAVROS 安装 (适用于 ROS1、ROS2)_ubuntu 安装 px4-CSDN 博客/4ffbff9d4c930012dd713b54a3309944_MD5.png]]
+![4ffbff9d4c930012dd713b54a3309944_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505262228582.png)
 
 *   安装 `GeographicLib datasets` ：
 
@@ -128,7 +128,7 @@ catkin build
 
 编译成功
 
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (2) —— MAVROS 安装 (适用于 ROS1、ROS2)_ubuntu 安装 px4-CSDN 博客/10f7047a3359d561ef7c8c98f5ce5d2a_MD5.png]]
+![10f7047a3359d561ef7c8c98f5ce5d2a_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505262228583.png)
 
 *   配置环境
 
@@ -163,7 +163,7 @@ rosinstall_generator --format repos --upstream mavros | tee -a /tmp/mavros.repos
 
 ```
 
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (2) —— MAVROS 安装 (适用于 ROS1、ROS2)_ubuntu 安装 px4-CSDN 博客/0b7c151c91f3aee5a0c60fe2d0a2debb_MD5.png]]
+![0b7c151c91f3aee5a0c60fe2d0a2debb_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505262228584.png)
 
 ```
 vcs import src < /tmp/mavlink.repos
@@ -172,14 +172,14 @@ vcs import src < /tmp/mavros.repos
 
 ```
 
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (2) —— MAVROS 安装 (适用于 ROS1、ROS2)_ubuntu 安装 px4-CSDN 博客/76de88146edc4cf4da5c2e805769e403_MD5.png]]
+![76de88146edc4cf4da5c2e805769e403_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505262228585.png)
 
 ```
 rosdep install --from-paths src --ignore-src -y
 
 ```
 
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (2) —— MAVROS 安装 (适用于 ROS1、ROS2)_ubuntu 安装 px4-CSDN 博客/b8a9c20a7c55cc9f2878d071a5570f7e_MD5.png]]
+![b8a9c20a7c55cc9f2878d071a5570f7e_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505262228586.png)
 
 *   安装 `GeographicLib datasets` ：
 
@@ -199,7 +199,7 @@ colcon build # 大概10分钟左右，跟个人配置有关
 
 ```
 
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (2) —— MAVROS 安装 (适用于 ROS1、ROS2)_ubuntu 安装 px4-CSDN 博客/df47605d65d9ba61ef100e76188e023b_MD5.png]]
+![df47605d65d9ba61ef100e76188e023b_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505262228587.png)
 
 *   配置环境
 
@@ -222,7 +222,7 @@ sudo ./install_geographiclib_datasets.sh
 
 ```
 
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (2) —— MAVROS 安装 (适用于 ROS1、ROS2)_ubuntu 安装 px4-CSDN 博客/f8e8560d4e89d8d8cb55fe8b3da36972_MD5.png]]
+![f8e8560d4e89d8d8cb55fe8b3da36972_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505262228588.png)
 
 4. 检测
 -----
@@ -245,16 +245,16 @@ ros2 pkg prefix mavros
 
 如果用方式法一，结果大致如下：  
 **ROS1:**  
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (2) —— MAVROS 安装 (适用于 ROS1、ROS2)_ubuntu 安装 px4-CSDN 博客/738b88516809e7f6747f3aee6f4bf0b8_MD5.png]] 
+![738b88516809e7f6747f3aee6f4bf0b8_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505262228590.png) 
 **ROS2:**  
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (2) —— MAVROS 安装 (适用于 ROS1、ROS2)_ubuntu 安装 px4-CSDN 博客/8cd4c61462af473d470987b4cbc4ab40_MD5.png]]
+![8cd4c61462af473d470987b4cbc4ab40_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505262228591.png)
 
 如果是方式法二，结果大致如下：
 
-**ROS1:** ![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (2) —— MAVROS 安装 (适用于 ROS1、ROS2)_ubuntu 安装 px4-CSDN 博客/05c9a8d7570f6c2416b5c53422d63d9d_MD5.png]] 
+**ROS1:** ![05c9a8d7570f6c2416b5c53422d63d9d_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505262228592.png) 
 **ROS2:**
 
-![[_resources/(最新)ubuntu 搭建 PX4 无人机仿真环境 (2) —— MAVROS 安装 (适用于 ROS1、ROS2)_ubuntu 安装 px4-CSDN 博客/04dda39b56ef61c85253a72ba9473fb1_MD5.png]]
+![04dda39b56ef61c85253a72ba9473fb1_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505262228593.png)
 
 > 如有其他问题，或者发现文章有错误，请在评论区留言  
 > Keep learning！
