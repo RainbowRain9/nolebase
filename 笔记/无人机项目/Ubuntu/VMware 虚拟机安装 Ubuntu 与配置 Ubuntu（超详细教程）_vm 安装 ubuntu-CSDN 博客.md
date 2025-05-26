@@ -24,16 +24,16 @@ updated: 2025-05-14T10:50
 #### 一 配置虚拟机
 
 1.  打开主页，点击新建虚拟机，会出现一个新建虚拟机向导，选自定义，然后点击下一步  
-    ![[2bc7fc0baf514342fec78658f208c971_MD5.png]]
+    ![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/2bc7fc0baf514342fec78658f208c971_MD5.png]]
     
 2.  后面都是默认**下一步**，要确认选择是否相同  
-    ![[41796910dbb0a561adb49b939e74a03c_MD5.png]] 
-    ![[67551893fcfb2e8214d70211caabb371_MD5.png]] 
-    ![[4980defb0d9248b68d27fd52e1debcbd_MD5.png]] 
+    ![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/41796910dbb0a561adb49b939e74a03c_MD5.png]] 
+    ![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/67551893fcfb2e8214d70211caabb371_MD5.png]] 
+    ![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/4980defb0d9248b68d27fd52e1debcbd_MD5.png]] 
     （操作系统版本要根据自己镜像系统是多少位，用的那个 Linux 发行版 自行选择）
     
 3.  虚拟机名称可以默认，也可以更改，但不能跟已经存在的虚拟机重名。存放位置建议都把虚拟机都放在一个文件夹下，再把虚拟机放在不同的文件夹下，而且要在空间大的硬盘下。  
-    ![[4c9ee10cca0faa9c9eb40ce0c2009f62_MD5.png]]
+    ![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/4c9ee10cca0faa9c9eb40ce0c2009f62_MD5.png]]
     
 4.  处理器配置
     
@@ -44,8 +44,8 @@ updated: 2025-05-14T10:50
     **内核**：即 CPU 核心数。
     
     **逻辑处理器**：即线程数。  
-    ![[625d86db7713fdcfa3a413aff9401a0a_MD5.png]] 
-    ![[f56b2a3cfcc23806517832bde6bd0100_MD5.png]]
+    ![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/625d86db7713fdcfa3a413aff9401a0a_MD5.png]] 
+    ![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/f56b2a3cfcc23806517832bde6bd0100_MD5.png]]
     
 
 大家按照自己的需要和根据电脑的配置，自行选择，点击下一步
@@ -57,16 +57,16 @@ updated: 2025-05-14T10:50
     首先虚拟机内存肯定是要小于主机内存的，其次要根据你要在虚拟机上运行的项目，否则过小就会出现进程被 **killed** 的情况。
     
     如果只是学习 Linux，那就 **2GB** 就可以了。要跑仿真或深度学习项目，建议 **4GB** 以上 （不过到后面如果觉得小了，还可以添加）  
-    ![[7e7cabb4487324726f321db32d280e2f_MD5.png]]
+    ![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/7e7cabb4487324726f321db32d280e2f_MD5.png]]
     
 6.  后面都是默认，下一步 要确认选择是否相同
     
 
-![[50ad2f67bf7ed60bbf64decb3d4e7794_MD5.png]] 
-![[f40169f45533dad16ef496cdba17453a_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/50ad2f67bf7ed60bbf64decb3d4e7794_MD5.png]] 
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/f40169f45533dad16ef496cdba17453a_MD5.png]]
 
-![[07308cb39356d413bb7404d5480ced0b_MD5.png]] 
-![[e1a88e27e9431de77cfa2827b9b3cd22_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/07308cb39356d413bb7404d5480ced0b_MD5.png]] 
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/e1a88e27e9431de77cfa2827b9b3cd22_MD5.png]]
 
 7.  虚拟机磁盘设置
 
@@ -78,47 +78,47 @@ updated: 2025-05-14T10:50
 
 没什么特殊需求默认大小即可，后面不够可以增加，不过需要设置一下。
 
-![[31677384f7ef0256dff6f31fa6f0485b_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/31677384f7ef0256dff6f31fa6f0485b_MD5.png]]
 
 默认下一步
 
-![[a80c959783a2ffd1bebb5abf246b4043_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/a80c959783a2ffd1bebb5abf246b4043_MD5.png]]
 
 8.  设置硬件
     
     点击自定义硬件，可以看到你前面步骤的设置，再移除**打印机**  
-    ![[64cb42cb489919a081459502309f148f_MD5.png]]
+    ![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/64cb42cb489919a081459502309f148f_MD5.png]]
     
 
-![[90aef835590319ff70b65e980eadcff0_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/90aef835590319ff70b65e980eadcff0_MD5.png]]
 
 打开 **CD/DVD** 页面，点击自定义 ISO 映像文件 ，点击浏览找到你下好的镜像文件，再关闭，点击完成即可
 
-![[cc4f778425351238b57dc5ba3d572f37_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/cc4f778425351238b57dc5ba3d572f37_MD5.png]]
 
 #### 二 安装虚拟机
 
 1.  打开虚拟机，看到 **welcome** 界面，点击 install ubuntu 。  
-    ![[af38d7fb0deba1f49e617457cf64aef3_MD5.png]]
+    ![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/af38d7fb0deba1f49e617457cf64aef3_MD5.png]]
     
 2.  键盘布局选默认
     
 
-![[b4ad28211d54f6cfe9abf4d6168eb243_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/b4ad28211d54f6cfe9abf4d6168eb243_MD5.png]]
 
 默认即可
 
-![[9468e28719ef49fa7cb367baa64e900d_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/9468e28719ef49fa7cb367baa64e900d_MD5.png]]
 
 3.  Installation type 选择 Something else 来自定义分区，继续  
     （ **注：也可以选择 Erase disk and install Ubuntu ，这里不是真的清除物理机磁盘上全部的内容，只是清除虚拟机申请虚拟磁盘空间的大小，然后系统自动分区** ）  
-    ![[7a08c88b0345e980dc739dc78ba0f180_MD5.png]]
+    ![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/7a08c88b0345e980dc739dc78ba0f180_MD5.png]]
 
 点击 **New Partition Table** 生成新的分区表，后面创建的 分区都会挂载到 /dev/sda 下
 
-![[014abe821536976105d2840e0c440f04_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/014abe821536976105d2840e0c440f04_MD5.png]]
 
-![[2bf4c893414d959688033a63f76bf701_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/2bf4c893414d959688033a63f76bf701_MD5.png]]
 
 **分区参考**
 
@@ -129,21 +129,21 @@ updated: 2025-05-14T10:50
 **分区步骤：**  
 点 **free space** ，**再点 +** 会弹出一个创建分区的框，按照自己的需求先创建 **/boot 分区**、然后 **swap 分区**、 **/ 分区**，其他的分区策略也可以
 
-![[c936ef3cde306828b602de076f92a7ad_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/c936ef3cde306828b602de076f92a7ad_MD5.png]]
 
 **结果**  
-![[b73ea54e90fc4060a92f312a1df97af7_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/b73ea54e90fc4060a92f312a1df97af7_MD5.png]]
 
 4.  点击 install now 后，会让你选地区，直接选上海就可以了  
-    ![[41cda75aec19aa1189e8b4541312ed40_MD5.png]]
+    ![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/41cda75aec19aa1189e8b4541312ed40_MD5.png]]
     
 5.  创建用户  
-    ![[29418681d165f11dbcda229e2d4672e0_MD5.png]]
+    ![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/29418681d165f11dbcda229e2d4672e0_MD5.png]]
     
 
 接下来就是等安装了
 
-![[b314f238f4f930e678f8fe9fc21b1236_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/b314f238f4f930e678f8fe9fc21b1236_MD5.png]]
 
 ### 配置 Ubuntu
 
@@ -161,7 +161,7 @@ sudo cat /etc/apt/sources.list
 ```
 
 如下图所示：  
-![[dde0ed076d9d3035fea7e5b0de1a5902_MD5.png]] 
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/dde0ed076d9d3035fea7e5b0de1a5902_MD5.png]] 
 输入下面命令：
 
 ```
@@ -170,7 +170,7 @@ sudo apt update
 ```
 
 如下图所示，你会发现我根本就没换清华源，怎么就变成了清华源。原因是 **cn.archive.ubuntu.com 已经自动跳转到清华源 ，所以如果你是这种情况，那么就直接跳过换源这一步。**  
-![[482b7e5425c7ca77f115d93a21aa983e_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/482b7e5425c7ca77f115d93a21aa983e_MD5.png]]
 
 ##### 1.2 通过 Software&Updates 软件换源
 
@@ -178,30 +178,30 @@ sudo apt update
 > `https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/` ，有个 ports 后缀，这是给 arm 架构的 Ubuntu 用的软件源，如果出现这种情况，直接把 ports 后缀删掉，变成`https://mirrors.tuna.tsinghua.edu.cn/ubuntu/` 就可以了。
 
 点击这个，打开软件菜单，在里面找到 Software&Updates(软件和更新)  
-![[27db4de48b2a18c04bfe983d0e183962_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/27db4de48b2a18c04bfe983d0e183962_MD5.png]]
 
 打开后，点击 **Download from** 这个框，选择 **other**
 
-![[72dfb940046372286ceba274be88dd89_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/72dfb940046372286ceba274be88dd89_MD5.png]]
 
 往上翻，找到 **china** ，然后点开，找到 **清华源** ，然后点击
 
-![[de02ef73bfd2d2719c05663eb66bd335_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/de02ef73bfd2d2719c05663eb66bd335_MD5.png]]
 
-![[2d3ed209803dcfc9645aacb3d899fc7b_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/2d3ed209803dcfc9645aacb3d899fc7b_MD5.png]]
 
 点击后，会让你输密码，权限认证
 
-![[47fb946bf4542d7babf6f829e8415ca9_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/47fb946bf4542d7babf6f829e8415ca9_MD5.png]]
 
 认证后，点击 **close** ，会出现一个提示框，点击 **reload** ，然后等待
 
-![[aaf21e3dcccac01a22e83e96578366a6_MD5.png]]  
-![[ac28a29848c7eb1b3212ae611e4fed39_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/aaf21e3dcccac01a22e83e96578366a6_MD5.png]]  
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/ac28a29848c7eb1b3212ae611e4fed39_MD5.png]]
 
 更新完后，按 **ctrl + Alt + t** (这是打开终端的快捷键) 打开终端,， 在终端输入 `sudo apt-get update` , 输入密码
 
-![[1fafac7b54bbc5b55b2d16c5e965ce55_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/1fafac7b54bbc5b55b2d16c5e965ce55_MD5.png]]
 
 ##### 3.3 通过修改文件换源
 
@@ -212,7 +212,7 @@ wget https://gitee.com/tyx6/mytools/raw/main/common/update_software_source.sh
 
 ```
 
-![[f5b25bf6560c19b7d16eaa80ac513dad_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/f5b25bf6560c19b7d16eaa80ac513dad_MD5.png]]
 
 执行脚本：
 
@@ -222,7 +222,7 @@ sudo ./update_software_source.sh
 
 ```
 
-![[5a4ca51fb3693e6690ddc369dacdcbf9_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/5a4ca51fb3693e6690ddc369dacdcbf9_MD5.png]]
 
 输入下面命令：
 
@@ -324,17 +324,17 @@ sudo apt-get install ibus-pinyin
 ```
 
 2.  打开 **Setting->Region&Language->Manage Installed Languages** ，如果是第一次打开会有一个提示框，点击 **install** ，输入密码，等待安装即可  
-    ![[45df1f4e05ef909dd6fca66cd706860f_MD5.png]]
+    ![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/45df1f4e05ef909dd6fca66cd706860f_MD5.png]]
 
 然后，点击 **Install / Remove Languages** ，选择简体中文，然后重启系统（如果已经安装好了，直接下一步）  
-![[918013d9ae5f95f01f16d1e7518fd516_MD5.png]]
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/918013d9ae5f95f01f16d1e7518fd516_MD5.png]]
 
 返回 **Region&Language** 页面，点击 **+ 号** ，选择 **chinese** ，然后再点击 **Chinese(Intelligent Pingyin)**，点 **add** j 即可。  
-![[4360e2bffa031f78d8fe10a9ae079ee1_MD5.png]]  
+![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/4360e2bffa031f78d8fe10a9ae079ee1_MD5.png]]  
 **win + space** 可以切换输入法，**shift** 可以切换中文输入法的中文模式和英文模式
 
-> **注：** 在我的教程中 **ubuntu** 的系统语言选的是英语，如果想使用中文语言，可以在 **Region&Language** 界面，点击 **Language** ，在弹出的界面中选择汉语，点击 Done ，重启即可![[fe9ada5de2fc72185bd5c25d1570d6f1_MD5.png]] 
-> ![[34e36219a3678aebc53bb7a2947733ef_MD5.png]]
+> **注：** 在我的教程中 **ubuntu** 的系统语言选的是英语，如果想使用中文语言，可以在 **Region&Language** 界面，点击 **Language** ，在弹出的界面中选择汉语，点击 Done ，重启即可![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/fe9ada5de2fc72185bd5c25d1570d6f1_MD5.png]] 
+> ![[_resources/VMware 虚拟机安装 Ubuntu 与配置 Ubuntu（超详细教程）_vm 安装 ubuntu-CSDN 博客/34e36219a3678aebc53bb7a2947733ef_MD5.png]]
 
 > 如有其他问题，或者发现文章有错误，请在评论区留言  
 > Keep learning！

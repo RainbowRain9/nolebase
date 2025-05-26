@@ -41,7 +41,7 @@ Ubuntu 22.04 安装指导手册
     1.  将需要烧录的 U 盘（格式化后的空白 U 盘，容量建议 8GB 以上）插入计算机，双击打开 Rufus.exe 软件。设备为需要使用的 U 盘，引导类型选择选择之前下载好的 Ubuntu 22.04 操作系统镜像文件。
     2.  点击 开始 即可进行烧录。一路 OK、确认，等待烧录完成。
 
-![[62cf3e5988aa622f4be63719cfc7eeb7_MD5.png]]
+![[_resources/Ubuntu 22_04 安装指导手册_ubuntu22_04 安装教程 - CSDN 博客/62cf3e5988aa622f4be63719cfc7eeb7_MD5.png]]
 
 ## 1.4 磁盘分区
 
@@ -75,16 +75,16 @@ Ubuntu 22.04 安装指导手册
 *   **步骤**：
 
 开机，进入引导界面，光标选择到 Try or Install Ubuntu，再按回车；
-![[6d3eefc2edd7a1bbbd1a4261cee24b17_MD5.png]]
+![[_resources/Ubuntu 22_04 安装指导手册_ubuntu22_04 安装教程 - CSDN 博客/6d3eefc2edd7a1bbbd1a4261cee24b17_MD5.png]]
 2、Ubuntu 准备安装前的加载过程；
 
-![[23b5f4ee11cd5a7a034a883e01427de1_MD5.png]]
+![[_resources/Ubuntu 22_04 安装指导手册_ubuntu22_04 安装教程 - CSDN 博客/23b5f4ee11cd5a7a034a883e01427de1_MD5.png]]
 
 3、进入安装向导，左侧选择 English 或中文 (简体)，再点击安装 Ubuntu，为方便使用 Ubuntn 终端，我选择的是 English；安装时建议大家先使用英文，因为中英文字符编码不一样，如果安装时使用中文，后续开发时可能会出现报错，虽然都可以解决，但大佬们应该不屑回答这些小问题的，也没有相应的文档，而先使用英文，安装完成后将语言改成中文，其他如桌面文件夹名称等都不改变，就可以避免这类问题。
 
 4、选择您的键盘布局，找到并选择 English（为了更广泛的适配性，选美式布局），再点击继续；
 
-![[0db16fbc453974ad3aa4df9a177665da_MD5.png]]
+![[_resources/Ubuntu 22_04 安装指导手册_ubuntu22_04 安装教程 - CSDN 博客/0db16fbc453974ad3aa4df9a177665da_MD5.png]]
 
 1.  选择语言：建议选择 “English”（后续可更改系统语言）。
 2.  键盘布局：选择 “English (US)”。
@@ -134,7 +134,7 @@ Ubuntu 22.04 安装指导手册
     4.  安装完成后，重启电脑，拔出 U 盘
     5.  重启后你会看到以下界面，第一项是 ubuntu 启动项，第二项是 ubuntu 高级设置，第三项是 windows 启动项，第四项不用管，默认选择的是第一个，回车进 ubuntu 系统。（关于这个启动项的默认选项也是可以手动配置的，避免主力为 windows 的电脑每次进入系统都需要手动选择 windows，具体方式比较简单，自行百度）
 
-![[8511fa5d7c3796c4f810c746ba49f3e5_MD5.png]]
+![[_resources/Ubuntu 22_04 安装指导手册_ubuntu22_04 安装教程 - CSDN 博客/8511fa5d7c3796c4f810c746ba49f3e5_MD5.png]]
 
 # 三、安装后配置
 
@@ -155,7 +155,7 @@ Ubuntu 官方的服务器在国外，为了提高软件 安装 / 更新速度，
 3.  设置 下载自… 其他站点
     
 4.  通过 选择最佳服务器 选择速度最快的 镜像源，如下图所示：
-![[edad7ceca612360d43509dd93052f25b_MD5.png]]
+![[_resources/Ubuntu 22_04 安装指导手册_ubuntu22_04 安装教程 - CSDN 博客/edad7ceca612360d43509dd93052f25b_MD5.png]]
     Ubuntu22.04 更换国内镜像源（阿里云）
     Ubuntu 采用 apt 作为软件安装工具，其镜像源列表记录在 / etc/apt/source.list 文件中。
 

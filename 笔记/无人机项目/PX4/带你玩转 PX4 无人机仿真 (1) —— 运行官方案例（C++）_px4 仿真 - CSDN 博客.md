@@ -45,7 +45,7 @@ catkin_create_pkg off_node roscpp std_msgs geometry_msgs mavros_msgs
 ```
 
 创建好后目录大致是下图所示：  
-![[6795f1ad36a25ea6afacb4b45b8bb62c_MD5.png]]
+![[_resources/带你玩转 PX4 无人机仿真 (1) —— 运行官方案例（C++）_px4 仿真 - CSDN 博客/6795f1ad36a25ea6afacb4b45b8bb62c_MD5.png]]
 
 在 off_node 功能包下的 src 目录下新建一个 offb_node.cpp 文件，将下列官方提供的代码复制进去（代码详解可以看官方的代码解释 [MAVROS Offboard 控制示例 (C++) | PX4 自动驾驶用户指南](https://docs.px4.io/main/zh/ros/mavros_offboard_cpp.html) ）
 
@@ -150,7 +150,7 @@ target_link_libraries(offb_node ${catkin_LIBRARIES})
 
 ```
 
-![[0e9af3e1bba9cfb49bddb99a673be947_MD5.png]]
+![[_resources/带你玩转 PX4 无人机仿真 (1) —— 运行官方案例（C++）_px4 仿真 - CSDN 博客/0e9af3e1bba9cfb49bddb99a673be947_MD5.png]]
 
 二. 编译运行
 -------
@@ -187,7 +187,7 @@ chmod +x offb.sh
 
 ```
 
-![[89c29c0eec7192e2cc619cf98f186f7b_MD5.png]] 
+![[_resources/带你玩转 PX4 无人机仿真 (1) —— 运行官方案例（C++）_px4 仿真 - CSDN 博客/89c29c0eec7192e2cc619cf98f186f7b_MD5.png]] 
 （无人机会切换到 Offboard 模式起飞两米，然后一直悬停）  
 **注：如果遇到仿真正常启动，但是运行程序无人机不动，可以参考这篇** [博客](https://blog.csdn.net/private_Jack/article/details/128466062?spm=1001.2014.3001.5506) ，修改参数即可。
 

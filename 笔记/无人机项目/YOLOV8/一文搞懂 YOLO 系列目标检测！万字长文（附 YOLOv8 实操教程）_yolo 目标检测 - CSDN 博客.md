@@ -1,8 +1,10 @@
+> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 [blog.csdn.net](https://blog.csdn.net/qq_45591302/article/details/139843795?ops_request_misc=%257B%2522request%255Fid%2522%253A%25222a977ec65afdd46bcce61e8c7168c0cb%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=2a977ec65afdd46bcce61e8c7168c0cb&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-139843795-null-null.142^v102^pc_search_result_base1&utm_term=yolo%E5%B0%8F%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B&spm=1018.2226.3001.4187)
+
 > **目标检测入门精品文章**
 
  **本文介绍目标检测基础概念，算法发展历史，YOLOV8 环境配置，数据集标注，模型评估指标，改进策略。帮助小白从入门到精通。**
 
-![[80765ac6e6f298db472cd3021993f015_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/80765ac6e6f298db472cd3021993f015_MD5.png]]
 
 **目录**
 
@@ -67,13 +69,13 @@
 
         **YOLO v1**：YOLO 的第一个版本是在 2015 年提出的，它采用了一个全卷积神经网络，将输入图像分为 S×S 个网格，每个网格预测 B 个边界框和各自边界框的类别概率。然后，通过阈值筛选和非极大值抑制（NMS）来获得最终的检测结果。YOLO v1 在速度和准确率上取得了很大的突破，但对小目标和近似目标的检测效果较差。
 
-![[2eca10011d7cb5c2549c010f15dc1b46_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/2eca10011d7cb5c2549c010f15dc1b46_MD5.png]]
 
         **YOLOv5** 是由 Ultralytics 团队在 2020 年开发的。YOLOv5 相比于之前的版本在精度和速度上都有显著提升。它采用了一种轻量化的结构，包括多个不同大小的卷积层和池化层，用于提取图像特征。与以往的版本相比，YOLOv5 引入了新的网络架构，以及一种新的训练方法，使用更大的数据集和更长的训练时间，从而提高了算法的性能。
 
        **YOLOv8** 是由 Ultralytics 公司在 2023 年 1 月发布的最新一代实时目标检测模型。YOLOv8 采用了先进的骨干网络和颈部架构，实现了改进的特征提取和目标检测性能。它采用了无锚点的分割 Ultralytics 头部设计，这有助于提高准确性并使检测过程更加高效。YOLOv8 还专注于在准确性和速度之间保持最佳平衡，适合于不同应用领域的实时目标检测任务。此外，YOLOv8 提供了一系列预训练模型，以满足不同任务和性能要求，使得用户可以根据自己的具体用例找到合适的模型。
 
-![[bb2fe3d686c311711d474f388982c4bf_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/bb2fe3d686c311711d474f388982c4bf_MD5.png]]
 
         **YOLOv9** 由中国台湾 Academia Sinica、台北科技大学等机构联合开发。YOLOv9 引入了**程序化梯度信息**（Programmable Gradient Information, PGI），这是一种全新的概念，旨在解决深层网络中信息丢失的问题。传统的目标检测网络在传递深层信息时，往往会丢失对最终预测至关重要的细节，而 PGI 技术能够保证网络在学习过程中保持完整的输入信息，从而获得更可靠的梯度信息，提高权重更新的准确性。这一创新显著提高了目标检测的准确率，为实时高精度目标检测提供了可能。此外，YOLOv9 采用了全新的网络架构——**泛化高效层聚合网络**（Generalized Efficient Layer Aggregation Network, GELAN）。GELAN 通过梯度路径规划，优化了网络结构，利用传统的卷积操作符实现了超越当前最先进方法（包括基于深度卷积的方法）的参数利用效率。这一设计不仅提高了模型的性能，同时也保证了模型的高效性，使 YOLOv9 能够在保持轻量级的同时，达到前所未有的准确度和速度。
 
@@ -129,7 +131,7 @@ YOLOv10 的结构建立在以前 YOLO 模型的基础上，同时引入了几项
 
         目前，目标检测技术仍在不断发展。一方面，研究者们致力于提高目标检测的准确性和效率。另一方面，一些新的方向也在探索中，如目标实例分割、多目标跟踪等。可以预见，随着技术的不断进步，目标检测技术将在更广泛的应用领域中发挥更大的作用。
 
-![[297e136baf6f603775e44afb6870b63b_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/297e136baf6f603775e44afb6870b63b_MD5.png]]
 
 ###  1.3 目标检测四大任务
 
@@ -142,7 +144,7 @@ YOLOv10 的结构建立在以前 YOLO 模型的基础上，同时引入了几项
 *   **分割 - Segmentation**：分为实例的分割（Instance-level）和场景分割（Scene-level），解决 “每一个像素属于哪个目标物或场景” 的问题。
     
 
-![[f00124a0b3abd767344ee49a6f3f0714_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/f00124a0b3abd767344ee49a6f3f0714_MD5.png]]
 
         目标检测任务可分为两个关键的子任务：**目标分类**和**目标定位**。**目标分类任务负责判断输入图像或所选择图像区域（Proposals）中是否有感兴趣类别的物体出现，输出一系列带分数的标签表明感兴趣类别的物体出现在输入图像或所选择图像区域（Proposals）中的可能性。目标定位任务负责确定输入图像或所选择图像区域（Proposals）中感兴趣类别的物体的位置和范围，输出物体的包围盒、或物体中心、或物体的闭合边界等，通常使用方形包围盒，即 Bounding Box 用来表示物体的位置信息。**
 
@@ -152,7 +154,7 @@ YOLOv10 的结构建立在以前 YOLO 模型的基础上，同时引入了几项
 
 （1）**One-Stage（单阶段）**目标检测算法，这类检测算法不需要 Region Proposal 阶段，可以通过一个 Stage 直接产生物体的类别概率和位置坐标值，比较典型的算法有 YOLO、SSD 和 CornerNet；One-Stage 目标检测算法可以在一个 stage 直接产生物体的类别概率和位置坐标值，相比于 Two-Stage 的目标检测算法不需要 Region Proposal 阶段，整体流程较为简单。如下图所示，在 Testing 的时候输入图片通过 CNN 网络产生输出，解码（后处理）生成对应检测框即可；在 Training 的时候则需要将 Ground Truth 编码成 CNN 输出对应的格式以便计算对应损失 loss。
 
-![[78a4c3598480a754a0db385f1fab5e5a_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/78a4c3598480a754a0db385f1fab5e5a_MD5.png]]
 
 目前对于 One-Stage 算法的主要创新主要集中在如何设计 CNN 结构、如何构建网络目标以及如何设计损失函数上。 
 
@@ -160,7 +162,7 @@ YOLOv10 的结构建立在以前 YOLO 模型的基础上，同时引入了几项
 
         Two-Stage 目标检测算法流程如下图所示，在 Testing 的时候输入图片经过**卷积神经网络**产生第一阶段输出，对输出进行解码处理生成候选区域，然后获取对应候选区域的特征表示（ROIs），然后对 ROIs 进一步精化产生第二阶段的输出，解码（后处理）生成最终结果，解码生成对应检测框即可；在 Training 的时候需要将 Ground Truth 编码成 CNN 输出对应的格式以便计算对应损失 loss。
 
-![[1abf7b7e13dd3ece8e31213dd9875711_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/1abf7b7e13dd3ece8e31213dd9875711_MD5.png]]
 
 二、[环境配置](https://so.csdn.net/so/search?q=%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE&spm=1001.2101.3001.7020)
 ------------------------------------------------------------------------------------------------------
@@ -175,11 +177,11 @@ YOLOv10 的结构建立在以前 YOLO 模型的基础上，同时引入了几项
 
         打开项目，点击 Code, 下载下来，解压。如下图所示。
 
-![[d2e910ec5fe3b4edc88e82de1937e8e5_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/d2e910ec5fe3b4edc88e82de1937e8e5_MD5.png]]
 
 解压后会得到一个文件夹。如下图所示。
 
-![[547235b09492bda5fc0b810c45c8471a_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/547235b09492bda5fc0b810c45c8471a_MD5.png]]
 
 ### 2.2 安装 Anaconda 和 PyCharm
 
@@ -191,13 +193,13 @@ PyCharm 建议下载专业版的，上网找个激活码就 ok。
 
 安装过程很简单，网上教程一大堆，随便找个一步步来就可以。就不再赘述。
 
-![[89423c0b4fd60f3bbb9c49f4574d6691_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/89423c0b4fd60f3bbb9c49f4574d6691_MD5.png]]
 
 ### 2.3 创建虚拟环境
 
 **安装好 Anaconda 之后，在开始菜单栏会有文件夹，打开 Anaconda Prompt（记住不能错，必须是 Anaconda Prompt）**
 
-**![[2c7df1e96767cd0252c337f1d6c501cb_MD5.png]]**
+**![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/2c7df1e96767cd0252c337f1d6c501cb_MD5.png]]**
 
 **新建虚拟环境**
 
@@ -221,7 +223,7 @@ AutoDL 是一个国内的 GPU 租用平台，AutoDL 可以提供服务稳定、�
 
 本文详细介绍如何租用，和配置环境。链接：[http://t.csdnimg.cn/7n7hL](http://t.csdnimg.cn/7n7hL "http://t.csdnimg.cn/7n7hL")
 
-![[fe09492f1a53c3492b69e5489d2131b0_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/fe09492f1a53c3492b69e5489d2131b0_MD5.png]]
 
 三、目标检测流程
 --------
@@ -234,7 +236,7 @@ AutoDL 是一个国内的 GPU 租用平台，AutoDL 可以提供服务稳定、�
 
 1）数据预处理。数据预处理旨在增强训练数据多样性，进而提升检测网络的检测能力。常用的数据增强手段有翻转、缩放、均值归一化和色调变化等。
 
-![[f605b320b39c113a38436dea846d03ef_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/f605b320b39c113a38436dea846d03ef_MD5.png]]
 
 2）检测网络。检测网络一般包括基础骨干、特征融合及预测网络 3 部分。目标检测器的基础骨干通常采用用于图像分类的深度卷积网络，如 AlexNet 、VGGNet、ResNet 和 DenseNet 等。近期，研究人员开始采用基于 Transformer 的基础骨干网络，如 ViT（vision transformer）、Swin 和 PVT（pyramid vision transformer）等。通常将大规模图像分类数据库 ImageNet 上的预训练权重作为检测器骨干网络的初始权重。
 
@@ -246,7 +248,7 @@ AutoDL 是一个国内的 GPU 租用平台，AutoDL 可以提供服务稳定、�
 
 ### 3.2 测试
 
-![[e7250d59a83c679a74cceb7f2966e5e0_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/e7250d59a83c679a74cceb7f2966e5e0_MD5.png]]
 
         基于训练阶段学习的检测网络，在测试阶段输出给定图像中存在物体的类别以及位置信息。如图（b）所示，主要包括输入图像、检测网络和后处理等过程。对于一幅给定的图像，先利用训练好的检测网络生成分类和回归结果。一般而言，大部分目标检测方法在同一物体周围会生成多个检测结果。因此，大部分目标检测方法需要一个后处理步骤，旨在为每个物体保留一个检测结果并去除其他冗余的检测结果。最常用的后处理方法为非极大值抑制方法（non-maximum suppression，NMS）。
 
@@ -269,7 +271,7 @@ AutoDL 是一个国内的 GPU 租用平台，AutoDL 可以提供服务稳定、�
 
         模型的建立需要收集图片并且进行标注。YOLOv8 标注的文件格式如下：
 
-![[53e5c046aeb64ce4c774b29786fd6927_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/53e5c046aeb64ce4c774b29786fd6927_MD5.png]]
 
         其中，每一行通常包含五个数字，分别是类别标签和四个坐标值。这四个坐标值的含义如下：
 
@@ -288,7 +290,7 @@ AutoDL 是一个国内的 GPU 租用平台，AutoDL 可以提供服务稳定、�
 
 ##### 1 Labelme
 
-![[e39a6851fe0d032ab0c9e10472ddb2f0_MD5.jpg]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/e39a6851fe0d032ab0c9e10472ddb2f0_MD5.jpg]]
 
 labelme 是一款开源的图像 / 视频标注工具，标签可用于目标检测、分割和分类。灵感是来自于 MIT 开源的一款标注工具 LabelMe。labelme 具有的特点是：
 
@@ -302,7 +304,7 @@ labelme 是一款开源的图像 / 视频标注工具，标签可用于目标检
 
 ##### 2 LabelImg
 
-![[b7251dd3e695b299acdb8f56f1c4e409_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/b7251dd3e695b299acdb8f56f1c4e409_MD5.png]]
 
 LabelImg 是一个图形化的图像注释工具。它是用 Python 编写的，使用 Qt 作为其图形界面。注释被保存为 PASCAL VOC 格式的 XML 文件，该格式被 ImageNet 使用。此外，它还支持 YOLO 和 Create ML 格式。LabelImg 是由 Tzutalin 在几十位贡献者的帮助下创建的流行的图像注释工具，现在已经不再积极开发，并成为 Label Studio 社区的一部分。
 
@@ -451,11 +453,11 @@ make_yolo_dataset(images_folder, labels_folder, output_folder)
 
 1. 准确率（Precision）：指模型预测为正样本中实际为正样本的比例。
 
-![[8bdf80113b82b16e818ef5bbd92a787b_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/8bdf80113b82b16e818ef5bbd92a787b_MD5.png]]
 
         **𝑇𝑃、𝐹𝑃、𝑇𝑁、𝐹𝑁分别代表被模型预测为正类的正样本、被 模型预测为正类的负样本、被模型预测为负类的负样本和被模型预测为负类的正 样本。𝑃表示正确预测的正样本在所有被预测为正样本中的百分比，𝑅表示正确预 测的正样本在所有正样本中的百分比。|𝑄𝑅| 表示目标类别的数量，𝑞表示检测目标 的类别，𝐴𝑃(𝑞) 表示类别𝑞的𝐴𝑃值。** 
 
-**![[9b252ad827d4b535fc9cd0692bfed2ec_MD5.png]]**
+**![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/9b252ad827d4b535fc9cd0692bfed2ec_MD5.png]]**
 
 2. 召回率（Recall）：指实际为正样本中模型预测为正样本的比例。
 
@@ -471,5 +473,6 @@ make_yolo_dataset(images_folder, labels_folder, output_folder)
 
  **论文中需要使用这些指标，对比不同模型，确定哪些模型是优秀的。**如图所示：
 
-![[2b821e5a0d612b17e5180a7beda8dc8f_MD5.png]]
+![[_resources/一文搞懂 YOLO 系列目标检测！万字长文（附 YOLOv8 实操教程）_yolo 目标检测 - CSDN 博客/2b821e5a0d612b17e5180a7beda8dc8f_MD5.png]]
 
+持续更新中。。。。。
