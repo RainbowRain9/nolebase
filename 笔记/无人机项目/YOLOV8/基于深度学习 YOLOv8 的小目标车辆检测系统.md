@@ -96,9 +96,9 @@ updated: 2025-05-20T13:36
 
 ✅**参数实时调节（置信度和 IoU 阈值）**
 
-![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/f9a5fc4e6a8718c546979d976d1abc3a_MD5.png]]
+![f9a5fc4e6a8718c546979d976d1abc3a_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848845.png)
 
-![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/7950b8e9342ec7da96ec0fb80aa4527c_MD5.png]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/7734bb24eea5ac3ee2c9a1934e998514_MD5.png]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/67443885faf886109b8dbfa4998f0049_MD5.png]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/e89896cbc393779d61788cffca931cda_MD5.png]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/3b8e469c6bbbb03b0c335748b3c705cc_MD5.png]]
+![7950b8e9342ec7da96ec0fb80aa4527c_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848846.png)![7734bb24eea5ac3ee2c9a1934e998514_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848847.png)![67443885faf886109b8dbfa4998f0049_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848848.png)![e89896cbc393779d61788cffca931cda_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848849.png)![3b8e469c6bbbb03b0c335748b3c705cc_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848850.png)
 
 *   #### **图片检测**
     
@@ -218,7 +218,7 @@ names: ['person', 'car']
         
     *   **光照调整**：模拟不同天气（雾天、夜间低光）。
         
-5.  ![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/450b7cbfd622e431bedb4f959f0a323d_MD5.png]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/f1f91c066697c96f38500cdeef92a164_MD5.png]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/f9293412842d131e6d1e83fd72aa9da1_MD5.png]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/ec8042ffb6d99a56b9020f47caa0db53_MD5.jpg]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/7a97f72235f433046e9bcdee2d491b0a_MD5.jpg]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/74fa392a7487250bb19a23744c9b78fe_MD5.jpg]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/d94da1ff7f1e6b235e7f93860efd7c83_MD5.jpg]]
+5.  ![450b7cbfd622e431bedb4f959f0a323d_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848851.png)![f1f91c066697c96f38500cdeef92a164_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848852.png)![f9293412842d131e6d1e83fd72aa9da1_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848853.png)![ec8042ffb6d99a56b9020f47caa0db53_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848854.jpg)![7a97f72235f433046e9bcdee2d491b0a_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848855.jpg)![74fa392a7487250bb19a23744c9b78fe_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848856.jpg)![d94da1ff7f1e6b235e7f93860efd7c83_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848857.jpg)
     
 
 ### 四、项目环境配置
@@ -231,14 +231,14 @@ names: ['person', 'car']
 
 conda create -n yolov8 python==3.9
 
-![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/0a017d249b744c5ce30848206e79191e_MD5.png]]
+![0a017d249b744c5ce30848206e79191e_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848858.png)
 
 **激活虚拟环境**
 
 conda activate yolov8  
  
 
-![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/8573d9dffc522e17879ab5038de25bad_MD5.png]]
+![8573d9dffc522e17879ab5038de25bad_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848859.png)
 
 **安装 cpu 版本 pytorch**
 
@@ -247,19 +247,19 @@ pip install torch torchvision torchaudio
 
 ```
 
-![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/7f71ffc779248cbbb21654346c6c43c6_MD5.png]]
+![7f71ffc779248cbbb21654346c6c43c6_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848860.png)
 
 #### **pycharm 中配置 anaconda**
 
-![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/6840f2e5b493c699d856083ecab59c69_MD5.png]]
+![6840f2e5b493c699d856083ecab59c69_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848861.png)
 
-![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/60221a870cb296a421585964d969d9c2_MD5.png]]
+![60221a870cb296a421585964d969d9c2_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848862.png)
 
 #### **安装所需要库**
 
 pip install -r requirements.txt
 
-![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/08929ffe08567f7c9d7e2e7a6108749a_MD5.png]]
+![08929ffe08567f7c9d7e2e7a6108749a_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848863.png)
 
 ### 五、模型训练
 
@@ -300,9 +300,9 @@ yolov8l.yaml (large)：大型模型，适合对精度要求高的任务。
 
 #### 训练结果
 
-![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/b76c0a2694980e676fdd7366f95d2c77_MD5.png]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/aad2082ada36d8fa28c4deadeac41145_MD5.png]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/05a0707e842d5e84a7565f0833070f60_MD5.png]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/0940e90124103fa466c06e7f58e6380c_MD5.png]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/1d592a0de61f823de7608da8c489a595_MD5.png]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/5eb97adf65264a2d600baaf956748be5_MD5.jpg]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/f0b17a63baec30106a215f14f01b3a84_MD5.jpg]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/77ceb8b7b3f3c9aef40cb6ea1f56cd9b_MD5.jpg]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/b64c32629ceb5dcefb27bb71030b1d6c_MD5.jpg]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/9d9d5adad701c8303385c5075f1164f1_MD5.jpg]]![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/585142b089da86362467dea69fb965a7_MD5.jpg]]
+![b76c0a2694980e676fdd7366f95d2c77_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848864.png)![aad2082ada36d8fa28c4deadeac41145_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848865.png)![05a0707e842d5e84a7565f0833070f60_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848866.png)![0940e90124103fa466c06e7f58e6380c_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848867.png)![1d592a0de61f823de7608da8c489a595_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848868.png)![5eb97adf65264a2d600baaf956748be5_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848869.jpg)![f0b17a63baec30106a215f14f01b3a84_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848870.jpg)![77ceb8b7b3f3c9aef40cb6ea1f56cd9b_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848871.jpg)![b64c32629ceb5dcefb27bb71030b1d6c_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848872.jpg)![9d9d5adad701c8303385c5075f1164f1_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848874.jpg)![585142b089da86362467dea69fb965a7_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848875.jpg)
 
-### 六、核心代码![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/82e2863a7dace2a2186f24975d2565b3_MD5.png]]
+### 六、核心代码![82e2863a7dace2a2186f24975d2565b3_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848876.png)
 
 ```
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -718,7 +718,7 @@ class Ui_MainWindow(object):
 
         **完整全部资源文件**（包括测试图片，_py_ 文件，训练数据集、训练代码、界面代码等），这里已打包上传至博主的面包多平台，见可参考博客与视频，已将所有涉及的文件同时打包到里面，点击即可运行，完整文件截图如下：
 
-![[_resources/基于深度学习 YOLOv8 的小目标车辆检测系统/f54f478f429da0c2a1f00ff62ff25fb0_MD5.png]]
+![f54f478f429da0c2a1f00ff62ff25fb0_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270848877.png)
 
 演示与介绍视频：
 

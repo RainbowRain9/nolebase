@@ -30,7 +30,7 @@ YOLOv7 提出一种新的训练策略，称为可训练免费赠品袋（TBoF）
 
 YOLOv8［[17](#Ref_17)］由 Ultralytics 团队于 2023 年发布，其结合众多实时目标检测器的优点，在保持高准确度的同时达到较快的运行速度，能够更高效地完成目标检测、图像分割等任务。YOLOv8 依据网络的深度与宽度差异，分为 YOLOv8n、YOLOv8s、YOLOv8m、YOLOv8l、YOLOv8x 5 种模型，YOLOv8 框架如图 1 所示。YOLOv8 仍然采用 YOLOv5 中的 CSP 思想、特征融合方法［包含特征金字塔网络［[18](#Ref_18)］（FPN）和路径聚合网络［[19](#Ref_19)］（PAN）两部分］和 SPPF 模块，主要改进如下：1）在保留 YOLOv5 原有思想的前提下，参照 YOLOv7 的 ELAN 结构设计了 C2f 模块；2）检测头部分采用目前流行的分类头和检测头分开的方法；3）采用无锚框机制，直接预测小目标的边缘，滤除标签中的噪声干扰项，降低模型的超参数、网络复杂度，使计算速度更接近 YOLO 系列的高速标签。
 
-![](https://opticsjournal.net/richHtml/lop/2025/62/10/1037009/img_01.jpg)
+![](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270840409.jpeg)
 
 # 图 1. YOLOv8 网络框图
 
@@ -49,7 +49,7 @@ YOLOv10 在后处理阶段采用一种新的 NMS-free 方法，提出了双重�
 
 针对无人机航拍图像小目标占比较高、不同目标尺度差异较大造成的细节信息不足和特征融合信息单一的问题，对 YOLOv8n 模型进行改进工作。首先，为了提高模型特征提取能力，在 YOLOv8n 模型的 Backbone 网络采用 ConvNeXt v2 替换 DarkNet-53；其次，为了充分利用多尺度信息获取更全面的目标特征，在 Neck 网络引入三重特征融合机制和尺度序列特征融合模块；然后，在 Head 层设计多尺度特征融合层来加强上下文信息的收集，以提升对多尺度小目标的识别能力；最后，采用层自适应幅度剪枝算法来平衡模型的计算复杂度与计算精度。改进算法的整体框图如图 2 所示。
 
-![](https://opticsjournal.net/richHtml/lop/2025/62/10/1037009/img_02.jpg)
+![](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270840410.jpeg)
 
 # 图 2. 基于 YOLOv8n 网络的改进算法整体框图
 
@@ -79,7 +79,7 @@ TFE 模块的输入分别为、_N_×_N_以及 2_N_×2_N_大小的特征图。首
 
 可以看到，由、和串联而成。TFE 模块结构如图 3 所示。
 
-![](https://opticsjournal.net/richHtml/lop/2025/62/10/1037009/img_03.jpg)
+![](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270840411.jpeg)
 
 # 图 3. TFE 特征连接模块
 
@@ -95,7 +95,7 @@ SSFF 模块（图 4）基于包含目标检测大部分信息的高分辨率特�
 
 式中：表示宽度为_w_、高度为_h_的二维特征图；为二维高斯滤波器的标准差缩放参数；* 为卷积运算。其次，将这些不同尺度的特征图水平堆叠，并使用 3D 卷积提取其尺度序列特征［[27](#Ref_27)］。上述高斯平滑的输出特征图具有不同的分辨率，使用最近邻插值法将所有特征图对齐到与_P_3 相同的分辨率。然后，将特征层从三维张量变为四维张量，沿着深度维度将特征图连接，形成一个用于后续卷积的三维特征图。最后，使用 3D 卷积、3D 批归一化完成尺度序列特征提取。
 
-![](https://opticsjournal.net/richHtml/lop/2025/62/10/1037009/img_04.jpg)
+![](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270840412.jpeg)
 
 # 图 4. SSFF 模块结构
 
@@ -108,7 +108,7 @@ SSFF 模块（图 4）基于包含目标检测大部分信息的高分辨率特�
 
 在无人机航拍场景中，由于无人机飞行高度较高、视野宽广，航拍数据集中小目标占比较大。VisDrone2019 数据集［[28](#Ref_28)］的目标尺寸分布见图 5。由图 5 可知：宽度和高度尺寸小于 0.05 的小目标分布最密，颜色最深；尺寸在 0.05~0.15 范围的中尺寸目标以及尺寸大于 0.15 的大尺寸目标分布广泛、宽高差异较大。
 
-![](https://opticsjournal.net/richHtml/lop/2025/62/10/1037009/img_05.jpg)
+![](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270840413.jpeg)
 
 # 图 5. 目标尺寸分布
 
@@ -118,7 +118,7 @@ SSFF 模块（图 4）基于包含目标检测大部分信息的高分辨率特�
 
 在目标检测过程中，浅层网络的感受野较小，语义信息较弱，但细节表示能力较强。随着卷积次数的增多，网络结构的感受野增大，引起细节表示能力削弱和抽象特征增强，所以利用不同层级的特征信息会影响目标检测的准确性。由于 VisDrone2019 数据集中小目标的尺寸较小，并且 YOLOv8 的上采样倍数较大，仅利用深层特征图难以学习到小目标的特征信息。为了利用不同尺寸感受野所包含的信息，设计了多尺度特征融合层（MSFH）模块，以连接不同层级的特征图，增强上下文信息收集能力，同时加强底层特征细节信息的利用，提高小目标的检测精度。MSFH 检测层结构如图 6 所示。
 
-![](https://opticsjournal.net/richHtml/lop/2025/62/10/1037009/img_06.jpg)
+![](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270840414.jpeg)
 
 # 图 6. MSFH 结构
 
@@ -222,7 +222,7 @@ FLOPS 用于衡量算法的计算复杂度和效率，并且表示在特定的�
 
 为了更加直观地观察改进算法在检测效果上的提升，使用 VisDrone2019 数据集设置两种可视化实验：1）不同场景下基准模型 YOLOv8n 与改进算法检测结果对比实验，结果如图 7 所示；2）使用梯度加权类激活映射［[32](#Ref_32)］（Grad-CAM）进行热力图分析，实验结果如图 8 所示。Grad-CAM 可以帮助理解模型在进行检测任务时所关注的区域，清晰展示模型的检测能力，进行针对性改进。
 
-![](https://opticsjournal.net/richHtml/lop/2025/62/10/1037009/img_07.jpg)
+![](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270840415.jpeg)
 
 # 图 7. YOLOv8n 与改进算法在不同场景的检测结果可视化对比。（a）停车场与道路场景；（b）广场场景
 
@@ -230,7 +230,7 @@ FLOPS 用于衡量算法的计算复杂度和效率，并且表示在特定的�
 
 [下载图片](https://opticsjournal.net/richHtml/lop/2025/62/10/1037009/img_07.jpg "下载此图片") [查看所有图片](https://opticsjournal.net/Articles/OJ4d48972414a6f31f/FigureTable "查看本文全图片")
 
-![](https://opticsjournal.net/richHtml/lop/2025/62/10/1037009/img_08.jpg)
+![](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270840416.jpeg)
 
 # 图 8. YOLOv8n 与改进算法的 Grad-CAM 可视化对比。（a）停车场与道路场景；（b）广场场景
 

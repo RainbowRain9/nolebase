@@ -12,7 +12,7 @@ updated: 2025-05-21T20:36
 
 学姐带你学习 YOLOv8，从入门到创新，轻轻松松搞定科研；
 
-![[_resources/基于 YOLOv8 的交通摄像头下车辆检测算法/ac3d5fec40cb8e334c089f5e467cd9be_MD5.png]]
+![ac3d5fec40cb8e334c089f5e467cd9be_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270837764.png)
 
 1. 交通摄像头车辆检测数据集介绍
 -----------------
@@ -23,9 +23,9 @@ updated: 2025-05-21T20:36
 
 **下图可以看出都是车辆数据集具有不同尺寸的目标物体，既有大目标又有小目标**
 
-![[_resources/基于 YOLOv8 的交通摄像头下车辆检测算法/4aec98f22e2ccfc8f7e4cc0d17eeb9bc_MD5.png]]
+![4aec98f22e2ccfc8f7e4cc0d17eeb9bc_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270837765.png)
 
- ![[_resources/基于 YOLOv8 的交通摄像头下车辆检测算法/65530a54bc50594c73893c39a6b6514f_MD5.png]]
+ ![65530a54bc50594c73893c39a6b6514f_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270837766.png)
 
 # 1.1 小目标检测难点 
 
@@ -37,29 +37,29 @@ updated: 2025-05-21T20:36
  2.HIC-YOLOv5 介绍
 ----------------
 
-![[_resources/基于 YOLOv8 的交通摄像头下车辆检测算法/fb0e3736c61d06acaf9d8755c5b89a46_MD5.png]]
+![fb0e3736c61d06acaf9d8755c5b89a46_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270837767.png)
 
 摘要：小目标检测一直是目标检测领域的一个具有挑战性的问题。 已经有一些工作提出了对该任务的改进，例如添加几个注意力块或改变特征融合网络的整体结构。 然而，这些模型的计算成本很大，这使得部署实时目标检测系统不可行，同时还有改进的空间。 为此，提出了一种改进的 YOLOv5 模型：**HICYOLOv5** 来解决上述问题。 **首先，添加一个针对小物体的额外预测头，以提供更高分辨率的特征图，以实现更好的预测。 其次，在 backbone 和 neck 之间采用 involution block 来增加特征图的通道信息。 此外，在主干网末端应用了一种名为 CBAM 的注意力机制**，与之前的工作相比，不仅降低了计算成本，而且还强调了通道和空间域中的重要信息。 我们的结果表明，HIC-YOLOv5 在 VisDrone-2019-DET 数据集上将 mAP@[.5:.95] 提高了 6.42%，将 mAP@0.5 提高了 9.38%。 
 
-![[_resources/基于 YOLOv8 的交通摄像头下车辆检测算法/ed1c8ae8ca33b54b5e75e88a22f3ea08_MD5.png]]
+![ed1c8ae8ca33b54b5e75e88a22f3ea08_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270837768.png)
 
 # 2.1 Convolutional Block Attention Module(CBAM) 介绍
 
- ![[_resources/基于 YOLOv8 的交通摄像头下车辆检测算法/09127561994a873be1fd6ede801ccf50_MD5.png]]​
+ ![09127561994a873be1fd6ede801ccf50_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270837769.png)​
 
  **论文地址：**************[https://arxiv.org/pdf/1807.06521.pdf](https://arxiv.org/pdf/1807.06521.pdf "https://arxiv.org/pdf/1807.06521.pdf")****************
 
  摘要：我们提出了卷积块注意力模块（CBAM），这是一种用于前馈卷积神经网络的简单而有效的注意力模块。 给定中间[特征图](https://so.csdn.net/so/search?q=%E7%89%B9%E5%BE%81%E5%9B%BE&spm=1001.2101.3001.7020)，我们的模块沿着两个独立的维度（通道和空间）顺序推断注意力图，然后将注意力图乘以输入特征图以进行自适应特征细化。 由于 CBAM 是一个轻量级通用模块，因此它可以无缝集成到任何 CNN 架构中，且开销可以忽略不计，并且可以与基础 CNN 一起进行端到端训练。 我们通过在 ImageNet-1K、MS COCO 检测和 VOC 2007 检测数据集上进行大量实验来验证我们的 CBAM。我们的实验显示各种模型在分类和检测性能方面的持续改进，证明了 CBAM 的广泛适用性。 代码和模型将公开。
 
- ![[_resources/基于 YOLOv8 的交通摄像头下车辆检测算法/e99e902f907359533affa1049a0dcbed_MD5.png]]
+ ![e99e902f907359533affa1049a0dcbed_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270837770.png)
 
 上图可以看到，CBAM 包含 CAM（Channel Attention Module）和 SAM（Spartial Attention Module）两个子模块，分别进行通道和空间上的 Attention。这样不只能够节约参数和计算力，并且保证了其能够做为即插即用的模块集成到现有的网络架构中去。
 
-![[_resources/基于 YOLOv8 的交通摄像头下车辆检测算法/375e7399bcecff5488a15ba40ba46b4a_MD5.png]]
+![375e7399bcecff5488a15ba40ba46b4a_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270837771.png)
 
 # 2.2 Involution 原理介绍
 
-![[_resources/基于 YOLOv8 的交通摄像头下车辆检测算法/b924371f3871c3de1b8cb6d9fdb91242_MD5.png]]
+![b924371f3871c3de1b8cb6d9fdb91242_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270837772.png)
 
 论文链接：https://arxiv.org/abs/2103.06255
 
@@ -73,9 +73,9 @@ updated: 2025-05-21T20:36
 
 2. 内卷可以将权重自适应地分配到不同的位置，从而对空间域中信息量最大的视觉元素进行优先级排序。（本来的卷积在空间的每一个地方都是用到同一个卷积核，用的同一套权重）
 
-![[_resources/基于 YOLOv8 的交通摄像头下车辆检测算法/e65aa5688a81e941a84223000487a515_MD5.png]]
+![e65aa5688a81e941a84223000487a515_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270837773.png)
 
-重新考虑了视觉任务标准卷积的固有原理，特别是与空间无关和特定于通道的方法。取而代之的是，我们通过反转前述的卷积设计原理（称为卷积）提出了一种用于深度神经网络的新颖 atomic 操作。![[_resources/基于 YOLOv8 的交通摄像头下车辆检测算法/6d4173b3c4100e3adc45d0b246c9f1b4_MD5.png]]
+重新考虑了视觉任务标准卷积的固有原理，特别是与空间无关和特定于通道的方法。取而代之的是，我们通过反转前述的卷积设计原理（称为卷积）提出了一种用于深度神经网络的新颖 atomic 操作。![6d4173b3c4100e3adc45d0b246c9f1b4_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270837774.png)
 
 # 2.3 多头检测器
 
@@ -100,4 +100,4 @@ PR_curve.png
 
 PR 曲线中的 **P 代表的是 precision（精准率）**，**R 代表的是 recall（召回率）**，其代表的是精准率与召回率的关系。
 
-![[_resources/基于 YOLOv8 的交通摄像头下车辆检测算法/d9f43cfdc00fefdc5b8e19c1a2b9a1ff_MD5.png]]
+![d9f43cfdc00fefdc5b8e19c1a2b9a1ff_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270837775.png)
