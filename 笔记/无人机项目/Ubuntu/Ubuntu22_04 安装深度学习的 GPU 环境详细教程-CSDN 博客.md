@@ -13,7 +13,7 @@ updated: 2025-05-24T22:57
 
 在本教程中，我们将详细介绍如何在 Ubuntu 22.04 上安装和配置深度学习环境，包括 NVIDIA 驱动、CUDA、cuDNN 以及 PyTorch 等深度学习框架。希望这篇教程能够帮助你顺利搭建出一个稳定、高效的深度学习开发环境。
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/85aae8fba0cdd102ba616c35fa1f0a70_MD5.png]]
+![85aae8fba0cdd102ba616c35fa1f0a70_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929753.png)
 
 1. 开始安装前
 --------
@@ -31,7 +31,7 @@ updated: 2025-05-24T22:57
 3.  **不要频繁更换软件源**：虽然更换国内的镜像源可以加快软件包的下载速度，但频繁更换源可能导致依赖冲突或更新问题。因此，选择一个稳定且速度快的源后，尽量保持一致。
     
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/56339e4295115b501a853bf821a93f8f_MD5.png]]
+![56339e4295115b501a853bf821a93f8f_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929754.png)
 
 **注意**：请有此觉悟！！！如果你发现**无论怎么安装显卡驱动总是出错，或者 CUDA 安装失败**，那要么是最新版的 ubuntu 系统，要么就是升级了内核导致兼容不了，版本不匹配。此时如果是小白，重装原始 ubuntu，或许比你自己折腾更快、更省事。事实就是，系统合适照步骤基本一步到位成功，系统不行搜一堆没用的教程，折腾死去活来也弄不好。在 ubuntu 中，贪新只能试坑！
 
@@ -50,7 +50,7 @@ updated: 2025-05-24T22:57
     
     执行上述命令后，系统会要求输入管理员密码。输入后，你将进入 `nano` 编辑器，并看到当前的源配置文件内容。
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/64a415459cdd5fc36b8529b9ec4e1e60_MD5.png]]
+    ![64a415459cdd5fc36b8529b9ec4e1e60_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929755.png)
     
 2.  **替换默认源**：
     
@@ -72,7 +72,7 @@ updated: 2025-05-24T22:57
     
     替换完成后，编辑器中内容应类似如下界面：
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/7b8c982ad1c2850213347a99fef50cfb_MD5.png]]
+    ![7b8c982ad1c2850213347a99fef50cfb_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929756.png)
     
     **注意**：在测试过程中，清华源的速度似乎更快。我们可以改为使用**清华源**，貌似企业用的阿里云比较多，同样的方法是将上述内容替换为如下清华源的配置：
     
@@ -90,7 +90,7 @@ updated: 2025-05-24T22:57
     
     **清华源配置**后的界面如下所示：
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/cefa569140bb43f28138cf53037d4f8e_MD5.png]]
+    ![cefa569140bb43f28138cf53037d4f8e_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929757.png)
     
 3.  **保存并退出编辑器**：
     
@@ -107,7 +107,7 @@ updated: 2025-05-24T22:57
     
     更新过程完成后，你可以看到软件包列表已经更新，如下图所示：
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/9c17bef7a6887f03b6386bd1ff4476c3_MD5.png]]
+    ![9c17bef7a6887f03b6386bd1ff4476c3_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929758.png)
     
 
 到这里，你已经成功地切换了 Ubuntu 的软件源，下载速度将显著提升，为后续的安装和配置过程做好了准备。
@@ -132,7 +132,7 @@ sudo apt upgrade -y
 
 在执行这些命令时，系统会下载并安装所有可用的更新。你可能会看到类似以下的输出：
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/ab9354402e43ca4d72f31f61591e30d2_MD5.png]]
+![ab9354402e43ca4d72f31f61591e30d2_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929759.png)
 
 ### 2.2 安装基本依赖项
 
@@ -149,7 +149,7 @@ sudo apt install build-essential gcc g++ make -y
 
 安装完成后，你应该会看到类似于以下的安装输出：
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/ab9354402e43ca4d72f31f61591e30d2_MD5.png]]
+![ab9354402e43ca4d72f31f61591e30d2_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929759.png)
 
 这些基本工具的安装为后续安装 NVIDIA 驱动程序、CUDA 和其他深度学习库奠定了基础。
 
@@ -171,7 +171,7 @@ sudo ubuntu-drivers autoinstall
 
 你可能会看到类似于以下的输出：
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/cb849710aa70f907a869d1a5b973c7f6_MD5.png]]
+![cb849710aa70f907a869d1a5b973c7f6_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929761.png)
 
 **注意**：有时在安装过程中可能会遇到驱动安装失败或冲突的情况。如果出现这种问题，建议首先卸载未成功安装的驱动程序，然后重新尝试安装。以下命令用于卸载之前安装失败的驱动程序（**下面的 535 是驱动型号，你需要看一眼命令行中显示的具体型号修改代码**），**如果上面没有提示出错就不要卸载**：
 
@@ -189,14 +189,14 @@ sudo apt-get remove --purge nvidia-driver-535
 
 1.  打开 “软件和更新” 应用。在 Ubuntu 的启动栏中找到这个应用，图标如下：
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/160cf4a23021772a079dd20ebed5bd67_MD5.png]]
+    ![160cf4a23021772a079dd20ebed5bd67_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929762.png)
     
 2.  进入 “软件和更新” 应用后，选择 “附加驱动” 选项卡。系统会自动检测可用的驱动程序，并显示在列表中。通常情况下，你会看到几个可供选择的 NVIDIA 驱动版本。
     
     选择 `nvidia-driver-535-server`，这里你的驱动号可能不太一样，但类似选择 nvidia-diriver-xxx（不是带 server 后缀的），然后点击 “应用更改”。
     
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/626f240fc42c8a8678891ac5efaca031_MD5.png]]
+![626f240fc42c8a8678891ac5efaca031_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929763.png)
 
 3.  等待系统自动安装并更新驱动程序。**安装完成后，重启系统以确保驱动程序生效**。
 
@@ -211,7 +211,7 @@ nvidia-smi
 
 如果驱动安装成功，你会看到类似如下的输出，显示 GPU 的详细信息，包括型号、驱动版本等：
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/f476a5b9f7c39e665b83a7eae8bb25f9_MD5.png]]
+![f476a5b9f7c39e665b83a7eae8bb25f9_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929764.png)
 
 注意：请记住上面的 **CUDA Version**，我这里是 12.2，**后面我们安装的 CUDA Toolkit 需要保持一致**。通过以上步骤，你的 NVIDIA 驱动程序应该已经正确安装，并准备好用于深度学习环境。
 
@@ -233,14 +233,14 @@ CUDA Toolkit 是 NVIDIA 提供的并行计算平台和编程模型，能够让�
 按照网站上的提示逐步**选择适合你自己电脑的选项**。值得注意的是，虽然 CUDA 有最新版本，但为了确保与深度学习框架的兼容性，建议使用与目标框架兼容的版本。在本文中，我们选择安装 CUDA 12.2。
 
 当进入下载页面后通常是 CUDA 的当前最新版本，为了保证后续的深度学习环境的库的兼容性，这里安装[早前版本的 CUDA](https://developer.nvidia.com/cuda-toolkit-archive)，如下图所示。  
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/1393011f8ecb1d5db4e9525dbbb85ad1_MD5.png]] 
+![1393011f8ecb1d5db4e9525dbbb85ad1_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929765.png) 
 我这里选择 12.2 的版本，**你注意看好自己的版本**。如下图所示：
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/17d2914bd08d7cd6cc4db9e7430c5408_MD5.png]]
+![17d2914bd08d7cd6cc4db9e7430c5408_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929766.png)
 
 这里按照操作系统的版本选择如下：
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/77e5c5a6b0fa6568d6b738d2fa1bcc05_MD5.png]]
+![77e5c5a6b0fa6568d6b738d2fa1bcc05_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929767.png)
 
 选择以上选项后，你会看到一系列安装命令。依次运行以下命令来下载和安装 CUDA：
 
@@ -263,7 +263,7 @@ sudo apt-get -y install cuda
 
 上面的命令就是从 [NVIDIA CUDA 下载页面](https://developer.nvidia.com/cuda-12-2-0-download-archive) 上复制出来的，**你需要使用的是选定选项后官网给出的命令**，如下图所示：
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/2556fa405d2b512d2c97e8066a178592_MD5.png]]
+![2556fa405d2b512d2c97e8066a178592_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929768.png)
 
 逐条复制官网上的命令（注意：**下面的步骤你应该跟我一样逐条复制官网上的命令执行，因为版本如果不同，命令有些差别**），这里我执行以上命令的效果如下：
 
@@ -274,7 +274,7 @@ sudo apt-get -y install cuda
     
     ```
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/8128b18fea1e0920e347609b057e4eaa_MD5.png]]
+    ![8128b18fea1e0920e347609b057e4eaa_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929769.png)
     
 2.  移动配置文件到指定目录：
     
@@ -283,7 +283,7 @@ sudo apt-get -y install cuda
     
     ```
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/31273dd2773dac3dcb37d2bcf0244224_MD5.png]]
+    ![31273dd2773dac3dcb37d2bcf0244224_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929770.png)
     
 3.  下载 CUDA 安装包：
     
@@ -292,7 +292,7 @@ sudo apt-get -y install cuda
     
     ```
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/c7bceca96de0d699c276940a87a0a006_MD5.png]]
+    ![c7bceca96de0d699c276940a87a0a006_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929771.png)
     
 4.  安装下载的 CUDA 包：
     
@@ -301,7 +301,7 @@ sudo apt-get -y install cuda
     
     ```
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/d169fb9dfd6cb2bc1adcf0020130ff6e_MD5.png]]
+    ![d169fb9dfd6cb2bc1adcf0020130ff6e_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929772.png)
     
 5.  复制 GPG 密钥到系统的受信任密钥列表中：
     
@@ -310,7 +310,7 @@ sudo apt-get -y install cuda
     
     ```
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/c52222be4a4528f0973358099a34d9b0_MD5.png]]
+    ![c52222be4a4528f0973358099a34d9b0_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929773.png)
     
 6.  更新软件包列表并安装 CUDA：
     
@@ -320,7 +320,7 @@ sudo apt-get -y install cuda
     
     ```
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/29dc2b506c12f256f09c7a3026b671cd_MD5.png]]
+    ![29dc2b506c12f256f09c7a3026b671cd_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929774.png)
     
 
 ### 4.2 配置环境变量
@@ -335,7 +335,7 @@ source ~/.bashrc
 ```
 
 这些命令会将 CUDA 的二进制文件路径和库路径添加到系统的 `PATH` 和 `LD_LIBRARY_PATH` 中，并立即生效。  
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/8becb8e86e4854eebe03c4949fce25f0_MD5.png]]
+![8becb8e86e4854eebe03c4949fce25f0_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929775.png)
 
 ### 4.3 验证 CUDA 安装
 
@@ -348,7 +348,7 @@ nvcc -V
 
 如果 CUDA 安装成功，你将看到类似如下的输出，显示 CUDA 的版本号和其他详细信息：
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/a132337ba518e9ee190bf61f38d24f4f_MD5.png]]
+![a132337ba518e9ee190bf61f38d24f4f_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929776.png)
 
 到此为止，你已经成功安装了 CUDA Toolkit 并将其配置为系统环境的一部分。接下来，我们将继续安装 cuDNN 以完成深度学习环境的配置。
 
@@ -363,31 +363,31 @@ cuDNN（CUDA Deep Neural Network library）是一个用于加速深度学习框�
 
 1.  **访问 cuDNN 下载页面**：进入 cuDNN 下载页面，点击 “Download cuDNN”，如下图所示：
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/51656e14a1936eeb08f569d313b850f3_MD5.png]]
+    ![51656e14a1936eeb08f569d313b850f3_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929777.png)
     
 2.  **选择合适的 cuDNN 版本**：进入下载页面后，你通常会看到当前最新版本的 cuDNN。为了保证与深度学习框架的兼容性，建议选择与已安装的 CUDA 版本相匹配的 cuDNN 版本。点击页面右下角的 “[Archived cuDNN Releases](https://developer.nvidia.com/rdp/cudnn-archive)”，以选择一个稍早版本的 cuDNN。
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/3e7a91d47b1d58ed05fc507890a3df5d_MD5.png]]
+    ![3e7a91d47b1d58ed05fc507890a3df5d_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929778.png)
     
 3.  **选择具体的 cuDNN 版本**：在存档版本页面中，选择适合你 CUDA 版本的 cuDNN 版本。在本例中，我们选择的是与 CUDA 12.2 兼容的 cuDNN 8.8.1 版本。
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/a19a540976fe1b527fbc496b636fce82_MD5.png]]
+    ![a19a540976fe1b527fbc496b636fce82_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929779.png)
     
 4.  **下载 Ubuntu 版本的 cuDNN**：根据你使用的 Ubuntu 版本下载[合适的 cuDNN 包](https://developer.nvidia.com/rdp/cudnn-archive)。在本例中，我们选择了适用于 Ubuntu 22.04 的 cuDNN 安装包，“for CUDA 12.x” 表示用于 CUDA12 的版本，这里也不建议用太新的。
     
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/bff3278e8afb0c76370401da4c568465_MD5.png]]
+![bff3278e8afb0c76370401da4c568465_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929780.png)
 
 在这个页面，点击 “Download cuDNN” 按钮开始下载。需要登录你的 NVIDIA 账户，如果还没有账户，可以点击注册。
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/36a0c315a98e0f0f6e223856396d9457_MD5.png]]
+![36a0c315a98e0f0f6e223856396d9457_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929781.png)
 
 ### 5.2 安装 cuDNN
 
 下载完成后，使用以下步骤安装 cuDNN。
 
 **注意**：找到你下载的文件位置（有可能在 “下载” 文件夹），我这里是在根目录，如下，可以右击选择“**在终端打开**”，这时终端就会打开到这个文件所在的位置，方便我们后面执行安装。  
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/ac5723dd9395c2d60e7ebe4b80f00e10_MD5.png]]
+![ac5723dd9395c2d60e7ebe4b80f00e10_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929783.png)
 
 1.  **安装 `.deb` 文件**：使用 `dpkg` 命令安装下载的 cuDNN `.deb` 文件。首先，进入下载文件所在的目录，然后运行以下命令（**注意看你的文件名称修改，不要盲目复制**）：
     
@@ -399,7 +399,7 @@ cuDNN（CUDA Deep Neural Network library）是一个用于加速深度学习框�
     安装过程可能会输出以下内容：
     
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/12060a8e49a85d1369648ac3719c397f_MD5.png]]
+![12060a8e49a85d1369648ac3719c397f_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929784.png)
 
 2.  **添加 GPG 密钥**：安装 `.deb` 文件后，接下来需要将 GPG 密钥添加到系统的受信任密钥列表中。这一步可以通过以下命令完成（**注意看你的命令行提示的文件名称，不要盲目复制**）：
     
@@ -411,7 +411,7 @@ cuDNN（CUDA Deep Neural Network library）是一个用于加速深度学习框�
     执行这条命令后，你会看到以下输出：
     
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/45aecc9edf9ed1a49c93530f7c9fab44_MD5.png]]
+![45aecc9edf9ed1a49c93530f7c9fab44_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929785.png)
 
 3.  **更新并安装 cuDNN 包**：更新你的包列表并安装 cuDNN 包：
     
@@ -422,12 +422,12 @@ cuDNN（CUDA Deep Neural Network library）是一个用于加速深度学习框�
     ```
     
     首先输入第一条的更新，如下：  
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/8a6ecf17778eae2c3c6b523aa6c0fe27_MD5.png]]
+    ![8a6ecf17778eae2c3c6b523aa6c0fe27_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929786.png)
     
     然后输入第二条，系统会下载并安装必要的 cuDNN 包，输出类似以下内容：
     
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/1260f30d24abfabcf96a8c0c412311cf_MD5.png]]
+![1260f30d24abfabcf96a8c0c412311cf_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929787.png)
 
 ### 5.3 验证 cuDNN 安装
 
@@ -443,7 +443,7 @@ cuDNN（CUDA Deep Neural Network library）是一个用于加速深度学习框�
     或者使用`dpkg -l | grep libcudnn`。上面的这条命令将会输出 cuDNN 的主版本号、次版本号和补丁版本号，如下所示：
     
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/2b4680ee4af895578b22682c26bfff20_MD5.png]]
+![2b4680ee4af895578b22682c26bfff20_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929788.png)
 
 如果看到类似的输出，并且版本号与预期的版本号相符，说明 cuDNN 已经成功安装并且配置正确。具体含义如下：
 
@@ -480,7 +480,7 @@ cuDNN（CUDA Deep Neural Network library）是一个用于加速深度学习框�
 --------------------
 
 在安装完 NVIDIA 驱动、CUDA 和 cuDNN 后，接下来就是安装 Python 及相关的深度学习框架，如 TensorFlow 和 PyTorch。我们推荐使用 Anaconda 或 Miniconda 来管理 Python 环境，这样可以有效避免环境冲突，并简化包管理。以下是详细步骤。  
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/b3a3f1d6c9e5ed00d3f520a2d470e394_MD5.png]]
+![b3a3f1d6c9e5ed00d3f520a2d470e394_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929789.png)
 
 ### 6.1 安装 Miniconda
 
@@ -497,7 +497,7 @@ Miniconda 是一个轻量级的 Anaconda 发行版，包含 Python 和 Conda 包
     
     下载完成后，你会看到如下的输出：
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/d2ac2730b72b38a4a72f11123fa4940b_MD5.png]]
+    ![d2ac2730b72b38a4a72f11123fa4940b_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929790.png)
     
 2.  **验证安装脚本（可选）**：
     
@@ -510,7 +510,7 @@ Miniconda 是一个轻量级的 Anaconda 发行版，包含 Python 和 Conda 包
     
     这条命令会生成一个 SHA-256 哈希值。你可以将其与 Miniconda 官方网站上提供的哈希值进行比对，以确保文件的完整性。
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/e376c5f2178b3b59365b60af0d15778a_MD5.png]]
+    ![e376c5f2178b3b59365b60af0d15778a_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929791.png)
     
 3.  **运行安装脚本**：
     
@@ -523,17 +523,17 @@ Miniconda 是一个轻量级的 Anaconda 发行版，包含 Python 和 Conda 包
     
     安装脚本将引导你完成 Miniconda 的安装，界面如下：
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/1fa502cccc36e42671e903c4e8104039_MD5.png]]
+    ![1fa502cccc36e42671e903c4e8104039_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929792.png)
     
 4.  **通过安装过程**：
     
     执行安装脚本后，会提示你阅读许可协议。按 `Enter` 键滚动到协议末尾，然后输入 `yes` 同意许可协议。
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/1e3538a07a99e9b226c8335fadf608d5_MD5.png]]
+    ![1e3538a07a99e9b226c8335fadf608d5_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929793.png)
     
     接着，它会询问你安装的位置。默认安装路径是你的主目录下的 `~/miniconda3`。你可以直接按 `Enter` 接受默认路径，或者输入自定义路径。
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/c1da43f3767b72d85e3fc677b0f3c99c_MD5.png]]
+    ![c1da43f3767b72d85e3fc677b0f3c99c_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929794.png)
     
 5.  **初始化 Miniconda**：
     
@@ -544,7 +544,7 @@ Miniconda 是一个轻量级的 Anaconda 发行版，包含 Python 和 Conda 包
     
     ```
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/60d7be78d2ac255be465eeb2c12720f8_MD5.png]]
+    ![60d7be78d2ac255be465eeb2c12720f8_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929795.png)
     
 6.  **激活 Miniconda**：
     
@@ -562,7 +562,7 @@ Miniconda 是一个轻量级的 Anaconda 发行版，包含 Python 和 Conda 包
     
     ```
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/e95d72af83081474fb8e9f7a41dc1b10_MD5.png]]
+    ![e95d72af83081474fb8e9f7a41dc1b10_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929796.png)
     
 7.  **测试安装**：
     
@@ -575,7 +575,7 @@ Miniconda 是一个轻量级的 Anaconda 发行版，包含 Python 和 Conda 包
     
     你应该看到 Conda 的版本号，类似于以下输出：
     
-    ![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/e5678f71b58d575ad01d4e07c0d0bae6_MD5.png]]
+    ![e5678f71b58d575ad01d4e07c0d0bae6_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929797.png)
     
 
 ### 6.2 创建 Python 环境
@@ -592,9 +592,9 @@ Miniconda 是一个轻量级的 Anaconda 发行版，包含 Python 和 Conda 包
     ```
     
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/36f97b89227a6e90671d909eb2fd31e1_MD5.png]]
+![36f97b89227a6e90671d909eb2fd31e1_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929798.png)
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/97a0dfb3f8d101aca7e6dd102baf4b61_MD5.png]]
+![97a0dfb3f8d101aca7e6dd102baf4b61_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929799.png)
 
 这个命令将创建一个新的虚拟环境，并安装 Python 3.8 版本。安装完成后，可以通过以下命令激活该环境：
 
@@ -608,11 +608,11 @@ conda activate env_rec
     在激活环境后，可以使用 `pip` 或 `conda` 安装你所需的深度学习框架，例如 PyTorch 或 TensorFlow。以下是安装 PyTorch 的示例：
     
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/c6786bcb780f054847e9df7c1505fb06_MD5.png]]
+![c6786bcb780f054847e9df7c1505fb06_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929800.png)
 
 访问 [PyTorch 官网](https://pytorch.org/) 获取安装命令，为了兼容性避免出错，可以进到[早前版本](https://pytorch.org/get-started/previous-versions/)，通常如下：
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/62a5dca8fa30b1c63f84c112623fa844_MD5.png]] 
+![62a5dca8fa30b1c63f84c112623fa844_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929801.png) 
 使用 pip 安装的命令如下：
 
 ```
@@ -627,7 +627,7 @@ conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=
 
 ```
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/14164fd7fa809ea19ef1c05afd9d029d_MD5.png]]
+![14164fd7fa809ea19ef1c05afd9d029d_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929802.png)
 
 安装完成后，可以通过启动 Python，在命令行输入
 
@@ -667,4 +667,4 @@ conda remove -n env_rec --all
 
 通过以上步骤，Ubuntu 系统已经配置好了深度学习的开发环境，包含了 GPU 支持的 CUDA、cuDNN、Miniconda 以及常用的深度学习框架。
 
-![[_resources/Ubuntu22_04 安装深度学习的 GPU 环境详细教程-CSDN 博客/f8c62ae9943681c8e72f079a796a87f0_MD5.png]]
+![f8c62ae9943681c8e72f079a796a87f0_MD5](https://raw.githubusercontent.com/RainbowRain9/PicGo/master/202505270929803.png)
