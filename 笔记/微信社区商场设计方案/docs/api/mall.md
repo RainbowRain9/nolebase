@@ -6,11 +6,28 @@
 
 ## 基础信息
 
-- **API版本**: v1
-- **基础URL**: `https://api.campus-mall.com/api/v1/mall`
-- **认证方式**: JWT Token
+- **调用方式**: 微信小程序云函数
+- **认证方式**: 微信小程序 openid 自动获取
+- **调用方法**: `wx.cloud.callFunction()`
 - **请求格式**: JSON
 - **响应格式**: JSON
+
+## 云函数调用示例
+
+```javascript
+// 调用商城相关云函数
+wx.cloud.callFunction({
+  name: 'mall', // 云函数名称
+  data: {
+    action: 'getProducts', // 具体操作
+    // 其他参数...
+  }
+}).then(res => {
+  console.log(res.result)
+}).catch(err => {
+  console.error(err)
+})
+```
 
 ## 商品相关接口
 

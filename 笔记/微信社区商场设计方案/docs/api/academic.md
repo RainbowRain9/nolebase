@@ -6,37 +6,62 @@
 
 ## 基础信息
 
-- **API版本**: v1
-- **基础URL**: `https://api.campus-mall.com/api/v1/academic`
-- **认证方式**: JWT Token
+- **调用方式**: 微信小程序云函数
+- **认证方式**: 微信小程序 openid 自动获取
+- **调用方法**: `wx.cloud.callFunction()`
 - **请求格式**: JSON
 - **响应格式**: JSON
+
+## 云函数调用示例
+
+```javascript
+// 调用教务相关云函数
+wx.cloud.callFunction({
+  name: 'academic', // 云函数名称
+  data: {
+    action: 'getCourseSchedule', // 具体操作
+    // 其他参数...
+  }
+}).then(res => {
+  console.log(res.result)
+}).catch(err => {
+  console.error(err)
+})
+```
 
 ## 课程相关接口
 
 ### 1. 获取课程表
 
-**接口地址**: `GET /schedule`
+**云函数名称**: `academic`
+
+**操作类型**: `getCourseSchedule`
 
 **接口描述**: 获取学生或教师的课程表
 
-**请求头**:
-```
-Authorization: Bearer {token}
-```
-
-**查询参数**:
-```
-semester=2024-1     // 学期，可选，默认当前学期
-week=1              // 周次，可选，默认当前周
-studentId=20210001  // 学号，可选（教师查询学生课表时使用）
-teacherId=T001      // 教师工号，可选（查询教师课表时使用）
-classId=CS2021-1    // 班级ID，可选（查询班级课表时使用）
+**调用示例**:
+```javascript
+wx.cloud.callFunction({
+  name: 'academic',
+  data: {
+    action: 'getCourseSchedule',
+    semester: '2024-1',     // 学期，可选，默认当前学期
+    week: 1,                // 周次，可选，默认当前周
+    studentId: '20210001',  // 学号，可选（教师查询学生课表时使用）
+    teacherId: 'T001',      // 教师工号，可选（查询教师课表时使用）
+    classId: 'CS2021-1'     // 班级ID，可选（查询班级课表时使用）
+  }
+}).then(res => {
+  console.log(res.result)
+}).catch(err => {
+  console.error(err)
+})
 ```
 
 **响应数据**:
 ```json
 {
+  "success": true,
   "code": 200,
   "message": "获取成功",
   "data": {
@@ -826,5 +851,5 @@ studentId=20210001  // 学号，可选（教师查询时使用）
 
 ---
 
-*文档版本: v1.0*  
+*文档版本: v1.0*
 *最后更新: 2025年5月*

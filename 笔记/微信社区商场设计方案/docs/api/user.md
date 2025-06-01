@@ -6,11 +6,28 @@
 
 ## 基础信息
 
-- **API版本**: v1
-- **基础URL**: `https://api.campus-mall.com/api/v1`
-- **认证方式**: JWT Token
+- **调用方式**: 微信小程序云函数
+- **认证方式**: 微信小程序 openid 自动获取
+- **调用方法**: `wx.cloud.callFunction()`
 - **请求格式**: JSON
 - **响应格式**: JSON
+
+## 云函数调用示例
+
+```javascript
+// 调用用户相关云函数
+wx.cloud.callFunction({
+  name: 'user', // 云函数名称
+  data: {
+    action: 'getUserInfo', // 具体操作
+    // 其他参数...
+  }
+}).then(res => {
+  console.log(res.result)
+}).catch(err => {
+  console.error(err)
+})
+```
 
 ## 统一响应格式
 
@@ -47,30 +64,38 @@
 
 ### 1. 微信登录
 
-**接口地址**: `POST /auth/wechat/login`
+**云函数名称**: `user`
+
+**操作类型**: `wechatLogin`
 
 **接口描述**: 使用微信授权码进行登录
 
-**请求参数**:
-```json
-{
-  "code": "string",           // 微信授权码，必填
-  "encryptedData": "string",  // 加密数据，可选
-  "iv": "string"              // 初始向量，可选
-}
+**调用示例**:
+```javascript
+wx.cloud.callFunction({
+  name: 'user',
+  data: {
+    action: 'wechatLogin',
+    code: 'wx_auth_code',           // 微信授权码，必填
+    encryptedData: 'encrypted_data', // 加密数据，可选
+    iv: 'initial_vector'            // 初始向量，可选
+  }
+}).then(res => {
+  console.log(res.result)
+}).catch(err => {
+  console.error(err)
+})
 ```
 
 **响应数据**:
 ```json
 {
+  "success": true,
   "code": 200,
   "message": "登录成功",
   "data": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-    "refreshToken": "refresh_token_string",
-    "expiresIn": 7200,
     "user": {
-      "id": 1001,
+      "_id": "60f1b2c3d4e5f6789abcdef0",
       "openid": "oGZUI0egBJY1zhBYw2KhdUfwVJJE",
       "unionid": "o6_bmasdasdsad6_2sgVt7hMZOPfL",
       "nickname": "张三",
@@ -621,5 +646,5 @@ Authorization: Bearer {token}
 
 ---
 
-*文档版本: v1.0*  
+*文档版本: v1.0*
 *最后更新: 2025年5月*
