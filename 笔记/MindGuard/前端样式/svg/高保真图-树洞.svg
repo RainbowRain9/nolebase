@@ -1,0 +1,77 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="375" height="812" viewBox="0 0 375 812">
+  <defs>
+    </defs>
+  <rect width="375" height="812" fill="#F7F9FC" />
+
+  <!-- 顶栏 -->
+  <rect x="0" y="0" width="375" height="72" fill="#FFFFFF" />
+  <text x="32" y="44" font-size="18" font-weight="700" fill="#2C3640">树洞</text>
+  <rect x="204" y="22" width="60" height="32" rx="16" fill="#FFFFFF" stroke="#3A7BD5" />
+  <text x="234" y="43" font-size="12" font-weight="600" fill="#3A7BD5" text-anchor="middle">草稿箱</text>
+  <rect x="270" y="22" width="84" height="32" rx="16" fill="#3A7BD5" />
+  <text x="312" y="43" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">发帖</text>
+
+  <!-- 自检提示条 -->
+  <rect x="24" y="80" width="327" height="68" rx="16" fill="#FFFFFF" stroke="#E9EDF3" />
+  <text x="40" y="102" font-size="12" font-weight="600" fill="#2C3640">发布前自检</text>
+  <text x="40" y="122" font-size="11" fill="#5A6672">礼貌守则 · 风险提示 · 匿名开关</text>
+  <rect x="244" y="100" width="92" height="24" rx="12" fill="#EEF5FF" />
+  <text x="290" y="116" font-size="11" fill="#3A7BD5" text-anchor="middle">查看设置</text>
+
+  <!-- 标签导航 -->
+  <g>
+    <rect x="24" y="160" width="72" height="32" rx="16" fill="#3A7BD5" />
+    <text x="60" y="181" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">推荐</text>
+    <rect x="104" y="160" width="72" height="32" rx="16" fill="#FFFFFF" stroke="#E9EDF3" />
+    <text x="140" y="181" font-size="12" font-weight="600" fill="#5A6672" text-anchor="middle">最新</text>
+    <rect x="184" y="160" width="72" height="32" rx="16" fill="#FFFFFF" stroke="#E9EDF3" />
+    <text x="220" y="181" font-size="12" font-weight="600" fill="#5A6672" text-anchor="middle">我的</text>
+    <rect x="264" y="160" width="87" height="32" rx="16" fill="#FFFFFF" stroke="#E9EDF3" />
+    <text x="308" y="181" font-size="12" font-weight="600" fill="#5A6672" text-anchor="middle">话题▼</text>
+  </g>
+
+  <!-- 置顶 Banner -->
+  <rect x="24" y="204" width="327" height="60" rx="16" fill="#EEF5FF" />
+  <text x="44" y="228" font-size="12" font-weight="600" fill="#2C3640">考试周暖心提醒</text>
+  <text x="44" y="246" font-size="11" fill="#5A6672">冲刺期也别忘了休息，欢迎分享你的缓压方式</text>
+
+  <!-- 树洞贴 1 -->
+  <rect x="24" y="276" width="327" height="150" rx="24" fill="#FFFFFF" />
+  <circle cx="52" cy="304" r="14" fill="#F4F3FF" stroke="#8C86FF" />
+  <text x="74" y="308" font-size="12" font-weight="600" fill="#2C3640">匿名 · 小夜</text>
+  <rect x="74" y="314" width="74" height="18" rx="9" fill="#EEF5FF" />
+  <text x="111" y="327" font-size="10" fill="#3A7BD5" text-anchor="middle">情绪温度 4/10</text>
+  <rect x="260" y="296" width="70" height="20" rx="10" fill="#EEF5FF" stroke="#3A7BD5" />
+  <text x="295" y="310" font-size="10" fill="#3A7BD5" text-anchor="middle">R1 观察</text>
+  <text x="44" y="342" font-size="12" fill="#5A6672">这周论文压力大，晚上总是睡不着。有没有人愿意聊聊怎么调整作息？</text>
+  <rect x="44" y="370" width="64" height="20" rx="10" fill="#EEF5FF" />
+  <text x="76" y="384" font-size="10" fill="#3A7BD5" text-anchor="middle">#睡眠</text>
+  <text x="142" y="384" font-size="10" fill="#3A7BD5">抱抱 12</text>
+  <text x="194" y="384" font-size="10" fill="#3A7BD5">回应 5</text>
+  <text x="246" y="384" font-size="10" fill="#7B8893">收藏</text>
+
+  <!-- 树洞贴 2 -->
+  <rect x="24" y="440" width="327" height="150" rx="24" fill="#FFFFFF" />
+  <circle cx="52" cy="468" r="14" fill="#EEF5FF" stroke="#3A7BD5" />
+  <text x="74" y="472" font-size="12" font-weight="600" fill="#2C3640">匿名 · 星河</text>
+  <rect x="74" y="478" width="74" height="18" rx="9" fill="#EAFBF5" />
+  <text x="111" y="491" font-size="10" fill="#1FA476" text-anchor="middle">情绪温度 6/10</text>
+  <rect x="254" y="460" width="82" height="20" rx="10" fill="#FFF7E8" stroke="#F2B23D" />
+  <text x="295" y="474" font-size="10" fill="#F59E0B" text-anchor="middle">R2 关注</text>
+  <text x="44" y="506" font-size="12" fill="#5A6672">想和室友缓和关系，但不知道如何开口。有没有温和的开场白？</text>
+  <rect x="44" y="534" width="80" height="20" rx="10" fill="#EEF5FF" />
+  <text x="84" y="548" font-size="10" fill="#3A7BD5" text-anchor="middle">#室友关系</text>
+  <rect x="134" y="534" width="112" height="20" rx="10" fill="#EAFBF5" />
+  <text x="190" y="548" font-size="10" fill="#1FA476" text-anchor="middle">领取行动卡</text>
+  <text x="264" y="548" font-size="10" fill="#7B8893">收藏</text>
+
+  <!-- 底部导航 -->
+  <rect x="0" y="744" width="375" height="68" fill="#FFFFFF" />
+  <g fill="#5A6672" font-size="12" font-weight="600" text-anchor="middle">
+    <text x="46" y="784">今天</text>
+    <text x="140" y="784">日记</text>
+    <text x="234" y="784" fill="#3A7BD5">树洞</text>
+    <text x="328" y="784">我的</text>
+  </g>
+  <rect x="218" y="760" width="32" height="4" rx="2" fill="#3A7BD5" />
+</svg>
