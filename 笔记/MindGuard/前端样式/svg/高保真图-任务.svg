@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="375" height="812" viewBox="0 0 375 812">
+  <defs>
+    <linearGradient id="taskHero" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EEF5FF" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+  </defs>
+  <rect width="375" height="812" fill="#F7F9FC" />
+
+  <!-- 顶栏 -->
+  <rect x="0" y="0" width="375" height="72" fill="#FFFFFF" />
+  <text x="32" y="44" font-size="18" font-weight="700" fill="#2C3640">任务</text>
+
+  <!-- 筛选标签 -->
+  <rect x="24" y="84" width="327" height="48" rx="24" fill="rgba(58,123,213,0.08)" />
+  <rect x="28" y="88" width="64" height="40" rx="20" fill="#3A7BD5" />
+  <text x="60" y="113" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">全部</text>
+  <text x="120" y="113" font-size="14" font-weight="600" fill="#7B8893" text-anchor="middle">AI</text>
+  <text x="170" y="113" font-size="14" font-weight="600" fill="#7B8893" text-anchor="middle">社区</text>
+  <text x="235" y="113" font-size="14" font-weight="600" fill="#7B8893" text-anchor="middle">真人</text>
+  <text x="290" y="113" font-size="14" font-weight="600" fill="#7B8893" text-anchor="middle">自建</text>
+
+  <!-- 统计卡片 -->
+  <rect x="24" y="140" width="327" height="120" rx="20" fill="url(#taskHero)" />
+  <text x="44" y="168" font-size="14" font-weight="700" fill="#2C3640">任务概览</text>
+  <circle cx="82" cy="220" r="32" fill="#EEF5FF" />
+  <path d="M92 188 A32 32 0 1 1 68 252" fill="none" stroke="#3A7BD5" stroke-width="6" />
+  <text x="82" y="226" font-size="16" font-weight="700" fill="#3A7BD5" text-anchor="middle">75%</text>
+  <text x="200" y="195" font-size="12" fill="#5A6672">本周新增: 12 个</text>
+  <text x="200" y="215" font-size="12" fill="#5A6672">进行中: 3 个</text>
+  <text x="200" y="235" font-size="12" fill="#5A6672">已完成: 9 个</text>
+  <text x="200" y="255" font-size="12" fill="#5A6672">逾期: 0 个</text>
+
+  <!-- 任务列表标题 -->
+  <text x="24" y="284" font-size="14" font-weight="700" fill="#2C3640">进行中</text>
+
+  <!-- 任务卡片1 -->
+  <rect x="24" y="296" width="327" height="100" rx="16" fill="#FFFFFF" stroke="#E9EDF3" />
+  <text x="40" y="318" font-size="14" font-weight="600" fill="#2C3640">整理书桌 10 分钟</text>
+  <rect x="40" y="326" width="56" height="18" rx="9" fill="#EAFBF5" />
+  <text x="68" y="339" font-size="10" fill="#1FA476" text-anchor="middle">AI 建议</text>
+  <text x="40" y="356" font-size="12" fill="#5A6672">小目标先开局，完成后记录感受</text>
+  <text x="40" y="376" font-size="11" fill="#7B8893">截止: 今天 20:00</text>
+  <rect x="270" y="330" width="72" height="24" rx="12" fill="#3A7BD5" />
+  <text x="306" y="347" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">开始</text>
+
+  <!-- 任务卡片2 -->
+  <rect x="24" y="410" width="327" height="100" rx="16" fill="#FFFFFF" stroke="#E9EDF3" />
+  <text x="40" y="432" font-size="14" font-weight="600" fill="#2C3640">和室友沟通</text>
+  <rect x="40" y="440" width="74" height="18" rx="9" fill="#F4F3FF" />
+  <text x="77" y="453" font-size="10" fill="#8C86FF" text-anchor="middle">树洞领取</text>
+  <text x="40" y="470" font-size="12" fill="#5A6672">缓和关系，找温和的开场白</text>
+  <text x="40" y="490" font-size="11" fill="#7B8893">截止: 明天 18:00</text>
+  <rect x="270" y="444" width="72" height="24" rx="12" fill="#3A7BD5" />
+  <text x="306" y="461" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">开始</text>
+
+  <!-- 任务列表标题 -->
+  <text x="24" y="540" font-size="14" font-weight="700" fill="#2C3640">已完成</text>
+
+  <!-- 已完成任务卡片 -->
+  <rect x="24" y="552" width="327" height="80" rx="16" fill="#F5F5F5" stroke="#E0E0E0" />
+  <text x="40" y="574" font-size="14" font-weight="600" fill="#7B8893">呼吸练习 5 分钟</text>
+  <rect x="40" y="582" width="56" height="18" rx="9" fill="#E8F5E9" />
+  <text x="68" y="595" font-size="10" fill="#4CAF50" text-anchor="middle">自建</text>
+  <text x="40" y="612" font-size="11" fill="#7B8893">完成时间: 14:30</text>
+  <rect x="270" y="566" width="72" height="24" rx="12" fill="#F5F5F5" />
+  <text x="306" y="583" font-size="12" font-weight="600" fill="#7B8893" text-anchor="middle">已完成</text>
+
+  <!-- 底部导航 -->
+  <rect x="0" y="744" width="375" height="68" fill="#FFFFFF" />
+  <g font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" text-anchor="middle">
+    <text x="38" y="784" fill="#5A6672">今天</text>
+    <text x="112" y="784" fill="#3A7BD5">任务</text>
+    <text x="186" y="784" fill="#5A6672">树洞</text>
+    <text x="260" y="784" fill="#5A6672">随笔</text>
+    <text x="334" y="784" fill="#5A6672">我的</text>
+  </g>
+  <rect x="100" y="760" width="24" height="4" rx="2" fill="#3A7BD5" />
+</svg>

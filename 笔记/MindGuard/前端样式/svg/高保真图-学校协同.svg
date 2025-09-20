@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="375" height="812" viewBox="0 0 375 812">
+  <defs>
+    <!-- 渐变定义 -->
+    <linearGradient id="schoolHeroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EEF5FF" />
+      <stop offset="100%" stop-color="#E0F2FE" />
+    </linearGradient>
+
+    <linearGradient id="psychologyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0FDF4" />
+      <stop offset="100%" stop-color="#C5EBDD" />
+    </linearGradient>
+
+    <linearGradient id="crisisGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF2F2" />
+      <stop offset="100%" stop-color="#FECACA" />
+    </linearGradient>
+
+    <!-- 图标定义 -->
+    <g id="schoolIcon">
+      <rect x="2" y="6" width="12" height="8" fill="#3A7BD5" rx="1"/>
+      <path d="M 2 6 L 8 2 L 14 6" stroke="#3A7BD5" stroke-width="1.5" fill="none"/>
+      <rect x="6" y="8" width="4" height="6" fill="#3A7BD5"/>
+    </g>
+
+    <g id="counselorIcon">
+      <circle cx="8" cy="6" r="4" fill="#22C55E"/>
+      <path d="M 4 10 L 12 10" stroke="#22C55E" stroke-width="2"/>
+      <path d="M 8 10 L 8 14" stroke="#22C55E" stroke-width="2"/>
+      <circle cx="6" cy="4" r="1" fill="#FFFFFF"/>
+      <circle cx="10" cy="4" r="1" fill="#FFFFFF"/>
+    </g>
+
+    <g id="psychologyIcon">
+      <circle cx="8" cy="8" r="6" fill="none" stroke="#1FA476" stroke-width="1.5"/>
+      <path d="M 5 8 Q 8 5 11 8" stroke="#1FA476" stroke-width="1" fill="none"/>
+      <path d="M 5 8 Q 8 11 11 8" stroke="#1FA476" stroke-width="1" fill="none"/>
+    </g>
+
+    <g id="crisisIcon">
+      <circle cx="8" cy="8" r="6" fill="none" stroke="#DC2626" stroke-width="2"/>
+      <path d="M 8 5 L 8 9" stroke="#DC2626" stroke-width="2"/>
+      <path d="M 5 8 L 11 8" stroke="#DC2626" stroke-width="2"/>
+    </g>
+
+    <g id="calendarIcon">
+      <rect x="2" y="4" width="12" height="10" fill="none" stroke="#3A7BD5" stroke-width="1.5" rx="1"/>
+      <path d="M 2 8 L 14 8" stroke="#3A7BD5" stroke-width="1.5"/>
+      <circle cx="5" cy="11" r="1" fill="#3A7BD5"/>
+      <circle cx="8" cy="11" r="1" fill="#3A7BD5"/>
+      <circle cx="11" cy="11" r="1" fill="#3A7BD5"/>
+    </g>
+
+    <g id="phoneIcon">
+      <path d="M 4 2 Q 2 2 2 4 L 2 10 Q 2 12 4 12 L 6 12 L 8 10 L 10 10 L 12 8 Q 14 8 14 6 L 14 4 Q 14 2 12 2 Z" fill="none" stroke="#3A7BD5" stroke-width="1.5"/>
+    </g>
+
+    <g id="activityIcon">
+      <circle cx="8" cy="8" r="6" fill="none" stroke="#8B5CF6" stroke-width="1.5"/>
+      <path d="M 5 10 L 7 6 L 9 8 L 11 4" stroke="#8B5CF6" stroke-width="1.5" fill="none"/>
+    </g>
+
+    <g id="onlineIndicator">
+      <circle cx="0" cy="0" r="3" fill="#22C55E"/>
+      <circle cx="0" cy="0" r="5" fill="#22C55E" opacity="0.3"/>
+    </g>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="375" height="812" fill="#F7F9FC" />
+
+  <!-- 顶栏 -->
+  <rect x="0" y="0" width="375" height="72" fill="#FFFFFF" />
+  <text x="32" y="44" font-size="18" font-weight="700" fill="#2C3640">学校协同</text>
+
+  <!-- 学校绑定状态卡 -->
+  <rect x="16" y="88" width="343" height="110" rx="16" fill="url(#schoolHeroGradient)" stroke="#E0F2FE" stroke-width="1" />
+
+  <!-- 已绑定状态 -->
+  <rect x="32" y="108" width="50" height="50" rx="8" fill="#FFFFFF"/>
+  <use href="#schoolIcon" transform="translate(48, 124)"/>
+  <text x="96" y="120" font-size="14" font-weight="700" fill="#2C3640">XX大学 · 心理学院</text>
+  <text x="96" y="138" font-size="11" fill="#5A6672">2021级 心理学专业</text>
+  <rect x="96" y="148" width="50" height="16" rx="8" fill="#22C55E" opacity="0.2"/>
+  <text x="121" y="160" font-size="9" font-weight="600" fill="#22C55E" text-anchor="middle">已绑定</text>
+
+  <!-- 辅导员信息 -->
+  <text x="240" y="120" font-size="11" fill="#5A6672">辅导员：王老师</text>
+  <text x="240" y="138" font-size="11" fill="#5A6672">工作日 9:00-17:00</text>
+  <rect x="240" y="148" width="80" height="24" rx="12" fill="#3A7BD5"/>
+  <text x="280" y="164" font-size="10" font-weight="600" fill="#FFFFFF" text-anchor="middle">联系辅导员</text>
+
+  <!-- 辅导员工作台 -->
+  <rect x="16" y="216" width="343" height="130" rx="16" fill="#FFFFFF" />
+  <text x="32" y="240" font-size="14" font-weight="700" fill="#2C3640">辅导员工作台</text>
+
+  <!-- 辅导员信息区 -->
+  <g transform="translate(32, 252)">
+    <circle cx="20" cy="20" r="18" fill="#E0F2FE"/>
+    <use href="#counselorIcon" transform="translate(14, 14)"/>
+    <use href="#onlineIndicator" transform="translate(32, 6)"/>
+    <text x="48" y="16" font-size="12" font-weight="600" fill="#2C3640">王老师 · 心理辅导员</text>
+    <text x="48" y="30" font-size="10" fill="#5A6672">专长：情绪管理、学业压力</text>
+    <text x="48" y="42" font-size="9" fill="#22C55E">在线 · 预约响应时间 &lt; 2小时</text>
+  </g>
+
+  <!-- 快捷操作区 -->
+  <g transform="translate(32, 310)">
+    <rect x="0" y="0" width="70" height="26" rx="13" fill="#3A7BD5"/>
+    <text x="35" y="18" font-size="9" font-weight="600" fill="#FFFFFF" text-anchor="middle">立即联系</text>
+
+    <rect x="80" y="0" width="70" height="26" rx="13" fill="none" stroke="#3A7BD5"/>
+    <text x="115" y="18" font-size="9" font-weight="600" fill="#3A7BD5" text-anchor="middle">发送消息</text>
+
+    <rect x="160" y="0" width="70" height="26" rx="13" fill="#EAFBF5"/>
+    <text x="195" y="18" font-size="9" font-weight="600" fill="#1FA476" text-anchor="middle">预约咨询</text>
+  </g>
+
+  <!-- 心理中心服务 -->
+  <rect x="16" y="362" width="343" height="150" rx="16" fill="url(#psychologyGradient)" stroke="#C5EBDD" stroke-width="1" />
+  <text x="32" y="386" font-size="14" font-weight="700" fill="#2C3640">心理中心服务</text>
+
+  <!-- 服务分类 -->
+  <g transform="translate(32, 402)">
+    <rect x="0" y="0" width="130" height="30" rx="15" fill="#FFFFFF"/>
+    <use href="#psychologyIcon" transform="translate(10, 10) scale(0.8)"/>
+    <text x="28" y="22" font-size="10" font-weight="600" fill="#1FA476">在线咨询</text>
+
+    <rect x="140" y="0" width="130" height="30" rx="15" fill="#FFFFFF"/>
+    <use href="#calendarIcon" transform="translate(150, 10) scale(0.8)"/>
+    <text x="168" y="22" font-size="10" font-weight="600" fill="#1FA476">预约服务</text>
+
+    <rect x="0" y="38" width="130" height="30" rx="15" fill="#FFFFFF"/>
+    <use href="#activityIcon" transform="translate(10, 48) scale(0.8)"/>
+    <text x="28" y="60" font-size="10" font-weight="600" fill="#8B5CF6">团体活动</text>
+
+    <rect x="140" y="38" width="130" height="30" rx="15" fill="#FFFFFF"/>
+    <use href="#schoolIcon" transform="translate(150, 48) scale(0.8)"/>
+    <text x="168" y="60" font-size="10" font-weight="600" fill="#1FA476">自助资源</text>
+  </g>
+
+  <!-- 本周可预约时间 -->
+  <text x="32" y="488" font-size="11" font-weight="600" fill="#2C3640">本周可预约时间</text>
+  <g transform="translate(32, 496)">
+    <rect x="0" y="0" width="40" height="20" rx="10" fill="#E5E7EB"/>
+    <text x="20" y="14" font-size="8" fill="#6B7280" text-anchor="middle">周一</text>
+
+    <rect x="48" y="0" width="40" height="20" rx="10" fill="#22C55E"/>
+    <text x="68" y="14" font-size="8" fill="#FFFFFF" text-anchor="middle">周二</text>
+
+    <rect x="96" y="0" width="40" height="20" rx="10" fill="#E5E7EB"/>
+    <text x="116" y="14" font-size="8" fill="#6B7280" text-anchor="middle">周三</text>
+
+    <rect x="144" y="0" width="40" height="20" rx="10" fill="#E5E7EB"/>
+    <text x="164" y="14" font-size="8" fill="#6B7280" text-anchor="middle">周四</text>
+
+    <rect x="192" y="0" width="40" height="20" rx="10" fill="#22C55E"/>
+    <text x="212" y="14" font-size="8" fill="#FFFFFF" text-anchor="middle">周五</text>
+
+    <rect x="240" y="0" width="60" height="20" rx="10" fill="#3A7BD5"/>
+    <text x="270" y="14" font-size="8" font-weight="600" fill="#FFFFFF" text-anchor="middle">查看全部</text>
+  </g>
+
+  <!-- 危机干预专区 -->
+  <rect x="16" y="536" width="343" height="90" rx="16" fill="url(#crisisGradient)" stroke="#FECACA" stroke-width="1" />
+  <text x="32" y="560" font-size="14" font-weight="700" fill="#2C3640">危机干预专区</text>
+
+  <!-- 预警流程说明 -->
+  <text x="32" y="580" font-size="10" fill="#5A6672">L1-L4风险等级 · 24小时紧急响应</text>
+
+  <!-- 紧急联系方式 -->
+  <g transform="translate(32, 594)">
+    <circle cx="12" cy="12" r="12" fill="#DC2626"/>
+    <use href="#crisisIcon" transform="translate(6, 6) scale(0.6)"/>
+    <text x="32" y="16" font-size="10" font-weight="600" fill="#DC2626">24小时热线：400-XXXX-120</text>
+  </g>
+
+  <!-- 院系资源导航 -->
+  <text x="32" y="652" font-size="14" font-weight="700" fill="#2C3640">院系资源导航</text>
+  <g>
+    <rect x="16" y="664" width="165" height="70" rx="12" fill="#FFFFFF" stroke="#E9EDF3"/>
+    <use href="#schoolIcon" transform="translate(40, 690)"/>
+    <text x="68" y="698" font-size="12" font-weight="600" fill="#2C3640">学业支持</text>
+    <text x="40" y="716" font-size="9" fill="#5A6672">课程辅导、学习方法</text>
+    <text x="40" y="728" font-size="9" fill="#5A6672">考试指导</text>
+
+    <rect x="194" y="664" width="165" height="70" rx="12" fill="#FFFFFF" stroke="#E9EDF3"/>
+    <use href="#activityIcon" transform="translate(218, 690)"/>
+    <text x="246" y="698" font-size="12" font-weight="600" fill="#2C3640">社团活动</text>
+    <text x="218" y="716" font-size="9" fill="#5A6672">学生社团、文体活动</text>
+    <text x="218" y="728" font-size="9" fill="#5A6672">志愿服务</text>
+  </g>
+
+  <!-- 底部导航 -->
+  <rect x="0" y="744" width="375" height="68" fill="#FFFFFF" />
+  <g font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" text-anchor="middle">
+    <text x="38" y="784" fill="#5A6672">今天</text>
+    <text x="112" y="784" fill="#5A6672">任务</text>
+    <text x="186" y="784" fill="#5A6672">树洞</text>
+    <text x="260" y="784" fill="#5A6672">随笔</text>
+    <text x="334" y="784" fill="#3A7BD5">我的</text>
+  </g>
+  <rect x="322" y="760" width="24" height="4" rx="2" fill="#3A7BD5" />
+</svg>

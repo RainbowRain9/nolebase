@@ -21,7 +21,8 @@
 | M5 运营与复盘 | Ops/Risk Lead, Data Lead | PMO | PO, QA Lead | FE Lead, BE Lead, Tech Lead | Sprint 7 | 上线日报、指标看板、复盘报告 | Week 14 结束 |
 | 公共组件 WBS 交付 | FE Lead | Tech Lead | PO, QA Lead | PMO, Ops/Risk Lead | Sprint 1-2 | 组件库、冒烟测试报告 | 与 WBS 任务结束同步 |
 | 今天页闭环交付 | FE Lead, BE Lead | Tech Lead | QA Lead, Data Lead | PMO | Sprint 2-3 | /api/moods/today 联调记录、主流程测试报告 | Week 6 |
-| 日记模块交付 | FE Lead, BE Lead | Tech Lead | QA Lead, Data Lead | PMO | Sprint 3-4 | /api/journals 联调、专项测试报告 | Week 8 |
+| 心情随笔模块交付 | FE Lead, BE Lead | Tech Lead | QA Lead, Data Lead | PMO | Sprint 3-4 | /api/journals 联调、专项测试报告 | Week 8 |
+| 任务看板交付 | FE Lead, BE Lead | Tech Lead | QA Lead, Data Lead | PMO | Sprint 3-4 | /api/tasks 联调、埋点验证、统计抽屉对账 | Week 8 |
 | 树洞风控交付 | FE Lead, BE Lead, Ops/Risk Lead | Tech Lead | QA Lead, Data Lead | PMO | Sprint 4-5 | 风控演练报告、告警配置 | Week 10 |
 | 我的 Tab 与周报交付 | FE Lead, BE Lead | Tech Lead | PO, QA Lead, Data Lead | Ops/Risk Lead, PMO | Sprint 4-5 | 周报接口联调、功能测试报告 | Week 10 |
 | SOS 分包与应急预案 | FE Lead, Ops/Risk Lead | Tech Lead | QA Lead, BE Lead | PMO, Data Lead | Sprint 5 | SOS 演练脚本、值班计划 | Week 10 |

@@ -1,0 +1,251 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="375" height="812" viewBox="0 0 375 812">
+  <defs>
+    <!-- 渐变定义 -->
+    <linearGradient id="recommendationGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF3C7" />
+      <stop offset="100%" stop-color="#FDE68A" />
+    </linearGradient>
+
+    <linearGradient id="moodBarGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3A7BD5" />
+      <stop offset="100%" stop-color="#8C86FF" />
+    </linearGradient>
+
+    <!-- 图标定义 -->
+    <g id="aiIcon">
+      <circle cx="8" cy="8" r="8" fill="#3A7BD5" opacity="0.2"/>
+      <text x="8" y="12" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" font-weight="700" fill="#3A7BD5" text-anchor="middle">AI</text>
+    </g>
+
+    <g id="videoIcon">
+      <rect x="2" y="4" width="12" height="8" fill="none" stroke="#EF4444" stroke-width="2" rx="2"/>
+      <path d="M 6 6 L 8 8 L 6 10 Z" fill="#EF4444"/>
+    </g>
+
+    <g id="audioIcon">
+      <circle cx="6" cy="10" r="2" fill="#8B5CF6"/>
+      <rect x="5" y="2" width="2" height="8" fill="#8B5CF6"/>
+      <circle cx="10" cy="8" r="2" fill="#8B5CF6"/>
+      <rect x="9" y="2" width="2" height="6" fill="#8B5CF6"/>
+    </g>
+
+    <g id="articleIcon">
+      <rect x="2" y="2" width="12" height="12" fill="none" stroke="#3B82F6" stroke-width="2" rx="2"/>
+      <path d="M 4 6 L 12 6 M 4 8 L 10 8 M 4 10 L 12 10" stroke="#3B82F6" stroke-width="1"/>
+    </g>
+
+    <g id="toolIcon">
+      <rect x="2" y="2" width="12" height="12" fill="none" stroke="#10B981" stroke-width="2" rx="2"/>
+      <circle cx="8" cy="8" r="2" fill="#10B981"/>
+    </g>
+
+    <g id="activityIcon">
+      <circle cx="8" cy="8" r="6" fill="none" stroke="#F59E0B" stroke-width="1.5"/>
+      <path d="M 5 10 L 7 6 L 9 8 L 11 4" stroke="#F59E0B" stroke-width="1.5" fill="none"/>
+    </g>
+
+    <g id="settingsIcon">
+      <circle cx="8" cy="8" r="6" fill="none" stroke="#6B7280" stroke-width="1.5"/>
+      <circle cx="8" cy="8" r="3" fill="#6B7280"/>
+    </g>
+
+    <g id="feedbackIcon">
+      <circle cx="8" cy="8" r="6" fill="none" stroke="#3A7BD5" stroke-width="1.5"/>
+      <path d="M 8 4 L 8 6 M 6 6 L 10 6 M 8 6 L 8 10 M 6 10 L 10 10" stroke="#3A7BD5" stroke-width="1" fill="none"/>
+    </g>
+
+    <g id="emotionIndicator">
+      <circle cx="8" cy="8" r="6" fill="#3A7BD5" opacity="0.2"/>
+      <text x="8" y="12" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" font-weight="700" fill="#3A7BD5" text-anchor="middle">😔</text>
+    </g>
+
+    <g id="matchScore">
+      <rect x="0" y="0" width="40" height="16" rx="8" fill="#22C55E"/>
+      <text x="20" y="11" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" font-weight="600" fill="#FFFFFF" text-anchor="middle">85%匹配</text>
+    </g>
+
+    <g id="likeIcon">
+      <path d="M 6 8 Q 6 6 8 6 Q 10 6 10 8 L 10 10 Q 10 12 8 12 Q 6 12 6 10 Z" fill="#EF4444"/>
+      <circle cx="8" cy="8" r="6" fill="none" stroke="#EF4444" stroke-width="1"/>
+    </g>
+
+    <g id="dislikeIcon">
+      <path d="M 6 8 L 10 8 M 8 6 L 8 10" stroke="#6B7280" stroke-width="2"/>
+      <circle cx="8" cy="8" r="6" fill="none" stroke="#6B7280" stroke-width="1"/>
+    </g>
+
+    <!-- 情绪温度条 -->
+    <g id="moodBar">
+      <rect x="0" y="6" width="60" height="6" rx="3" fill="#E5E7EB"/>
+      <rect x="0" y="6" width="24" height="6" rx="3" fill="url(#moodBarGradient)"/>
+      <circle cx="24" cy="9" r="4" fill="#3A7BD5"/>
+    </g>
+
+    <!-- 推荐标签 -->
+    <g id="aiRecommendTag">
+      <rect x="0" y="0" width="50" height="18" rx="9" fill="#DBEAFE"/>
+      <text x="25" y="12" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" font-weight="600" fill="#1E40AF" text-anchor="middle">AI推荐</text>
+    </g>
+
+    <g id="emotionRecommendTag">
+      <rect x="0" y="0" width="60" height="18" rx="9" fill="#FEF3C7"/>
+      <text x="30" y="12" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" font-weight="600" fill="#92400E" text-anchor="middle">情绪匹配</text>
+    </g>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="375" height="812" fill="#F7F9FC" />
+
+  <!-- 顶栏 -->
+  <rect x="0" y="0" width="375" height="72" fill="#FFFFFF" />
+  <text x="32" y="44" font-size="18" font-weight="700" fill="#2C3640">资源推送</text>
+  <use href="#settingsIcon" transform="translate(335, 30) scale(0.8)"/>
+
+  <!-- 今日状态卡 -->
+  <rect x="16" y="88" width="343" height="90" rx="16" fill="#EEF5FF" stroke="#D9E8FF" stroke-width="1"/>
+  <text x="32" y="112" font-size="14" font-weight="600" fill="#1E40AF">当前情绪状态</text>
+  <use href="#emotionIndicator" transform="translate(32, 124)"/>
+  <text x="56" y="134" font-size="12" fill="#5A6672">焦虑 · 压力较大</text>
+
+  <!-- 情绪强度 -->
+  <g transform="translate(200, 124)">
+    <use href="#moodBar"/>
+    <text x="68" y="12" font-size="10" fill="#5A6672">6/10</text>
+  </g>
+
+  <!-- 个性化推荐卡片 -->
+  <rect x="16" y="196" width="343" height="200" rx="16" fill="url(#recommendationGradient)" />
+  <text x="32" y="220" font-size="14" font-weight="600" fill="#92400E">基于你的焦虑情绪推荐</text>
+  <text x="32" y="240" font-size="11" fill="#92400E">检测到你最近有些焦虑，试试这些放松资源</text>
+
+  <!-- AI推荐标签 -->
+  <use href="#aiRecommendTag" transform="translate(280, 208)"/>
+
+  <!-- 推荐资源列表 -->
+  <g transform="translate(32, 258)">
+    <!-- 资源卡片1 - 视频 -->
+    <rect x="0" y="0" width="100" height="90" rx="12" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1"/>
+    <rect x="10" y="10" width="40" height="25" fill="#FEE2E2" rx="6"/>
+    <use href="#videoIcon" transform="translate(25, 18) scale(0.7)"/>
+    <text x="55" y="20" font-size="11" font-weight="600" fill="#1F2937">5分钟呼吸</text>
+    <text x="55" y="35" font-size="9" fill="#6B7280">放松练习</text>
+    <use href="#matchScore" transform="translate(55, 48)"/>
+
+    <!-- 资源卡片2 - 音频 -->
+    <rect x="110" y="0" width="100" height="90" rx="12" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1"/>
+    <rect x="120" y="10" width="40" height="25" fill="#EDE9FE" rx="6"/>
+    <use href="#audioIcon" transform="translate(135, 18) scale(0.7)"/>
+    <text x="165" y="20" font-size="11" font-weight="600" fill="#1F2937">冥想音乐</text>
+    <text x="165" y="35" font-size="9" fill="#6B7280">舒缓神经</text>
+    <use href="#matchScore" transform="translate(165, 48)"/>
+
+    <!-- 资源卡片3 - 文章 -->
+    <rect x="220" y="0" width="100" height="90" rx="12" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1"/>
+    <rect x="230" y="10" width="40" height="25" fill="#DBEAFE" rx="6"/>
+    <use href="#articleIcon" transform="translate(245, 18) scale(0.7)"/>
+    <text x="275" y="20" font-size="11" font-weight="600" fill="#1F2937">焦虑缓解</text>
+    <text x="275" y="35" font-size="9" fill="#6B7280">专业指南</text>
+    <use href="#matchScore" transform="translate(275, 48)"/>
+  </g>
+
+  <!-- 推荐原因 -->
+  <text x="32" y="370" font-size="12" font-weight="600" fill="#92400E">推荐原因：情绪匹配度高 · 评价良好 · 同类用户选择</text>
+
+  <!-- 资源分类导航 -->
+  <text x="16" y="410" font-size="16" font-weight="700" fill="#2C3640">资源分类</text>
+
+  <!-- 分类标签 -->
+  <g transform="translate(16, 424)">
+    <rect x="0" y="0" width="65" height="32" rx="16" fill="#3A7BD5"/>
+    <use href="#videoIcon" transform="translate(10, 8) scale(0.8)"/>
+    <text x="28" y="24" font-size="11" font-weight="600" fill="#FFFFFF">视频</text>
+
+    <rect x="73" y="0" width="65" height="32" rx="16" fill="#FFFFFF" stroke="#E9EDF3"/>
+    <use href="#audioIcon" transform="translate(83, 8) scale(0.8)"/>
+    <text x="101" y="24" font-size="11" font-weight="600" fill="#5A6672">音频</text>
+
+    <rect x="146" y="0" width="65" height="32" rx="16" fill="#FFFFFF" stroke="#E9EDF3"/>
+    <use href="#articleIcon" transform="translate(156, 8) scale(0.8)"/>
+    <text x="174" y="24" font-size="11" font-weight="600" fill="#5A6672">文章</text>
+
+    <rect x="219" y="0" width="65" height="32" rx="16" fill="#FFFFFF" stroke="#E9EDF3"/>
+    <use href="#toolIcon" transform="translate(229, 8) scale(0.8)"/>
+    <text x="247" y="24" font-size="11" font-weight="600" fill="#5A6672">工具</text>
+
+    <rect x="292" y="0" width="65" height="32" rx="16" fill="#FFFFFF" stroke="#E9EDF3"/>
+    <use href="#activityIcon" transform="translate(302, 8) scale(0.8)"/>
+    <text x="320" y="24" font-size="11" font-weight="600" fill="#5A6672">活动</text>
+  </g>
+
+  <!-- 筛选条件 -->
+  <text x="16" y="482" font-size="12" fill="#5A6672">筛选条件：</text>
+  <g transform="translate(76, 472)">
+    <rect x="0" y="0" width="55" height="22" rx="11" fill="#F3F4F6"/>
+    <text x="27.5" y="15" font-size="9" fill="#6B7280" text-anchor="middle">&lt;5分钟</text>
+
+    <rect x="63" y="0" width="55" height="22" rx="11" fill="#F3F4F6"/>
+    <text x="90.5" y="15" font-size="9" fill="#6B7280" text-anchor="middle">入门</text>
+
+    <rect x="126" y="0" width="55" height="22" rx="11" fill="#3A7BD5"/>
+    <text x="153.5" y="15" font-size="9" font-weight="600" fill="#FFFFFF" text-anchor="middle">免费</text>
+
+    <rect x="189" y="0" width="55" height="22" rx="11" fill="#F3F4F6"/>
+    <text x="216.5" y="15" font-size="9" fill="#6B7280" text-anchor="middle">高相关</text>
+  </g>
+
+  <!-- 资源列表 -->
+  <text x="16" y="522" font-size="16" font-weight="700" fill="#2C3640">为你推荐</text>
+  <text x="359" y="522" font-size="12" font-weight="600" fill="#3A7BD5" text-anchor="end">查看更多</text>
+
+  <!-- 资源项1 -->
+  <rect x="16" y="538" width="343" height="80" rx="12" fill="#FFFFFF" stroke="#E9EDF3"/>
+  <rect x="24" y="550" width="48" height="48" rx="8" fill="#FEE2E2"/>
+  <use href="#videoIcon" transform="translate(36, 562)"/>
+  <text x="84" y="562" font-size="14" font-weight="600" fill="#2C3640">10分钟正念冥想：缓解焦虑</text>
+  <text x="84" y="580" font-size="11" fill="#5A6672">专业引导 · 适合初学者 · 已帮助2.3万人</text>
+  <use href="#emotionRecommendTag" transform="translate(84, 592)"/>
+  <rect x="276" y="578" width="70" height="24" rx="12" fill="#3A7BD5"/>
+  <text x="311" y="594" font-size="10" font-weight="600" fill="#FFFFFF" text-anchor="middle">立即体验</text>
+
+  <!-- 资源项2 -->
+  <rect x="16" y="630" width="343" height="80" rx="12" fill="#FFFFFF" stroke="#E9EDF3"/>
+  <rect x="24" y="642" width="48" height="48" rx="8" fill="#EDE9FE"/>
+  <use href="#audioIcon" transform="translate(36, 654)"/>
+  <text x="84" y="654" font-size="14" font-weight="600" fill="#2C3640">睡眠音乐：深度放松</text>
+  <text x="84" y="672" font-size="11" fill="#5A6672">舒缓音频 · 改善睡眠质量 · 时长30分钟</text>
+  <use href="#emotionRecommendTag" transform="translate(84, 684)"/>
+  <rect x="276" y="670" width="70" height="24" rx="12" fill="#3A7BD5"/>
+  <text x="311" y="686" font-size="10" font-weight="600" fill="#FFFFFF" text-anchor="middle">立即播放</text>
+
+  <!-- 反馈区 -->
+  <rect x="16" y="724" width="343" height="60" rx="12" fill="#F9FAFB" stroke="#E5E7EB"/>
+  <text x="32" y="744" font-size="12" font-weight="600" fill="#2C3640">这些推荐对你有帮助吗？</text>
+
+  <!-- 反馈按钮 -->
+  <g transform="translate(32, 756)">
+    <use href="#likeIcon" transform="translate(0, 0) scale(1.2)"/>
+    <text x="20" y="4" font-size="10" fill="#5A6672">有帮助</text>
+
+    <use href="#dislikeIcon" transform="translate(80, 0) scale(1.2)"/>
+    <text x="100" y="4" font-size="10" fill="#5A6672">不相关</text>
+
+    <rect x="160" y="-8" width="80" height="20" rx="10" fill="#3A7BD5"/>
+    <text x="200" y="4" font-size="9" font-weight="600" fill="#FFFFFF" text-anchor="middle">详细反馈</text>
+  </g>
+
+  <!-- 推送设置 -->
+  <rect x="246" y="740" width="100" height="24" rx="12" fill="none" stroke="#3A7BD5"/>
+  <use href="#settingsIcon" transform="translate(254, 746) scale(0.6)"/>
+  <text x="280" y="756" font-size="10" font-weight="600" fill="#3A7BD5" text-anchor="middle">推送设置</text>
+
+  <!-- 底部导航 -->
+  <rect x="0" y="744" width="375" height="68" fill="#FFFFFF" />
+  <g font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" text-anchor="middle">
+    <text x="38" y="784" fill="#3A7BD5">今天</text>
+    <text x="112" y="784" fill="#5A6672">任务</text>
+    <text x="186" y="784" fill="#5A6672">树洞</text>
+    <text x="260" y="784" fill="#5A6672">随笔</text>
+    <text x="334" y="784" fill="#5A6672">我的</text>
+  </g>
+  <rect x="26" y="768" width="24" height="4" rx="2" fill="#3A7BD5" />
+</svg>

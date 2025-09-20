@@ -1,0 +1,63 @@
+﻿Task Title,Description,Priority,Milestone,Dependencies,Owner,Estimation,Acceptance Criteria,Docs
+T-M0-01 启动与需求基线确认,召开项目启动会，确认五个 Tab 用户流程与功能优先级并形成需求基线。,High,M0 准备,,PO / PMO,16h,启动会纪要发布；需求基线文档更新。,docs/项目计划/总计划-里程碑与时间线.md
+T-M0-02 云开发环境与仓库搭建,配置微信云开发环境、代码仓库和访问权限，完成基础脚手架初始化。,High,M0 准备,T-M0-01,Tech Lead,20h,微信云开发可编译；仓库主干可拉取并运行 demo。,docs/项目计划/总计划-里程碑与时间线.md
+T-M0-03 分包规划与命名冻结,复核并冻结主包+分包结构与页面命名，更新 app.json 草案。,Medium,M0 准备,T-M0-02,FE Lead,12h,分包规划同步到仓库；app.json 草案通过评审。,docs/分包规划方案.md
+T-M0-04 CI 基线配置,搭建 lint/构建/单测流水线，确保失败时阻断合并。,High,M0 准备,T-M0-02,Tech Lead,14h,CI 流水线触发成功；lint+单测任务可阻断 PR。,docs/项目计划/质量门禁与验收标准.md
+T-M0-05 风险清单草稿发布,梳理里程碑级风险并输出应对策略。,Medium,M0 准备,T-M0-01,PMO / Ops-Risk Lead,10h,风险清单进入知识库并在站会同步。,docs/项目计划/风险清单与应对.md
+T-M1-01 tabBar 主包骨架搭建,搭建五个 Tab 主包页面骨架与路由，确保基础导航可运行。,High (阻塞),M1 骨架与首页,T-M0-03;T-M0-04,FE Lead,20h,五个 Tab 真机加载成功；tabBar 文案与图标符合分包规划。,docs/项目计划/工作分解结构WBS.md
+T-M1-02 公共卡片与按钮组件库初版,沉淀按钮、卡片、宫格等可复用组件便于各 Tab 共用。,High (阻塞),M1 骨架与首页,T-M1-01,FE Lead,24h,组件在今天/心情随笔页复用不破版；通过设计走查。,docs/项目计划/工作分解结构WBS.md
+T-M1-03 公共组件冒烟测试,编写并执行组件层冒烟用例覆盖主交互。,Medium,M1 骨架与首页,T-M1-02,QA Lead,12h,冒烟报告归档；缺陷均在看板登记。,docs/项目计划/工作分解结构WBS.md
+T-M1-04 TopMoodCard 情绪打卡面板实现,实现情绪状态卡与心情轮交互流程。,High (阻塞),M1 骨架与首页,T-M1-01,FE Lead,24h,真机完成情绪打卡；UI 细节符合功能文档。,docs/功能文档/功能-情绪打卡.md
+T-M1-05 Top3 微建议列表实现,实现微建议渲染、刷新与一键生成任务交互。,High,M1 骨架与首页,T-M1-04,FE Lead,20h,微建议刷新正常；生成任务后状态反馈正确。,docs/功能文档/功能-微建议与任务生成.md
+T-M1-06 今日任务列表与状态同步 UI,实现任务卡状态切换、回执入口与番茄控件。,High,M1 骨架与首页,T-M1-04;T-M1-05,FE Lead,22h,开始/完成/跳过状态更新正确；回执入口可唤起。,docs/功能文档/功能-任务卡执行闭环.md
+T-M1-07 checkins 集合索引与权限配置,为情绪打卡集合创建索引并校验权限表达式。,High (阻塞),M1 骨架与首页,T-M0-02,BE Lead,16h,索引在云开发创建成功；测试账号读写矩阵验证通过。,docs/数据库/集合-情绪打卡.checkins.md
+T-M2-01 taskReceipt 云函数上线,实现任务回执写入 checkins 的云函数与单元测试。,High (阻塞),M2 核心流程,T-M1-07,BE Lead,20h,函数部署成功；单测覆盖核心路径并通过。,docs/项目计划/工作分解结构WBS.md
+T-M2-02 情绪打卡与微建议接口联调,完成 /api/moods/today、/api/micro-tips、/api/tasks 的端到端联调。,High (阻塞),M2 核心流程,T-M1-04;T-M1-05;T-M1-07;T-M2-01,FE Lead / BE Lead,24h,联调日志无 4xx/5xx；任务写入 tasks 集合成功。,docs/接口占位文档.md
+T-M2-03 今天页主流程测试,执行情绪打卡→微建议→任务闭环的测试用例。,High (阻塞),M2 核心流程,T-M2-02,QA Lead,12h,测试报告通过；缺陷关闭率 ≥95%。,docs/测试用例.md
+T-M2-04 今天页监控与埋点告警配置,配置崩溃率、接口错误率与埋点漏斗的监控与告警。,High (阻塞),M2 核心流程,T-M2-03,Ops-Risk Lead,10h,Grafana/飞书告警测试通过；告警阈值入库。,docs/运维与监控.md
+T-M2-05 心情随笔视图与多模录入,完成心情随笔多模录入、情绪趋势与生成任务入口的前端实现。,High (阻塞),M2 核心流程,T-M1-02,FE Lead,20h,随笔录入、REBT 折叠、趋势筛选真机可用；生成任务跳转任务 Tab 正常。,docs/页面文档/页面-心情随笔.md
+T-M2-06 任务看板实现,实现任务 Tab 列表、来源筛选、批量操作与统计抽屉。,High,M2 核心流程,T-M2-05,FE Lead,24h,来源/状态筛选可用；番茄计时与复盘流程完成；统计抽屉数据与埋点正确。,docs/页面文档/页面-任务.md
+T-M2-07 journals 集合索引与软删策略,配置 journals 集合索引/权限并实现软删策略。,High (阻塞),M2 核心流程,T-M0-02,BE Lead,16h,索引与权限在控制台验证通过；软删标记可用。,docs/数据库/集合-心情随笔.journals.md
+T-M2-08 /api/journals 与清单接口联调,完成心情随笔创建、清单同步以及任务生成联调。,High (阻塞),M2 核心流程,T-M2-06;T-M2-07;T-M2-01,FE Lead / BE Lead,22h,心情随笔→任务链路无错误；Swagger 更新。,docs/接口占位文档.md
+T-M2-09 心情随笔模块专项测试,执行心情随笔记录、过滤、任务生成测试。,High (阻塞),M2 核心流程,T-M2-08,QA Lead,12h,专项测试通过；缺陷闭环记录完成。,docs/测试用例.md
+T-M2-10 心情随笔数据备份与脱敏流程,配置 journals 数据每日快照与脱敏脚本。,High (阻塞),M2 核心流程,T-M2-09,Ops-Risk Lead,10h,COS 快照成功；脱敏脚本抽检通过。,docs/运维与监控.md
+T-M2-11 埋点封装与事件枚举实现,实现 analytics.ts 封装与事件常量。,High,M2 核心流程,T-M1-02,Data Lead / FE Lead,14h,统一封装通过 lint；各页面可调用。,docs/埋点与数据分析.md
+T-M2-12 今天/心情随笔关键事件埋点集成,集成 pv_today、mood_checkin_submit、journal_entry_submit 等事件。,High,M2 核心流程,T-M2-11;T-M2-02;T-M2-08,FE Lead / Data Lead,16h,埋点真机可上报；ClickHouse 数据与业务对账。,docs/埋点与数据分析.md
+T-M2-13 events 集合索引与权限配置,为埋点 events 集合配置索引与权限。,Medium,M2 核心流程,T-M0-02,BE Lead,8h,索引建立成功；权限限制写入角色。,docs/数据库/集合-用户事件.events.md
+T-M2-14 埋点采集链路联调,打通前端埋点、events 集合与 ClickHouse。,High,M2 核心流程,T-M2-12;T-M2-13,Data Lead,18h,关键事件在看板可见；偏差 <5%。,docs/埋点与数据分析.md
+T-M2-15 埋点自动校验脚本执行,上线自动校验脚本并纳入日常巡检。,Medium,M2 核心流程,T-M2-14,Data Lead / QA Lead,8h,脚本每日运行；异常自动通知。,docs/埋点与数据分析.md
+T-M2-16 syncActionCardTask 云函数实现,实现树洞行动卡同步任务的云函数。,High (阻塞),M2 核心流程,T-M0-02,BE Lead,16h,行动卡领取写入 tasks 成功；幂等校验通过。,docs/功能文档/功能-行动卡领取与同步.md
+T-M3-01 树洞信息流与风险角标 UI,实现树洞列表、风险角标与温和提示 UI。,High (阻塞),M3 扩展与风控,T-M1-02,FE Lead,22h,R1-R4 UI 区分清晰；提示交互符合文档。,docs/页面文档/页面-树洞.md
+T-M3-02 树洞发帖向导与草稿自检,实现发帖多步表单及草稿自检提示。,High,M3 扩展与风控,T-M3-01,FE Lead,18h,草稿自检阻断与提示文案正确；发布成功返回列表。,docs/功能文档/功能-树洞发帖与草稿自检.md
+T-M3-03 posts 集合索引与风险字段配置,配置树洞 posts 集合索引、权限及风险字段。,High (阻塞),M3 扩展与风控,T-M0-02,BE Lead,14h,索引创建成功；风险字段可被模型更新。,docs/数据库/集合-树洞帖子.posts.md
+T-M3-04 树洞发帖/风险提示接口联调,联调 /api/treehole/posts 与 risk-hints 接口并验证行动卡写入。,High (阻塞),M3 扩展与风控,T-M3-02;T-M3-03;T-M2-16,FE Lead / BE Lead,22h,发帖、草稿、风险提示链路通过；行动卡写入成功。,docs/接口占位文档.md
+T-M3-05 树洞风控演练测试,执行 R3/R4 风险演练并验证告警链路。,High (阻塞),M3 扩展与风控,T-M3-04,QA Lead / Ops-Risk Lead,12h,演练记录归档；告警触达值班人员。,docs/运维与监控.md
+T-M3-06 树洞值班 SOP 与告警优化,更新树洞值班手册与飞书告警配置。,High (阻塞),M3 扩展与风控,T-M3-05,Ops-Risk Lead,8h,值班表发布；告警升级链路符合 SLA。,docs/运维与监控.md
+T-M3-07 护心周报卡与详情入口实现,实现我的 Tab 周报卡与详情入口。,High (阻塞),M3 扩展与风控,T-M1-02,FE Lead,20h,周报数据展示正确；CTA 可跳转详情。,docs/功能文档/功能-护心周报.md
+T-M3-08 隐私与授权中心 UI 开发,实现授权列表、操作弹窗与审计入口。,High,M3 扩展与风控,T-M3-07,FE Lead,18h,撤销授权流程可用；UI 符合隐私文档。,docs/功能文档/功能-隐私授权中心.md
+T-M3-09 users/reports 权限与索引核查,校验 users 与 reports 集合权限、索引与合规模板。,High (阻塞),M3 扩展与风控,T-M0-02,BE Lead,14h,权限表达式测试通过；索引创建成功。,docs/数据库/集合-用户.users.md;docs/数据库/集合-周报与风控.reports.md
+T-M3-10 generateWeeklyReport 云函数聚合,实现护心周报数据聚合云函数与调度。,High (阻塞),M3 扩展与风控,T-M3-09,BE Lead,18h,函数写入 reports 成功；耗时 <2 分钟。,docs/项目计划/工作分解结构WBS.md
+T-M3-11 周报/授权接口联调,完成 /api/reports/weekly 与 /api/privacy/consents 联调。,High (阻塞),M3 扩展与风控,T-M3-07;T-M3-08;T-M3-10,FE Lead / BE Lead,20h,周报与授权变更接口返回正确；日志无异常。,docs/接口占位文档.md
+T-M3-12 我的 Tab 功能测试,执行周报、徽章、授权相关测试用例。,High (阻塞),M3 扩展与风控,T-M3-11,QA Lead,12h,测试报告通过；缺陷清零。,docs/测试用例.md
+T-M3-13 周报推送与隐私审计巡检,配置周报推送试跑与隐私审计清单。,High (阻塞),M3 扩展与风控,T-M3-12,Ops-Risk Lead,10h,周报推送试跑成功；隐私审计日志每周产出。,docs/运维与监控.md
+T-M3-14 SOS 面板与资源入口实现,实现独立分包 SOS 面板与资源跳转。,High (阻塞),M3 扩展与风控,T-M1-02,FE Lead,16h,长按浮标秒开；资源跳转正常。,docs/功能文档/功能-SOS安全守护.md
+T-M3-15 sos 集合权限与索引配置,配置 SOS 集合权限表达式与索引。,High (阻塞),M3 扩展与风控,T-M0-02,BE Lead,12h,权限规则经测试账号验证；索引成功。,docs/数据库/集合-SOS事件.sos.md
+T-M3-16 pushGuardianAlert 云函数实现,实现守护通知云函数与重试策略。,High (阻塞),M3 扩展与风控,T-M3-15,BE Lead,16h,通知成功触达；失败重试日志完整。,docs/项目计划/工作分解结构WBS.md
+T-M3-17 SOS 触发与通知联调,联调 /api/sos/trigger 与守护通知回执链路。,High (阻塞),M3 扩展与风控,T-M3-14;T-M3-15;T-M3-16,FE Lead / BE Lead,18h,触发至通知链路无失败；回执写入成功。,docs/接口占位文档.md
+T-M3-18 SOS 流程演练测试,执行触发、取消、升级场景演练。,High (阻塞),M3 扩展与风控,T-M3-17,QA Lead / Ops-Risk Lead,10h,演练脚本通过；缺陷闭环。,docs/运维与监控.md
+T-M3-19 SOS 值班与应急响应计划,发布 SOS 值班排班与应急联系人清单。,High (阻塞),M3 扩展与风控,T-M3-18,Ops-Risk Lead,8h,值班表覆盖 7×16h；联系人确认签字。,docs/运维与监控.md
+T-M3-20 树洞/我的埋点补充,补充 treehole_post_publish、weekly_report_view 等事件埋点。,High,M3 扩展与风控,T-M3-04;T-M3-11;T-M2-11,FE Lead / Data Lead,14h,事件数据完整；看板指标更新。,docs/埋点与数据分析.md
+T-M4-01 全量测试与回归执行,覆盖 4 个 Tab、云函数与风险流程的端到端测试。,High,M4 提审与发布,T-M2-03;T-M2-09;T-M3-05;T-M3-12;T-M3-18,QA Lead,24h,回归报告通过；阻断缺陷清零。,docs/测试用例.md
+T-M4-02 审核资料定稿,整理截图、功能说明、资质文件并归档。,High,M4 提审与发布,T-M3-13;T-M3-19,Ops-Risk Lead,12h,审核资料包归档；运营确认签字。,docs/上线说明.md
+T-M4-03 微信提审提交,在微信后台提交提审并跟踪反馈。,High,M4 提审与发布,T-M4-01;T-M4-02,Ops-Risk Lead,6h,提审通过截图归档；反馈在 24h 内处理。,docs/上线说明.md
+T-M4-04 回滚预案演练,演练版本回滚与数据恢复流程。,High,M4 提审与发布,T-M4-01,Tech Lead / Ops-Risk Lead,10h,演练记录通过；回滚脚本可执行。,docs/上线说明.md
+T-M5-01 上线 48h 值班执行,安排并执行上线 48 小时多角色值班。,High,M5 运营与复盘,T-M4-03,Ops-Risk Lead,16h,值班记录归档；告警响应达标。,docs/上线说明.md
+T-M5-02 指标日报/周报发布,汇总关键指标并发布 T+1 日报与周报。,High,M5 运营与复盘,T-M5-01;T-M2-14,Data Lead,12h,日报/周报按时发布；指标差异 <5%。,docs/埋点与数据分析.md
+T-M5-03 用户反馈与缺陷跟踪,收集用户反馈并整理缺陷 backlog。,Medium,M5 运营与复盘,T-M5-01,PO / QA Lead,10h,反馈清单入库；高优缺陷安排修复。,docs/项目计划/总计划-里程碑与时间线.md
+T-M5-04 项目复盘与下阶段规划,组织复盘会并沉淀后续迭代计划。,Medium,M5 运营与复盘,T-M5-02;T-M5-03,PMO / Tech Lead,12h,复盘报告发布；下阶段 backlog 草案形成。,docs/项目计划/总计划-里程碑与时间线.md
+
+
+
+
+
+

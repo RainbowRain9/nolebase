@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="375" height="812" viewBox="0 0 375 812">
+  <defs>
+    <!-- 渐变定义 -->
+    <linearGradient id="recommendationGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FEF3C7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FDE68A;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- 图标定义 -->
+    <g id="aiIcon">
+      <circle cx="8" cy="8" r="8" fill="#3A7BD5" opacity="0.2"/>
+      <text x="8" y="12" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" font-weight="700" fill="#3A7BD5" text-anchor="middle">AI</text>
+    </g>
+
+    <g id="lightbulbIcon">
+      <circle cx="8" cy="8" r="6" fill="none" stroke="#3A7BD5" stroke-width="2"/>
+      <path d="M 8 2 L 8 6 M 5 4 L 11 4 M 6 6 L 10 6" stroke="#3A7BD5" stroke-width="1.5" fill="none"/>
+      <rect x="6" y="10" width="4" height="2" fill="#3A7BD5"/>
+    </g>
+
+    <g id="taskIcon">
+      <rect x="2" y="4" width="12" height="8" fill="none" stroke="#3A7BD5" stroke-width="2" rx="1"/>
+      <path d="M 4 8 L 6 10 L 10 6" stroke="#3A7BD5" stroke-width="2" fill="none"/>
+    </g>
+
+    <g id="resourceIcon">
+      <rect x="2" y="2" width="12" height="12" fill="none" stroke="#3A7BD5" stroke-width="2" rx="2"/>
+      <circle cx="8" cy="8" r="2" fill="#3A7BD5"/>
+    </g>
+
+    <g id="bookIcon">
+      <path d="M 2 3 L 2 11 L 8 9 L 14 11 L 14 3 L 8 5 Z" fill="none" stroke="#3A7BD5" stroke-width="2"/>
+    </g>
+
+    <g id="videoIcon">
+      <rect x="2" y="4" width="12" height="8" fill="none" stroke="#3A7BD5" stroke-width="2" rx="2"/>
+      <path d="M 6 6 L 10 8 L 6 10 Z" fill="#3A7BD5"/>
+    </g>
+
+    <g id="musicIcon">
+      <circle cx="6" cy="10" r="2" fill="#3A7BD5"/>
+      <rect x="5" y="2" width="2" height="8" fill="#3A7BD5"/>
+      <circle cx="10" cy="8" r="2" fill="#3A7BD5"/>
+      <rect x="9" y="2" width="2" height="6" fill="#3A7BD5"/>
+    </g>
+  </defs>
+
+  <!-- 背景 -->
+  <rect x="0" y="0" width="375" height="812" fill="#F7F9FC"/>
+
+  <!-- 顶部状态栏 -->
+  <rect x="0" y="0" width="375" height="44" fill="#FFFFFF"/>
+
+  <!-- 今日状态卡 -->
+  <rect x="16" y="56" width="343" height="96" fill="#EEF5FF" rx="16" ry="16" stroke="#D9E8FF" stroke-width="1"/>
+  <text x="32" y="86" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="16" font-weight="700" fill="#2C3640" text-anchor="start">今日状态</text>
+  <text x="32" y="112" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="500" fill="#5A6672" text-anchor="start">情绪：平静  ·  压力：2/10</text>
+  <g>
+    <rect x="253" y="70" width="66.0" height="28" fill="#EEF5FF" rx="999" ry="999"/>
+    <text x="286.0" y="90" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#3A7BD5" text-anchor="middle">R1 观察</text>
+  </g>
+
+  <!-- Top3微建议卡片 -->
+  <rect x="16" y="172" width="343" height="140" fill="#F0F9FF" rx="16" ry="16" stroke="#E0F2FE" stroke-width="1"/>
+  <text x="32" y="202" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="600" fill="#1E40AF" text-anchor="start">今日微建议</text>
+
+  <!-- AI推荐标签 -->
+  <g transform="translate(280, 184)">
+    <rect x="0" y="0" width="60" height="20" fill="#DBEAFE" rx="10" ry="10"/>
+    <text x="30" y="14" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" font-weight="600" fill="#1E40AF" text-anchor="middle">AI推荐</text>
+  </g>
+
+  <!-- 建议项1 -->
+  <g transform="translate(32, 220)">
+    <use href="#lightbulbIcon" x="0" y="0"/>
+    <text x="20" y="12" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="500" fill="#475569" text-anchor="start">试试5分钟呼吸练习缓解压力</text>
+    <rect x="260" y="0" width="70" height="24" fill="#3A7BD5" rx="6" ry="6"/>
+    <text x="295" y="16" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="11" font-weight="600" fill="#FFFFFF" text-anchor="middle">生成任务</text>
+  </g>
+
+  <!-- 建议项2 -->
+  <g transform="translate(32, 250)">
+    <use href="#taskIcon" x="0" y="0"/>
+    <text x="20" y="12" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="500" fill="#475569" text-anchor="start">整理桌面，营造清爽环境</text>
+    <rect x="260" y="0" width="70" height="24" fill="#3A7BD5" rx="6" ry="6"/>
+    <text x="295" y="16" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="11" font-weight="600" fill="#FFFFFF" text-anchor="middle">生成任务</text>
+  </g>
+
+  <!-- 建议项3 -->
+  <g transform="translate(32, 280)">
+    <use href="#bookIcon" x="0" y="0"/>
+    <text x="20" y="12" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="500" fill="#475569" text-anchor="start">写下今天的三件感恩小事</text>
+    <rect x="260" y="0" width="70" height="24" fill="#3A7BD5" rx="6" ry="6"/>
+    <text x="295" y="16" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="11" font-weight="600" fill="#FFFFFF" text-anchor="middle">生成任务</text>
+  </g>
+
+  <!-- 工具箱 -->
+  <text x="16" y="340" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="16" font-weight="700" fill="#2C3640" text-anchor="start">工具箱</text>
+
+  <!-- 第一行工具 -->
+  <rect x="34.875" y="354" width="48" height="48" fill="#FFFFFF" rx="12" ry="12" stroke="#E9EDF3" stroke-width="1"/>
+  <rect x="42.875" y="362" width="32" height="32" fill="#3A7BD5" rx="16" ry="16"/>
+  <text x="58.875" y="384" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">随</text>
+  <text x="58.875" y="420" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#434E5A" text-anchor="middle">随笔</text>
+
+  <rect x="120.625" y="354" width="48" height="48" fill="#FFFFFF" rx="12" ry="12" stroke="#E9EDF3" stroke-width="1"/>
+  <rect x="128.625" y="362" width="32" height="32" fill="#3A7BD5" rx="16" ry="16"/>
+  <text x="144.625" y="384" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">清</text>
+  <text x="144.625" y="420" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#434E5A" text-anchor="middle">清单</text>
+
+  <rect x="206.375" y="354" width="48" height="48" fill="#FFFFFF" rx="12" ry="12" stroke="#E9EDF3" stroke-width="1"/>
+  <rect x="214.375" y="362" width="32" height="32" fill="#3A7BD5" rx="16" ry="16"/>
+  <text x="230.375" y="384" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">呼</text>
+  <text x="230.375" y="420" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#434E5A" text-anchor="middle">呼吸</text>
+
+  <rect x="292.125" y="354" width="48" height="48" fill="#FFFFFF" rx="12" ry="12" stroke="#E9EDF3" stroke-width="1"/>
+  <rect x="300.125" y="362" width="32" height="32" fill="#3A7BD5" rx="16" ry="16"/>
+  <text x="316.125" y="384" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">正</text>
+  <text x="316.125" y="420" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#434E5A" text-anchor="middle">正念</text>
+
+  <!-- 第二行工具 -->
+  <rect x="34.875" y="442" width="48" height="48" fill="#FFFFFF" rx="12" ry="12" stroke="#E9EDF3" stroke-width="1"/>
+  <rect x="42.875" y="450" width="32" height="32" fill="#3A7BD5" rx="16" ry="16"/>
+  <text x="58.875" y="472" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">树</text>
+  <text x="58.875" y="508" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#434E5A" text-anchor="middle">树洞</text>
+
+  <rect x="120.625" y="442" width="48" height="48" fill="#FFFFFF" rx="12" ry="12" stroke="#E9EDF3" stroke-width="1"/>
+  <rect x="128.625" y="450" width="32" height="32" fill="#3A7BD5" rx="16" ry="16"/>
+  <text x="144.625" y="472" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">任</text>
+  <text x="144.625" y="508" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#434E5A" text-anchor="middle">任务</text>
+
+  <rect x="206.375" y="442" width="48" height="48" fill="#FFFFFF" rx="12" ry="12" stroke="#E9EDF3" stroke-width="1"/>
+  <rect x="214.375" y="450" width="32" height="32" fill="#3A7BD5" rx="16" ry="16"/>
+  <text x="230.375" y="472" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">打</text>
+  <text x="230.375" y="508" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#434E5A" text-anchor="middle">打卡</text>
+
+  <rect x="292.125" y="442" width="48" height="48" fill="#FFFFFF" rx="12" ry="12" stroke="#E9EDF3" stroke-width="1"/>
+  <rect x="300.125" y="450" width="32" height="32" fill="#DC2626" rx="16" ry="16"/>
+  <text x="316.125" y="472" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">S</text>
+  <text x="316.125" y="508" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#434E5A" text-anchor="middle">SOS</text>
+
+  <!-- 进行中的任务 -->
+  <text x="16" y="540" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="16" font-weight="700" fill="#2C3640" text-anchor="start">进行中的任务</text>
+  <text x="359" y="540" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#3A7BD5" text-anchor="end">查看全部</text>
+
+  <rect x="16" y="546" width="343" height="120" fill="#EAFBF5" rx="16" ry="16" stroke="#C5EBDD" stroke-width="1"/>
+  <text x="32" y="576" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="16" font-weight="700" fill="#2C3640" text-anchor="start">整理书桌 10 分钟</text>
+  <text x="32" y="602" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="500" fill="#5A6672" text-anchor="start">小目标先开局，完成后记录感受。</text>
+  <g>
+    <rect x="253" y="560" width="82.8" height="28" fill="#EAFBF5" rx="999" ry="999"/>
+    <text x="294.4" y="580" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#1FA476" text-anchor="middle">Success</text>
+  </g>
+  <g>
+    <rect x="247" y="622" width="96" height="32" fill="#2AC28D" rx="10" ry="10"/>
+    <text x="295.0" y="643.0" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">去完成</text>
+  </g>
+
+  <!-- 个性化资源推送 -->
+  <text x="16" y="695" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="16" font-weight="700" fill="#2C3640" text-anchor="start">为你推荐</text>
+  <text x="359" y="695" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#3A7BD5" text-anchor="end">查看更多</text>
+
+  <rect x="16" y="704" width="343" height="140" fill="url(#recommendationGradient)" rx="16" ry="16"/>
+
+  <!-- 推荐原因 -->
+  <text x="32" y="734" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="600" fill="#92400E" text-anchor="start">基于你的焦虑情绪推荐</text>
+  <text x="32" y="754" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" font-weight="400" fill="#92400E" text-anchor="start">检测到你最近有些焦虑，试试这些放松资源</text>
+
+  <!-- 资源卡片1 - 视频 -->
+  <g transform="translate(32, 770)">
+    <rect x="0" y="0" width="100" height="60" fill="#FFFFFF" rx="12" ry="12" stroke="#FDE68A" stroke-width="1"/>
+    <rect x="10" y="10" width="40" height="30" fill="#FEE2E2" rx="6" ry="6"/>
+    <use href="#videoIcon" x="25" y="20"/>
+    <text x="55" y="20" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="11" font-weight="600" fill="#1F2937" text-anchor="start">5分钟呼吸</text>
+    <text x="55" y="35" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="9" font-weight="400" fill="#6B7280" text-anchor="start">放松练习</text>
+    <text x="55" y="48" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" font-weight="400" fill="#92400E" text-anchor="start">85%匹配</text>
+  </g>
+
+  <!-- 资源卡片2 - 音频 -->
+  <g transform="translate(148, 770)">
+    <rect x="0" y="0" width="100" height="60" fill="#FFFFFF" rx="12" ry="12" stroke="#FDE68A" stroke-width="1"/>
+    <rect x="10" y="10" width="40" height="30" fill="#EDE9FE" rx="6" ry="6"/>
+    <use href="#musicIcon" x="25" y="20"/>
+    <text x="55" y="20" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="11" font-weight="600" fill="#1F2937" text-anchor="start">冥想音乐</text>
+    <text x="55" y="35" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="9" font-weight="400" fill="#6B7280" text-anchor="start">舒缓神经</text>
+    <text x="55" y="48" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" font-weight="400" fill="#92400E" text-anchor="start">78%匹配</text>
+  </g>
+
+  <!-- 底部导航 -->
+  <rect x="0" y="752" width="375" height="60" fill="#FFFFFF"/>
+  <g font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" text-anchor="middle">
+    <text x="38" y="788" fill="#3A7BD5">今天</text>
+    <text x="112" y="788" fill="#5A6672">任务</text>
+    <text x="186" y="788" fill="#5A6672">树洞</text>
+    <text x="260" y="788" fill="#5A6672">随笔</text>
+    <text x="334" y="788" fill="#5A6672">我的</text>
+  </g>
+  <rect x="26" y="768" width="24" height="4" rx="2" fill="#3A7BD5"/>
+</svg>

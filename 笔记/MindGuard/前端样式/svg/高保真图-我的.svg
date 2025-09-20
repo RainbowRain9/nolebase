@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="375" height="812" viewBox="0 0 375 812">
+  <defs>
+    <!-- 渐变定义 -->
+    <linearGradient id="profileHero" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EEF5FF" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+
+    <linearGradient id="schoolGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0F2FE" />
+      <stop offset="100%" stop-color="#DBEAFE" />
+    </linearGradient>
+
+    <!-- 图标定义 -->
+    <g id="schoolIcon">
+      <rect x="2" y="6" width="12" height="8" fill="#3A7BD5" rx="1"/>
+      <path d="M 2 6 L 8 2 L 14 6" stroke="#3A7BD5" stroke-width="1.5" fill="none"/>
+      <rect x="6" y="8" width="4" height="6" fill="#3A7BD5"/>
+    </g>
+
+    <g id="guardianIcon">
+      <circle cx="8" cy="6" r="4" fill="#22C55E"/>
+      <path d="M 4 10 L 12 10 M 8 10 L 8 14" stroke="#22C55E" stroke-width="2"/>
+      <circle cx="6" cy="4" r="1" fill="#FFFFFF"/>
+      <circle cx="10" cy="4" r="1" fill="#FFFFFF"/>
+    </g>
+
+    <g id="shieldIcon">
+      <path d="M 8 2 L 12 4 L 12 8 Q 12 12 8 14 Q 4 12 4 8 L 4 4 Z" fill="#EAFBF5" stroke="#1FA476" stroke-width="1.5"/>
+      <path d="M 6 8 L 7.5 9.5 L 10 6.5" stroke="#1FA476" stroke-width="2" fill="none"/>
+    </g>
+
+    <g id="calendarIcon">
+      <rect x="2" y="4" width="12" height="10" fill="none" stroke="#3A7BD5" stroke-width="1.5" rx="1"/>
+      <path d="M 2 8 L 14 8" stroke="#3A7BD5" stroke-width="1.5"/>
+      <circle cx="5" cy="11" r="1" fill="#3A7BD5"/>
+      <circle cx="8" cy="11" r="1" fill="#3A7BD5"/>
+      <circle cx="11" cy="11" r="1" fill="#3A7BD5"/>
+    </g>
+
+    <g id="phoneIcon">
+      <path d="M 4 2 Q 2 2 2 4 L 2 10 Q 2 12 4 12 L 6 12 L 8 10 L 10 10 L 12 8 Q 14 8 14 6 L 14 4 Q 14 2 12 2 Z" fill="none" stroke="#3A7BD5" stroke-width="1.5"/>
+    </g>
+
+    <g id="badgeIcon">
+      <circle cx="8" cy="8" r="6" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5"/>
+      <text x="8" y="11" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" font-weight="700" fill="#92400E" text-anchor="middle">徽</text>
+    </g>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="375" height="812" fill="#F7F9FC" />
+
+  <!-- 顶栏 -->
+  <rect x="0" y="0" width="375" height="72" fill="#FFFFFF" />
+  <text x="32" y="44" font-size="18" font-weight="700" fill="#2C3640">我的</text>
+
+  <!-- 欢迎卡 -->
+  <rect x="24" y="88" width="327" height="120" rx="24" fill="url(#profileHero)" />
+  <circle cx="68" cy="120" r="20" fill="#D9E8FF" />
+  <text x="100" y="118" font-size="16" font-weight="700" fill="#2C3640">晚安，小林</text>
+  <text x="100" y="138" font-size="12" fill="#5A6672">今天已连续守护 12 天</text>
+
+  <!-- 连续打卡徽章 -->
+  <rect x="100" y="148" width="80" height="20" rx="10" fill="#EAFBF5" />
+  <text x="140" y="162" font-size="10" fill="#1FA476" text-anchor="middle">连续打卡 12 天</text>
+
+  <!-- 学校绑定状态 -->
+  <g transform="translate(100, 172)">
+    <use href="#schoolIcon"/>
+    <rect x="20" y="2" width="80" height="16" rx="8" fill="#E0F2FE"/>
+    <text x="28" y="13" font-size="9" font-weight="600" fill="#3A7BD5">已绑定：XX大学</text>
+  </g>
+
+  <!-- 快捷入口按钮 -->
+  <rect x="240" y="108" width="80" height="28" rx="14" fill="#FFFFFF" stroke="#3A7BD5" />
+  <text x="280" y="126" font-size="11" font-weight="600" fill="#3A7BD5" text-anchor="middle">查看周报</text>
+  <rect x="240" y="144" width="80" height="28" rx="14" fill="#FFFFFF" stroke="#E9EDF3" />
+  <text x="280" y="162" font-size="11" font-weight="600" fill="#5A6672" text-anchor="middle">隐私设置</text>
+
+  <!-- 学校信息卡 -->
+  <rect x="24" y="224" width="327" height="100" rx="16" fill="#FFFFFF" />
+  <text x="44" y="248" font-size="14" font-weight="700" fill="#2C3640">学校信息</text>
+
+  <!-- 学校基本信息 -->
+  <g transform="translate(44, 268)">
+    <rect x="0" y="0" width="40" height="40" rx="8" fill="#E0F2FE"/>
+    <use href="#schoolIcon" transform="translate(14, 14)"/>
+  </g>
+  <text x="100" y="284" font-size="12" font-weight="600" fill="#2C3640">XX大学 · 心理学院</text>
+  <text x="100" y="300" font-size="10" fill="#5A6672">辅导员：王老师</text>
+
+  <!-- 辅导员联系方式 -->
+  <g transform="translate(100, 308)">
+    <rect x="0" y="0" width="70" height="20" rx="10" fill="#DBEAFE"/>
+    <use href="#phoneIcon" transform="translate(4, 4) scale(0.7)"/>
+    <text x="22" y="14" font-size="9" font-weight="600" fill="#3A7BD5">联系辅导员</text>
+  </g>
+
+  <!-- 护心周报 -->
+  <rect x="24" y="340" width="327" height="140" rx="16" fill="#FFFFFF" />
+  <text x="44" y="364" font-size="14" font-weight="700" fill="#2C3640">护心周报</text>
+  <text x="280" y="364" font-size="11" fill="#3A7BD5" text-anchor="end">生成任务</text>
+  <circle cx="92" cy="424" r="32" fill="#EEF5FF" />
+  <path d="M92 396 A32 32 0 1 1 68 452" fill="none" stroke="#3A7BD5" stroke-width="6" />
+  <text x="92" y="430" font-size="14" font-weight="700" fill="#3A7BD5" text-anchor="middle">67%</text>
+  <text x="140" y="410" font-size="10" fill="#5A6672">情绪稳定度 +12%</text>
+  <text x="140" y="430" font-size="10" fill="#5A6672">建议接受率 82%</text>
+  <text x="140" y="450" font-size="10" fill="#5A6672">任务完成率 74%</text>
+  <rect x="140" y="460" width="120" height="24" rx="12" fill="#3A7BD5" />
+  <text x="200" y="476" font-size="11" font-weight="600" fill="#FFFFFF" text-anchor="middle">查看完整周报</text>
+
+  <!-- 徽章滑动区 -->
+  <text x="24" y="508" font-size="14" font-weight="700" fill="#2C3640">护心徽章</text>
+  <g>
+    <rect x="24" y="520" width="96" height="80" rx="16" fill="#EEF5FF" />
+    <use href="#badgeIcon" transform="translate(56, 544)"/>
+    <text x="72" y="584" font-size="11" font-weight="600" fill="#3A7BD5" text-anchor="middle">晨间打卡</text>
+
+    <rect x="130" y="520" width="96" height="80" rx="16" fill="#F4F3FF" />
+    <use href="#guardianIcon" transform="translate(162, 544)"/>
+    <text x="178" y="584" font-size="11" font-weight="600" fill="#8C86FF" text-anchor="middle">守护者</text>
+
+    <rect x="236" y="520" width="96" height="80" rx="16" fill="#E9EDF3" />
+    <use href="#schoolIcon" transform="translate(268, 544)"/>
+    <text x="284" y="584" font-size="11" font-weight="600" fill="#7B8893" text-anchor="middle">待解锁</text>
+  </g>
+
+  <!-- 隐私与授权（包含守护人管理） -->
+  <rect x="24" y="624" width="327" height="100" rx="16" fill="#FFFFFF" />
+  <text x="44" y="648" font-size="14" font-weight="700" fill="#2C3640">隐私与授权</text>
+
+  <!-- 授权信息 -->
+  <text x="44" y="672" font-size="11" fill="#5A6672">辅导员（有效至 12/30） · 查看情绪评分</text>
+  <text x="44" y="688" font-size="11" fill="#5A6672">树洞守护者（永久） · 仅限风险信号</text>
+
+  <!-- 守护人管理 -->
+  <g transform="translate(44, 700)">
+    <use href="#guardianIcon" transform="scale(0.7)"/>
+    <text x="14" y="5" font-size="11" font-weight="600" fill="#1FA476">守护人：妈妈 (L3权限)</text>
+  </g>
+
+  <rect x="248" y="692" width="80" height="24" rx="12" fill="#EAFBF5" />
+  <text x="288" y="708" font-size="10" font-weight="600" fill="#1FA476" text-anchor="middle">查看审计</text>
+
+  <!-- 底部导航 -->
+  <rect x="0" y="744" width="375" height="68" fill="#FFFFFF" />
+  <g font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" text-anchor="middle">
+    <text x="38" y="784" fill="#5A6672">今天</text>
+    <text x="112" y="784" fill="#5A6672">任务</text>
+    <text x="186" y="784" fill="#5A6672">树洞</text>
+    <text x="260" y="784" fill="#5A6672">随笔</text>
+    <text x="334" y="784" fill="#3A7BD5">我的</text>
+  </g>
+  <rect x="322" y="760" width="24" height="4" rx="2" fill="#3A7BD5" />
+</svg>

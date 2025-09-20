@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="375" height="812" viewBox="0 0 375 812">
+  <defs>
+    <linearGradient id="journalHero" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EEF5FF" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+    <filter id="cardShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+      <feOffset dx="0" dy="4" result="offsetblur"/>
+      <feFlood flood-color="#0F141A" flood-opacity="0.06"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="375" height="812" fill="#F7F9FC" />
+
+  <!-- 顶栏 -->
+  <rect x="0" y="0" width="375" height="72" fill="#FFFFFF" filter="url(#cardShadow)" />
+  <text x="32" y="44" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="18" font-weight="700" fill="#2C3640">心情随笔</text>
+
+  <!-- Segmented 控件 -->
+  <rect x="24" y="84" width="327" height="40" rx="20" fill="rgba(58,123,213,0.08)" />
+  <rect x="28" y="86" width="155" height="36" rx="18" fill="#3A7BD5" />
+  <text x="105" y="108" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">心情随笔</text>
+  <text x="265" y="108" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="600" fill="#7B8893" text-anchor="middle">情绪趋势</text>
+
+  <!-- 多模录入入口 -->
+  <rect x="24" y="132" width="327" height="80" rx="16" fill="#FFFFFF" filter="url(#cardShadow)" />
+  <text x="40" y="150" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="600" fill="#2C3640">记录此刻</text>
+
+  <!-- 录入选项 -->
+  <g>
+    <rect x="40" y="162" width="64" height="40" rx="8" fill="#F4F3FF" />
+    <text x="72" y="187" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#8C86FF" text-anchor="middle">文本</text>
+
+    <rect x="120" y="162" width="64" height="40" rx="8" fill="#EEF5FF" />
+    <text x="152" y="187" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#3A7BD5" text-anchor="middle">语音</text>
+
+    <rect x="200" y="162" width="64" height="40" rx="8" fill="#EAFBF5" />
+    <text x="232" y="187" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#1FA476" text-anchor="middle">图片</text>
+
+    <rect x="280" y="162" width="64" height="40" rx="8" fill="#FFF7E8" />
+    <text x="312" y="187" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#F59E0B" text-anchor="middle">REBT</text>
+    <!-- 悬停提示 -->
+    <title>理性情绪行为疗法模板</title>
+  </g>
+
+  <!-- 随笔卡 1 -->
+  <rect x="24" y="228" width="327" height="140" rx="12" fill="#FFFFFF" filter="url(#cardShadow)" />
+
+  <!-- 日期图标 -->
+  <circle cx="52" cy="256" r="16" fill="#D9E8FF" />
+  <text x="52" y="255" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="15" font-weight="600" fill="#3A7BD5" text-anchor="middle">18</text>
+  <text x="52" y="265" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" font-weight="600" fill="#3A7BD5" text-anchor="middle">Sept</text>
+
+  <!-- 星期和时间段 -->
+  <text x="80" y="260" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#2C3640">星期三 · 晚间</text>
+
+  <!-- 中间时间小写灰色 -->
+  <text x="185" y="260" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#9AA6B2" text-anchor="middle">09.18 20:20</text>
+
+  <!-- 最右侧情绪标签 -->
+  <rect x="280" y="246" width="68" height="20" rx="6" fill="#EEF5FF" />
+  <text x="314" y="260" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#3A7BD5" text-anchor="middle">情绪 平静</text>
+
+  <!-- 正文 -->
+  <text x="52" y="305" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#5A6672">今天和组员开会比预期顺利，想把这个节奏延续下去...</text>
+
+  <!-- 附件标签 -->
+  <rect x="52" y="334" width="72" height="20" rx="6" fill="#F4F3FF" />
+  <text x="88" y="348" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#8C86FF" text-anchor="middle">语音 02:10</text>
+
+  <!-- 生成任务按钮 -->
+  <rect x="144" y="334" width="80" height="20" rx="6" fill="#EAFBF5" stroke="#2AC28D" stroke-width="1" />
+  <text x="184" y="348" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="9" font-weight="500" fill="#2AC28D" text-anchor="middle">生成任务</text>
+
+  <!-- 随笔卡 2 -->
+  <rect x="24" y="384" width="327" height="140" rx="12" fill="#FFFFFF" filter="url(#cardShadow)" />
+
+  <!-- 日期图标 -->
+  <circle cx="52" cy="412" r="16" fill="#F5D4D2" />
+  <text x="52" y="412" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="15" font-weight="600" fill="#DC2626" text-anchor="middle">17</text>
+  <text x="52" y="420" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" font-weight="600" fill="#DC2626" text-anchor="middle">Sept</text>
+
+  <!-- 星期和时间段 -->
+  <text x="80" y="416" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#2C3640">星期二 · 午后</text>
+
+  <!-- 中间时间小写灰色 -->
+  <text x="185" y="416" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#9AA6B2" text-anchor="middle">09.17 14:30</text>
+
+  <!-- 最右侧情绪标签 -->
+  <rect x="280" y="400" width="64" height="20" rx="6" fill="#FFEDEA" />
+  <text x="312" y="414" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#DC2626" text-anchor="middle">情绪 紧张</text>
+
+  <text x="52" y="468" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#5A6672">在自习室有点分心，下午要补回 30 分钟复习...</text>
+
+  <rect x="52" y="494" width="102" height="20" rx="6" fill="#EAFBF5" />
+  <text x="103" y="508" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#1FA476" text-anchor="middle">已生成任务卡</text>
+
+  <!-- AI 推荐条 -->
+  <rect x="24" y="540" width="327" height="76" rx="12" fill="#FFEFEF" stroke="#FECACA" stroke-width="1" />
+  <text x="40" y="560" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#DC2626">情绪关怀</text>
+  <text x="40" y="578" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="11" fill="#7F1D1D">连续两天记录负向情绪，建议和 ASK 聊聊</text>
+  <!-- 联系 ASK 按钮 -->
+  <rect x="280" y="550" width="64" height="22" rx="6" fill="#EEF5FF" stroke="#3A7BD5" stroke-width="1" />
+  <text x="312" y="565" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="9" font-weight="500" fill="#3A7BD5" text-anchor="middle">联系 ASK</text>
+  <!-- 查看资源按钮 -->
+  <rect x="280" y="582" width="64" height="22" rx="6" fill="#FFFFFF" stroke="#FECACA" />
+  <text x="312" y="597" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="9" font-weight="500" fill="#DC2626" text-anchor="middle">查看资源</text>
+
+  <!-- 底部导航 -->
+  <rect x="0" y="744" width="375" height="68" fill="#FFFFFF" />
+  <g font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" text-anchor="middle">
+    <text x="38" y="784" fill="#5A6672">今天</text>
+    <text x="112" y="784" fill="#5A6672">任务</text>
+    <text x="186" y="784" fill="#5A6672">树洞</text>
+    <text x="260" y="784" fill="#3A7BD5">随笔</text>
+    <text x="334" y="784" fill="#5A6672">我的</text>
+  </g>
+  <rect x="248" y="760" width="24" height="4" rx="2" fill="#3A7BD5" />
+</svg>

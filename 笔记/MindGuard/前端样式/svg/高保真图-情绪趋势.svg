@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="375" height="812" viewBox="0 0 375 812">
+  <defs>
+    <linearGradient id="trendHero" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EEF5FF" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+    <filter id="cardShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+      <feOffset dx="0" dy="4" result="offsetblur"/>
+      <feFlood flood-color="#0F141A" flood-opacity="0.06"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3A7BD5" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#3A7BD5" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+
+  <rect width="375" height="812" fill="#F7F9FC" />
+
+  <!-- 顶栏 -->
+  <rect x="0" y="0" width="375" height="72" fill="#FFFFFF" filter="url(#cardShadow)" />
+  <text x="32" y="44" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="18" font-weight="700" fill="#2C3640">情绪趋势</text>
+
+  <!-- 时间范围切换 -->
+  <g transform="translate(24, 84)">
+    <rect x="0" y="0" width="48" height="28" rx="14" fill="#F7F9FC" stroke="#E9EDF3"/>
+    <text x="24" y="18" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#7B8893" text-anchor="middle">日</text>
+
+    <rect x="56" y="0" width="48" height="28" rx="14" fill="#3A7BD5"/>
+    <text x="80" y="18" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#FFFFFF" text-anchor="middle">周</text>
+
+    <rect x="112" y="0" width="48" height="28" rx="14" fill="#F7F9FC" stroke="#E9EDF3"/>
+    <text x="136" y="18" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#7B8893" text-anchor="middle">月</text>
+  </g>
+
+  <!-- AI 情绪摘要卡 -->
+  <rect x="24" y="128" width="327" height="120" rx="16" fill="url(#trendHero)" filter="url(#cardShadow)" />
+  <text x="44" y="152" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="700" fill="#2C3640">本周情绪摘要</text>
+  <text x="44" y="172" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#5A6672">平均情绪指数：7.2分 · 较上周 +0.8</text>
+  <text x="44" y="192" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#5A6672">主要情绪：平静(45%) · 专注(25%) · 喜悦(20%)</text>
+  <text x="44" y="212" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#5A6672">高频场景：学业压力 · 社交互动 · 自我提升</text>
+  <text x="330" y="234" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#3A7BD5" text-anchor="end">查看详情</text>
+
+  <!-- 情绪趋势折线图 -->
+  <rect x="24" y="264" width="327" height="200" rx="16" fill="#FFFFFF" filter="url(#cardShadow)" />
+  <text x="44" y="288" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="700" fill="#2C3640">情绪趋势</text>
+
+  <!-- 图表区域 -->
+  <g transform="translate(44, 304)">
+    <!-- 背景网格 -->
+    <g stroke="#E9EDF3" stroke-width="0.5" opacity="0.1">
+      <line x1="0" y1="0" x2="287" y2="0"/>
+      <line x1="0" y1="30" x2="287" y2="30"/>
+      <line x1="0" y1="60" x2="287" y2="60"/>
+      <line x1="0" y1="90" x2="287" y2="90"/>
+      <line x1="0" y1="120" x2="287" y2="120"/>
+    </g>
+
+    <!-- 阈值区域 -->
+    <rect x="0" y="36" width="287" height="48" fill="#EEF5FF" opacity="0.3"/>
+
+    <!-- 阈值线 -->
+    <line x1="0" y1="60" x2="287" y2="60" stroke="#BFD6FF" stroke-width="1" stroke-dasharray="5,5" opacity="0.6"/>
+
+    <!-- 区域填充 -->
+    <path d="M 0,75 L 48,60 L 96,45 L 144,52 L 192,40 L 240,35 L 287,42 L 287,120 L 0,120 Z"
+          fill="url(#areaGradient)" opacity="0.6"/>
+
+    <!-- 主趋势线 -->
+    <path d="M 0,75 L 48,60 L 96,45 L 144,52 L 192,40 L 240,35 L 287,42"
+          stroke="#3A7BD5" stroke-width="2" fill="none"/>
+
+    <!-- 数据点 -->
+    <g fill="#3A7BD5">
+      <circle cx="0" cy="75" r="4"/>
+      <circle cx="48" cy="60" r="4"/>
+      <circle cx="96" cy="45" r="4"/>
+      <circle cx="144" cy="52" r="4"/>
+      <circle cx="192" cy="40" r="4"/>
+      <circle cx="240" cy="35" r="4"/>
+      <circle cx="287" cy="42" r="4"/>
+    </g>
+
+    <!-- Y轴标签 -->
+    <g font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" fill="#9AA6B2">
+      <text x="-10" y="5" text-anchor="end">10</text>
+      <text x="-10" y="65" text-anchor="end">7</text>
+      <text x="-10" y="125" text-anchor="end">4</text>
+    </g>
+
+    <!-- X轴标签 -->
+    <g font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" fill="#9AA6B2">
+      <text x="0" y="140" text-anchor="middle">周一</text>
+      <text x="48" y="140" text-anchor="middle">周二</text>
+      <text x="96" y="140" text-anchor="middle">周三</text>
+      <text x="144" y="140" text-anchor="middle">周四</text>
+      <text x="192" y="140" text-anchor="middle">周五</text>
+      <text x="240" y="140" text-anchor="middle">周六</text>
+      <text x="287" y="140" text-anchor="middle">周日</text>
+    </g>
+  </g>
+
+  <!-- 关键词标签云 -->
+  <rect x="24" y="480" width="327" height="140" rx="16" fill="#FFFFFF" filter="url(#cardShadow)" />
+  <text x="44" y="504" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="700" fill="#2C3640">关键词云</text>
+
+  <!-- 标签云内容 -->
+  <g transform="translate(187.5, 567)">
+    <!-- 高频词 -->
+    <text x="0" y="0" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="16" fill="#2C3640" text-anchor="middle" font-weight="600">学习</text>
+    <text x="-50" y="-15" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" fill="#5A6672" text-anchor="middle">考试</text>
+    <text x="55" y="10" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" fill="#5A6672" text-anchor="middle">压力</text>
+    <text x="30" y="-20" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#7B8893" text-anchor="middle">专注</text>
+
+    <!-- 中频词 -->
+    <text x="-70" y="20" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#9AA6B2" text-anchor="middle">室友</text>
+    <text x="80" y="-25" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#9AA6B2" text-anchor="middle">运动</text>
+    <text x="-35" y="-35" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#9AA6B2" text-anchor="middle">平静</text>
+
+    <!-- 低频词 -->
+    <text x="20" y="30" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" fill="#C5CEDA" text-anchor="middle">睡眠</text>
+    <text x="-45" y="30" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" fill="#C5CEDA" text-anchor="middle">饮食</text>
+    <text x="65" y="20" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" fill="#C5CEDA" text-anchor="middle">娱乐</text>
+  </g>
+
+  <!-- 场景分类条 -->
+  <rect x="24" y="636" width="327" height="76" rx="16" fill="#FFFFFF" filter="url(#cardShadow)" />
+  <text x="44" y="660" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="700" fill="#2C3640">场景分布</text>
+
+  <!-- 场景分类内容 -->
+  <g transform="translate(44, 676)">
+    <!-- 学业 35% -->
+    <rect x="0" y="0" width="100" height="24" rx="12" fill="#EEF5FF"/>
+    <text x="50" y="16" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#3A7BD5" text-anchor="middle">学业 35%</text>
+
+    <!-- 社交 25% -->
+    <rect x="108" y="0" width="72" height="24" rx="12" fill="#F4F3FF"/>
+    <text x="144" y="16" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#8C86FF" text-anchor="middle">社交 25%</text>
+
+    <!-- 健康 20% -->
+    <rect x="188" y="0" width="58" height="24" rx="12" fill="#EAFBF5"/>
+    <text x="217" y="16" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#2AC28D" text-anchor="middle">健康 20%</text>
+
+    <!-- 其他 20% -->
+    <rect x="252" y="0" width="55" height="24" rx="12" fill="#F7F9FC"/>
+    <text x="279" y="16" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#7B8893" text-anchor="middle">其他 20%</text>
+  </g>
+
+  <!-- 趋势提示条 -->
+  <rect x="24" y="728" width="327" height="48" rx="12" fill="#FFF6E8"/>
+  <text x="40" y="748" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#F2B23D" font-weight="600">情绪波动提醒</text>
+  <text x="40" y="764" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" fill="#D9961E">连续3天情绪下降，建议和 ASK 聊聊</text>
+  <rect x="260" y="740" width="72" height="20" rx="10" fill="#F2B23D"/>
+  <text x="296" y="754" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="9" fill="#FFFFFF" text-anchor="middle">查看建议</text>
+
+  <!-- 底部导航 -->
+  <rect x="0" y="744" width="375" height="68" fill="#FFFFFF" />
+  <g font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" text-anchor="middle">
+    <text x="38" y="784" fill="#5A6672">今天</text>
+    <text x="112" y="784" fill="#5A6672">任务</text>
+    <text x="186" y="784" fill="#5A6672">树洞</text>
+    <text x="260" y="784" fill="#3A7BD5">随笔</text>
+    <text x="334" y="784" fill="#5A6672">我的</text>
+  </g>
+  <rect x="248" y="760" width="24" height="4" rx="2" fill="#3A7BD5" />
+</svg>
