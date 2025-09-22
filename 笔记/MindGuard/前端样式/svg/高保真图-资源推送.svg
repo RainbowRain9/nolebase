@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="375" height="812" viewBox="0 0 375 812">
   <defs>
-    <!-- 渐变定义 -->
+    <!-- 重构后色彩系统定义 -->
     <linearGradient id="recommendationGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FEF3C7" />
       <stop offset="100%" stop-color="#FDE68A" />
@@ -11,7 +11,18 @@
       <stop offset="100%" stop-color="#8C86FF" />
     </linearGradient>
 
-    <!-- 图标定义 -->
+    <!-- 风险预警渐变 -->
+    <linearGradient id="riskWarningMedium" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F97316" />
+      <stop offset="100%" stop-color="#FB923C" />
+    </linearGradient>
+
+    <linearGradient id="riskWarningHigh" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#DC2626" />
+      <stop offset="100%" stop-color="#EF4444" />
+    </linearGradient>
+
+    <!-- 图标定义 - 重构版 -->
     <g id="aiIcon">
       <circle cx="8" cy="8" r="8" fill="#3A7BD5" opacity="0.2"/>
       <text x="8" y="12" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" font-weight="700" fill="#3A7BD5" text-anchor="middle">AI</text>
@@ -64,24 +75,36 @@
       <text x="20" y="11" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" font-weight="600" fill="#FFFFFF" text-anchor="middle">85%匹配</text>
     </g>
 
-    <g id="likeIcon">
-      <path d="M 6 8 Q 6 6 8 6 Q 10 6 10 8 L 10 10 Q 10 12 8 12 Q 6 12 6 10 Z" fill="#EF4444"/>
-      <circle cx="8" cy="8" r="6" fill="none" stroke="#EF4444" stroke-width="1"/>
+    <!-- 重构版反馈图标 -->
+    <g id="likeIconSelected">
+      <circle cx="8" cy="8" r="6" fill="#22C55E"/>
+      <path d="M 6 8 Q 6 6 8 6 Q 10 6 10 8 L 10 10 Q 10 12 8 12 Q 6 12 6 10 Z" fill="#FFFFFF"/>
     </g>
 
-    <g id="dislikeIcon">
-      <path d="M 6 8 L 10 8 M 8 6 L 8 10" stroke="#6B7280" stroke-width="2"/>
-      <circle cx="8" cy="8" r="6" fill="none" stroke="#6B7280" stroke-width="1"/>
+    <g id="dislikeIconSelected">
+      <circle cx="8" cy="8" r="6" fill="#EF4444"/>
+      <path d="M 6 8 L 10 8 M 8 6 L 8 10" stroke="#FFFFFF" stroke-width="2"/>
     </g>
 
-    <!-- 情绪温度条 -->
+    <!-- 风险预警图标 -->
+    <g id="riskWarningIcon">
+      <path d="M 8 2 L 14 12 L 2 12 Z" fill="#F59E0B"/>
+      <text x="8" y="10" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" font-weight="700" fill="#FFFFFF" text-anchor="middle">!</text>
+    </g>
+
+    <g id="riskDangerIcon">
+      <path d="M 8 2 L 14 12 L 2 12 Z" fill="#DC2626"/>
+      <text x="8" y="10" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" font-weight="700" fill="#FFFFFF" text-anchor="middle">!</text>
+    </g>
+
+    <!-- 情绪温度条 - 重构版 -->
     <g id="moodBar">
       <rect x="0" y="6" width="60" height="6" rx="3" fill="#E5E7EB"/>
       <rect x="0" y="6" width="24" height="6" rx="3" fill="url(#moodBarGradient)"/>
       <circle cx="24" cy="9" r="4" fill="#3A7BD5"/>
     </g>
 
-    <!-- 推荐标签 -->
+    <!-- 推荐标签 - 重构版 -->
     <g id="aiRecommendTag">
       <rect x="0" y="0" width="50" height="18" rx="9" fill="#DBEAFE"/>
       <text x="25" y="12" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" font-weight="600" fill="#1E40AF" text-anchor="middle">AI推荐</text>
@@ -91,38 +114,63 @@
       <rect x="0" y="0" width="60" height="18" rx="9" fill="#FEF3C7"/>
       <text x="30" y="12" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" font-weight="600" fill="#92400E" text-anchor="middle">情绪匹配</text>
     </g>
+
+    <!-- 中风险提示条 -->
+    <g id="mediumRiskAlert">
+      <rect x="0" y="0" width="343" height="40" rx="8" fill="url(#riskWarningMedium)"/>
+      <use href="#riskWarningIcon" transform="translate(16, 12)"/>
+      <text x="32" y="20" font-size="12" font-weight="600" fill="#FFFFFF">检测到中等风险信号</text>
+      <text x="32" y="32" font-size="10" fill="#FFFFFF">建议查看相关资源或联系辅导员</text>
+      <rect x="240" y="12" width="80" height="16" rx="8" fill="#FFFFFF"/>
+      <text x="280" y="23" font-size="9" font-weight="600" fill="#F97316" text-anchor="middle">查看资源</text>
+    </g>
+
+    <!-- 高风险提示条 -->
+    <g id="highRiskAlert">
+      <rect x="0" y="0" width="343" height="48" rx="8" fill="url(#riskWarningHigh)"/>
+      <use href="#riskDangerIcon" transform="translate(16, 16)"/>
+      <text x="32" y="24" font-size="14" font-weight="700" fill="#FFFFFF">高风险警告</text>
+      <text x="32" y="38" font-size="11" fill="#FFFFFF">系统检测到高风险状态，建议立即寻求帮助</text>
+      <rect x="220" y="16" width="50" height="16" rx="8" fill="#FFFFFF"/>
+      <text x="245" y="26" font-size="9" font-weight="700" fill="#DC2626" text-anchor="middle">SOS求助</text>
+      <rect x="280" y="16" width="50" height="16" rx="8" fill="#FFFFFF"/>
+      <text x="305" y="26" font-size="9" font-weight="600" fill="#DC2626" text-anchor="middle">心理中心</text>
+    </g>
   </defs>
 
-  <!-- 背景 -->
+  <!-- 背景：重构后的统一色彩 -->
   <rect width="375" height="812" fill="#F7F9FC" />
 
-  <!-- 顶栏 -->
+  <!-- 顶栏：纯白背景 -->
   <rect x="0" y="0" width="375" height="72" fill="#FFFFFF" />
   <text x="32" y="44" font-size="18" font-weight="700" fill="#2C3640">资源推送</text>
   <use href="#settingsIcon" transform="translate(335, 30) scale(0.8)"/>
 
-  <!-- 今日状态卡 -->
-  <rect x="16" y="88" width="343" height="90" rx="16" fill="#EEF5FF" stroke="#D9E8FF" stroke-width="1"/>
-  <text x="32" y="112" font-size="14" font-weight="600" fill="#1E40AF">当前情绪状态</text>
-  <use href="#emotionIndicator" transform="translate(32, 124)"/>
-  <text x="56" y="134" font-size="12" fill="#5A6672">焦虑 · 压力较大</text>
+  <!-- 风险预警提示条 - 中风险示例 -->
+  <use href="#mediumRiskAlert" transform="translate(16, 88)"/>
 
-  <!-- 情绪强度 -->
-  <g transform="translate(200, 124)">
+  <!-- 今日状态卡 - 重构后采用冷色调 -->
+  <rect x="16" y="144" width="343" height="90" rx="16" fill="#EEF5FF" stroke="#D9E8FF" stroke-width="1"/>
+  <text x="32" y="168" font-size="14" font-weight="600" fill="#1E40AF">当前情绪状态</text>
+  <use href="#emotionIndicator" transform="translate(32, 180)"/>
+  <text x="56" y="190" font-size="12" fill="#5A6672">焦虑 · 压力较大</text>
+
+  <!-- 情绪强度：品牌蓝到雾紫渐变 -->
+  <g transform="translate(200, 180)">
     <use href="#moodBar"/>
     <text x="68" y="12" font-size="10" fill="#5A6672">6/10</text>
   </g>
 
-  <!-- 个性化推荐卡片 -->
-  <rect x="16" y="196" width="343" height="200" rx="16" fill="url(#recommendationGradient)" />
-  <text x="32" y="220" font-size="14" font-weight="600" fill="#92400E">基于你的焦虑情绪推荐</text>
-  <text x="32" y="240" font-size="11" fill="#92400E">检测到你最近有些焦虑，试试这些放松资源</text>
+  <!-- 个性化推荐卡片 - 保持暖色破格设计 -->
+  <rect x="16" y="252" width="343" height="200" rx="16" fill="url(#recommendationGradient)" />
+  <text x="32" y="276" font-size="14" font-weight="600" fill="#92400E">基于你的焦虑情绪推荐</text>
+  <text x="32" y="296" font-size="11" fill="#92400E">检测到你最近有些焦虑，试试这些放松资源</text>
 
-  <!-- AI推荐标签 -->
-  <use href="#aiRecommendTag" transform="translate(280, 208)"/>
+  <!-- AI推荐标签 - 重构后设计 -->
+  <use href="#aiRecommendTag" transform="translate(280, 264)"/>
 
-  <!-- 推荐资源列表 -->
-  <g transform="translate(32, 258)">
+  <!-- 推荐资源列表 - 白底+暖色描边 -->
+  <g transform="translate(32, 314)">
     <!-- 资源卡片1 - 视频 -->
     <rect x="0" y="0" width="100" height="90" rx="12" fill="#FFFFFF" stroke="#FDE68A" stroke-width="1"/>
     <rect x="10" y="10" width="40" height="25" fill="#FEE2E2" rx="6"/>
@@ -149,13 +197,13 @@
   </g>
 
   <!-- 推荐原因 -->
-  <text x="32" y="370" font-size="12" font-weight="600" fill="#92400E">推荐原因：情绪匹配度高 · 评价良好 · 同类用户选择</text>
+  <text x="32" y="426" font-size="12" font-weight="600" fill="#92400E">推荐原因：情绪匹配度高 · 评价良好 · 同类用户选择</text>
 
-  <!-- 资源分类导航 -->
-  <text x="16" y="410" font-size="16" font-weight="700" fill="#2C3640">资源分类</text>
+  <!-- 资源分类导航 - 品牌蓝主色 -->
+  <text x="16" y="466" font-size="16" font-weight="700" fill="#2C3640">资源分类</text>
 
-  <!-- 分类标签 -->
-  <g transform="translate(16, 424)">
+  <!-- 分类标签：重构后选中状态使用品牌蓝 -->
+  <g transform="translate(16, 480)">
     <rect x="0" y="0" width="65" height="32" rx="16" fill="#3A7BD5"/>
     <use href="#videoIcon" transform="translate(10, 8) scale(0.8)"/>
     <text x="28" y="24" font-size="11" font-weight="600" fill="#FFFFFF">视频</text>
@@ -178,8 +226,8 @@
   </g>
 
   <!-- 筛选条件 -->
-  <text x="16" y="482" font-size="12" fill="#5A6672">筛选条件：</text>
-  <g transform="translate(76, 472)">
+  <text x="16" y="538" font-size="12" fill="#5A6672">筛选条件：</text>
+  <g transform="translate(76, 528)">
     <rect x="0" y="0" width="55" height="22" rx="11" fill="#F3F4F6"/>
     <text x="27.5" y="15" font-size="9" fill="#6B7280" text-anchor="middle">&lt;5分钟</text>
 
@@ -194,51 +242,56 @@
   </g>
 
   <!-- 资源列表 -->
-  <text x="16" y="522" font-size="16" font-weight="700" fill="#2C3640">为你推荐</text>
-  <text x="359" y="522" font-size="12" font-weight="600" fill="#3A7BD5" text-anchor="end">查看更多</text>
+  <text x="16" y="578" font-size="16" font-weight="700" fill="#2C3640">为你推荐</text>
+  <text x="359" y="578" font-size="12" font-weight="600" fill="#3A7BD5" text-anchor="end">查看更多</text>
 
-  <!-- 资源项1 -->
-  <rect x="16" y="538" width="343" height="80" rx="12" fill="#FFFFFF" stroke="#E9EDF3"/>
-  <rect x="24" y="550" width="48" height="48" rx="8" fill="#FEE2E2"/>
-  <use href="#videoIcon" transform="translate(36, 562)"/>
-  <text x="84" y="562" font-size="14" font-weight="600" fill="#2C3640">10分钟正念冥想：缓解焦虑</text>
-  <text x="84" y="580" font-size="11" fill="#5A6672">专业引导 · 适合初学者 · 已帮助2.3万人</text>
-  <use href="#emotionRecommendTag" transform="translate(84, 592)"/>
-  <rect x="276" y="578" width="70" height="24" rx="12" fill="#3A7BD5"/>
-  <text x="311" y="594" font-size="10" font-weight="600" fill="#FFFFFF" text-anchor="middle">立即体验</text>
+  <!-- 资源项1 - 重构后使用标准白底卡片 -->
+  <rect x="16" y="594" width="343" height="80" rx="12" fill="#FFFFFF" stroke="#E9EDF3"/>
+  <rect x="24" y="606" width="48" height="48" rx="8" fill="#FEE2E2"/>
+  <use href="#videoIcon" transform="translate(36, 618)"/>
+  <text x="84" y="618" font-size="14" font-weight="600" fill="#2C3640">10分钟正念冥想：缓解焦虑</text>
+  <text x="84" y="636" font-size="11" fill="#5A6672">专业引导 · 适合初学者 · 已帮助2.3万人</text>
+  <use href="#emotionRecommendTag" transform="translate(84, 648)"/>
+  <rect x="276" y="634" width="70" height="24" rx="12" fill="#3A7BD5"/>
+  <text x="311" y="650" font-size="10" font-weight="600" fill="#FFFFFF" text-anchor="middle">立即体验</text>
 
   <!-- 资源项2 -->
-  <rect x="16" y="630" width="343" height="80" rx="12" fill="#FFFFFF" stroke="#E9EDF3"/>
-  <rect x="24" y="642" width="48" height="48" rx="8" fill="#EDE9FE"/>
-  <use href="#audioIcon" transform="translate(36, 654)"/>
-  <text x="84" y="654" font-size="14" font-weight="600" fill="#2C3640">睡眠音乐：深度放松</text>
-  <text x="84" y="672" font-size="11" fill="#5A6672">舒缓音频 · 改善睡眠质量 · 时长30分钟</text>
-  <use href="#emotionRecommendTag" transform="translate(84, 684)"/>
-  <rect x="276" y="670" width="70" height="24" rx="12" fill="#3A7BD5"/>
-  <text x="311" y="686" font-size="10" font-weight="600" fill="#FFFFFF" text-anchor="middle">立即播放</text>
+  <rect x="16" y="686" width="343" height="80" rx="12" fill="#FFFFFF" stroke="#E9EDF3"/>
+  <rect x="24" y="698" width="48" height="48" rx="8" fill="#EDE9FE"/>
+  <use href="#audioIcon" transform="translate(36, 710)"/>
+  <text x="84" y="710" font-size="14" font-weight="600" fill="#2C3640">睡眠音乐：深度放松</text>
+  <text x="84" y="728" font-size="11" fill="#5A6672">舒缓音频 · 改善睡眠质量 · 时长30分钟</text>
+  <use href="#emotionRecommendTag" transform="translate(84, 740)"/>
+  <rect x="276" y="726" width="70" height="24" rx="12" fill="#3A7BD5"/>
+  <text x="311" y="742" font-size="10" font-weight="600" fill="#FFFFFF" text-anchor="middle">立即播放</text>
 
-  <!-- 反馈区 -->
-  <rect x="16" y="724" width="343" height="60" rx="12" fill="#F9FAFB" stroke="#E5E7EB"/>
-  <text x="32" y="744" font-size="12" font-weight="600" fill="#2C3640">这些推荐对你有帮助吗？</text>
+  <!-- 反馈区 - 重构后使用语义化色彩 -->
+  <rect x="16" y="780" width="343" height="24" rx="12" fill="#F9FAFB" stroke="#E5E7EB"/>
+  <text x="32" y="796" font-size="11" fill="#2C3640">这些推荐对你有帮助吗？</text>
 
-  <!-- 反馈按钮 -->
-  <g transform="translate(32, 756)">
-    <use href="#likeIcon" transform="translate(0, 0) scale(1.2)"/>
-    <text x="20" y="4" font-size="10" fill="#5A6672">有帮助</text>
+  <!-- 反馈按钮：重构后状态可视化 -->
+  <g transform="translate(200, 784)">
+    <!-- 有帮助按钮 - 选中状态 -->
+    <circle cx="8" cy="8" r="6" fill="#22C55E"/>
+    <path d="M 6 8 Q 6 6 8 6 Q 10 6 10 8 L 10 10 Q 10 12 8 12 Q 6 12 6 10 Z" fill="#FFFFFF"/>
+    <text x="20" y="11" font-size="9" fill="#22C55E" font-weight="600">有帮助</text>
 
-    <use href="#dislikeIcon" transform="translate(80, 0) scale(1.2)"/>
-    <text x="100" y="4" font-size="10" fill="#5A6672">不相关</text>
+    <!-- 不相关按钮 - 未选中状态 -->
+    <circle cx="68" cy="8" r="6" fill="none" stroke="#EF4444" stroke-width="1"/>
+    <path d="M 66 8 L 70 8 M 68 6 L 68 10" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="80" y="11" font-size="9" fill="#6B7280">不相关</text>
 
-    <rect x="160" y="-8" width="80" height="20" rx="10" fill="#3A7BD5"/>
-    <text x="200" y="4" font-size="9" font-weight="600" fill="#FFFFFF" text-anchor="middle">详细反馈</text>
+    <!-- 详细反馈按钮 -->
+    <rect x="136" y="0" width="60" height="16" rx="8" fill="#3A7BD5"/>
+    <text x="166" y="11" font-size="8" font-weight="600" fill="#FFFFFF" text-anchor="middle">详细反馈</text>
   </g>
 
   <!-- 推送设置 -->
-  <rect x="246" y="740" width="100" height="24" rx="12" fill="none" stroke="#3A7BD5"/>
-  <use href="#settingsIcon" transform="translate(254, 746) scale(0.6)"/>
-  <text x="280" y="756" font-size="10" font-weight="600" fill="#3A7BD5" text-anchor="middle">推送设置</text>
+  <rect x="280" y="784" width="70" height="16" rx="8" fill="none" stroke="#3A7BD5"/>
+  <use href="#settingsIcon" transform="translate(286, 788) scale(0.5)"/>
+  <text x="315" y="794" font-size="8" font-weight="600" fill="#3A7BD5" text-anchor="middle">推送设置</text>
 
-  <!-- 底部导航 -->
+  <!-- 底部导航：纯白背景 -->
   <rect x="0" y="744" width="375" height="68" fill="#FFFFFF" />
   <g font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" text-anchor="middle">
     <text x="38" y="784" fill="#3A7BD5">今天</text>
@@ -248,4 +301,22 @@
     <text x="334" y="784" fill="#5A6672">我的</text>
   </g>
   <rect x="26" y="768" width="24" height="4" rx="2" fill="#3A7BD5" />
+
+  <!-- 重构要点标注 -->
+  <g opacity="0.7">
+    <!-- 统一背景色标注 -->
+    <text x="190" y="30" font-size="10" fill="#6B7280" text-anchor="middle" font-style="italic">页面背景: #F7F9FC (Ink-0)</text>
+
+    <!-- 暖色破格标注 -->
+    <line x1="360" y1="252" x2="375" y2="252" stroke="#F59E0B" stroke-width="1"/>
+    <text x="373" y="256" font-size="8" fill="#F59E0B" text-anchor="end">暖色破格</text>
+
+    <!-- 品牌蓝标注 -->
+    <circle cx="51" cy="496" r="3" fill="#3A7BD5"/>
+    <text x="58" y="500" font-size="8" fill="#3A7BD5">品牌蓝主色</text>
+
+    <!-- 风险预警标注 -->
+    <circle cx="24" cy="108" r="3" fill="#F97316"/>
+    <text x="30" y="112" font-size="8" fill="#F97316">风险预警</text>
+  </g>
 </svg>
