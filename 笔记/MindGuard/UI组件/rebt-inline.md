@@ -61,7 +61,7 @@
 | `setData(data: object)` | 入参：REBT数据；返回：void | `this.selectComponent('#rebt').setData({...})` |
 | `getCurrentData()` | 入参：无；返回：object | `this.selectComponent('#rebt').getCurrentData()` |
 | `validateStep(step: string)` | 入参：步骤；返回：boolean | `this.selectComponent('#rebt').validateStep('A')` |
-| `generateSuggestions()` | 入参：无；返回：Promise<array> | `this.selectComponent('#rebt').generateSuggestions()` |
+| `generateSuggestions()` | 入参：无；返回：Promise<`array`> | `this.selectComponent('#rebt').generateSuggestions()` |
 | `exportData()` | 入参：无；返回：object | `this.selectComponent('#rebt').exportData()` |
 
 ## Data Contract（数据契约）

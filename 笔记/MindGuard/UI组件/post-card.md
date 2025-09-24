@@ -52,11 +52,11 @@
 
 | 方法名 | 入参与返回 | 使用示例 |
 |--------|------------|---------|
-| `toggleHug()` | 入参：无；返回：Promise<boolean> | `this.selectComponent('#post-card').toggleHug()` |
-| `toggleSave()` | 入参：无；返回：Promise<boolean> | `this.selectComponent('#post-card').toggleSave()` |
+| `toggleHug()` | 入参：无；返回：Promise<`boolean`> | `this.selectComponent('#post-card').toggleHug()` |
+| `toggleSave()` | 入参：无；返回：Promise<`boolean`> | `this.selectComponent('#post-card').toggleSave()` |
 | `showReportDialog()` | 入参：无；返回：void | `this.selectComponent('#post-card').showReportDialog()` |
-| `sharePost()` | 入参：无；返回：Promise<boolean> | `this.selectComponent('#post-card').sharePost()` |
-| `refreshData()` | 入参：postId；返回：Promise<void> | `this.selectComponent('#post-card').refreshData('post_123')` |
+| `sharePost()` | 入参：无；返回：Promise<`boolean`> | `this.selectComponent('#post-card').sharePost()` |
+| `refreshData()` | 入参：postId；返回：Promise<`void`> | `this.selectComponent('#post-card').refreshData('post_123')` |
 
 ## Data Contract（数据契约）
 
