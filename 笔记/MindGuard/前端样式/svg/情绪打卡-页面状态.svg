@@ -1,0 +1,115 @@
+<svg width="375" height="812" viewBox="0 0 375 812" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    情绪打卡 - 页面状态 (非弹窗状态)
+    展示今天页的情绪状态卡和基础界面
+  -->
+
+  <defs>
+    <!-- 阴影滤镜 -->
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <!-- 页面背景 -->
+  <rect width="375" height="812" fill="#F7F9FC"/>
+
+  <!-- 顶部安全区 -->
+  <rect width="375" height="44" fill="white"/>
+
+  <!-- 页面标题 -->
+  <text x="20" y="30" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="18" font-weight="700" fill="#2C3640">今天</text>
+
+  <!-- 模块1：情绪状态卡 -->
+  <g id="moodStatusCard">
+    <rect x="16" y="68" width="343" height="120" rx="16" fill="#FFFFFF" filter="url(#cardShadow)"/>
+
+    <!-- 用户信息区 -->
+    <circle cx="48" cy="104" r="20" fill="#F0F4F8"/>
+    <text x="48" y="109" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" fill="#3A7BD5">头像</text>
+
+    <text x="80" y="96" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="16" font-weight="600" fill="#2C3640">今日状态</text>
+    <text x="80" y="112" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#7B8893">最后更新：10分钟前</text>
+
+    <!-- 风险等级徽标 -->
+    <circle cx="320" cy="96" r="8" fill="#2AC28D"/>
+    <text x="320" y="100" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="8" fill="#FFFFFF">L1</text>
+    <text x="335" y="96" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" fill="#2C3640">今日情绪良好</text>
+    <text x="335" y="112" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#5A6672">情绪指数：72分</text>
+
+    <!-- 再次打卡按钮 -->
+    <rect x="271" y="144" width="72" height="28" rx="14" fill="#3A7BD5"/>
+    <text x="307" y="162" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#FFFFFF">再次打卡</text>
+  </g>
+
+  <!-- 微建议卡片 -->
+  <g transform="translate(16, 200)">
+    <rect x="0" y="0" width="343" height="120" rx="16" fill="#F0F9FF" stroke="#E0F2FE" stroke-width="2"/>
+    <text x="16" y="28" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="600" fill="#1E40AF">今日微建议</text>
+
+    <!-- AI推荐标识 -->
+    <rect x="269" y="12" width="60" height="20" rx="10" fill="#DBEAFE"/>
+    <text x="299" y="26" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" font-weight="600" fill="#1E40AF">AI推荐</text>
+
+    <!-- 建议列表 -->
+    <text x="16" y="56" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#475569">💡 试试5分钟呼吸练习缓解压力</text>
+    <text x="16" y="78" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#475569">✓ 整理桌面，营造清爽环境</text>
+    <text x="16" y="100" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#475569">📝 写下今天的三件感恩小事</text>
+  </g>
+
+  <!-- 工具箱 -->
+  <g transform="translate(16, 340)">
+    <text x="0" y="0" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="16" font-weight="700" fill="#2C3640">工具箱</text>
+
+    <!-- 工具网格 -->
+    <g transform="translate(0, 20)">
+      <!-- 第一行 -->
+      <rect x="0" y="0" width="64" height="64" rx="12" fill="white" stroke="#E9EDF3"/>
+      <text x="32" y="40" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="20" fill="#3A7BD5">📝</text>
+      <text x="32" y="80" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#434E5A">随笔</text>
+
+      <rect x="80" y="0" width="64" height="64" rx="12" fill="white" stroke="#E9EDF3"/>
+      <text x="112" y="40" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="20" fill="#3A7BD5">📋</text>
+      <text x="112" y="80" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#434E5A">清单</text>
+
+      <rect x="160" y="0" width="64" height="64" rx="12" fill="white" stroke="#E9EDF3"/>
+      <text x="192" y="40" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="20" fill="#3A7BD5">🧘</text>
+      <text x="192" y="80" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#434E5A">呼吸</text>
+
+      <rect x="240" y="0" width="64" height="64" rx="12" fill="white" stroke="#E9EDF3"/>
+      <text x="272" y="40" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="20" fill="#3A7BD5">🎯</text>
+      <text x="272" y="80" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#434E5A">正念</text>
+
+      <!-- 第二行 -->
+      <rect x="0" y="88" width="64" height="64" rx="12" fill="white" stroke="#E9EDF3"/>
+      <text x="32" y="128" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="20" fill="#3A7BD5">🌳</text>
+      <text x="32" y="168" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#434E5A">树洞</text>
+
+      <rect x="80" y="88" width="64" height="64" rx="12" fill="white" stroke="#E9EDF3"/>
+      <text x="112" y="128" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="20" fill="#3A7BD5">✓</text>
+      <text x="112" y="168" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#434E5A">任务</text>
+
+      <rect x="160" y="88" width="64" height="64" rx="12" fill="white" stroke="#E9EDF3"/>
+      <text x="192" y="128" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="20" fill="#3A7BD5">😊</text>
+      <text x="192" y="168" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#434E5A">打卡</text>
+
+      <rect x="240" y="88" width="64" height="64" rx="12" fill="white" stroke="#E9EDF3"/>
+      <text x="272" y="128" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="16" font-weight="700" fill="#DC2626">SOS</text>
+      <text x="272" y="168" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" fill="#434E5A">紧急</text>
+    </g>
+  </g>
+
+  <!-- 底部导航 -->
+  <g id="bottomNav">
+    <rect y="752" width="375" height="60" fill="white"/>
+    <g font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" text-anchor="middle">
+      <text x="38" y="788" fill="#3A7BD5">今天</text>
+      <text x="112" y="788" fill="#5A6672">任务</text>
+      <text x="186" y="788" fill="#5A6672">树洞</text>
+      <text x="260" y="788" fill="#5A6672">随笔</text>
+      <text x="334" y="788" fill="#5A6672">我的</text>
+    </g>
+    <rect x="26" y="768" width="24" height="4" rx="2" fill="#3A7BD5"/>
+  </g>
+
+</svg>

@@ -89,10 +89,14 @@
   <g id="statusCard">
     <rect x="16" y="68" width="343" height="96" rx="16" fill="#EEF5FF" stroke="#D9E8FF" stroke-width="2"/>
     <text x="32" y="100" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="16" font-weight="700" fill="#2C3640">今日状态</text>
-    <text x="32" y="130" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="500" fill="#5A6672">情绪：平静 · 压力：2/10</text>
+    <!-- 今日已打卡的情绪与压力摘要（适配心情打卡） -->
+    <text x="32" y="130" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="500" fill="#5A6672">情绪：平静 6/10 · 压力：2/10</text>
     <!-- 风险标签 -->
     <rect x="253" y="78" width="66" height="28" rx="14" fill="#EEF5FF"/>
     <text x="286" y="96" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#3A7BD5">R1 观察</text>
+    <!-- 再次打卡按钮（轻底深字） -->
+    <rect x="253" y="124" width="88" height="28" rx="14" fill="#EEF5FF" stroke="#D9E8FF" stroke-width="1"/>
+    <text x="297" y="142" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="600" fill="#3A7BD5">再次打卡</text>
   </g>
 
   <!-- 模块2：Top3 微建议卡片 -->
@@ -100,31 +104,31 @@
     <rect x="16" y="180" width="343" height="140" rx="16" fill="#F0F9FF" stroke="#E0F2FE" stroke-width="2"/>
     <text x="32" y="208" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="14" font-weight="600" fill="#1E40AF">今日微建议</text>
     <!-- AI推荐标识 -->
-    <rect x="280" y="192" width="60" height="20" rx="10" fill="#DBEAFE"/>
-    <text x="310" y="206" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" font-weight="600" fill="#1E40AF">AI推荐</text>
+    <rect x="285" y="192" width="60" height="20" rx="10" fill="#DBEAFE"/>
+    <text x="315" y="206" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="10" font-weight="600" fill="#1E40AF">AI推荐</text>
 
     <!-- 建议列表 -->
     <g transform="translate(32, 220)">
       <!-- 建议项1 -->
       <use href="#lightbulbIcon" x="0" y="0"/>
       <text x="20" y="12" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="500" fill="#475569">试试5分钟呼吸练习缓解压力</text>
-      <rect x="260" y="0" width="70" height="24" rx="6" fill="#3A7BD5"/>
-      <text x="295" y="16" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="11" font-weight="600" fill="white">生成任务</text>
+      <rect x="250" y="0" width="70" height="24" rx="6" fill="#EEF5FF"/>
+      <text x="285" y="16" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="11" font-weight="600" fill="#3A7BD5">生成任务</text>
 
       <!-- 建议项2 -->
       <g transform="translate(0, 30)">
         <use href="#taskIcon" x="0" y="0"/>
         <text x="20" y="12" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="500" fill="#475569">整理桌面，营造清爽环境</text>
-        <rect x="260" y="0" width="70" height="24" rx="6" fill="#3A7BD5"/>
-        <text x="295" y="16" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="11" font-weight="600" fill="white">生成任务</text>
+        <rect x="250" y="0" width="70" height="24" rx="6" fill="#EEF5FF"/>
+        <text x="285" y="16" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="11" font-weight="600" fill="#3A7BD5">生成任务</text>
       </g>
 
       <!-- 建议项3 -->
       <g transform="translate(0, 60)">
         <use href="#bookIcon" x="0" y="0"/>
         <text x="20" y="12" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="12" font-weight="500" fill="#475569">写下今天的三件感恩小事</text>
-        <rect x="260" y="0" width="70" height="24" rx="6" fill="#3A7BD5"/>
-        <text x="295" y="16" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="11" font-weight="600" fill="white">生成任务</text>
+        <rect x="250" y="0" width="70" height="24" rx="6" fill="#EEF5FF"/>
+        <text x="285" y="16" text-anchor="middle" font-family="Inter, PingFang SC, Helvetica, Arial" font-size="11" font-weight="600" fill="#3A7BD5">生成任务</text>
       </g>
     </g>
   </g>
