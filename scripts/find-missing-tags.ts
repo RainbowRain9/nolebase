@@ -6,6 +6,7 @@ import { join, extname } from "path";
 
 const ROOTS = [
   join(process.cwd(), "docs"),
+  join(process.cwd(), "notes"),
   join(process.cwd(), "笔记"), // 你的仓库有中文目录，这里也扫一下
 ];
 

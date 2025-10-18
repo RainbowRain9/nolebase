@@ -15,7 +15,7 @@ hero:
   actions:
     - theme: brand
       text: 技术笔记
-      link: /笔记/index
+      link: /notes/index
     - theme: alt
       text: Notion学习笔记
       link: https://tarry-hour-fda.notion.site/integrated-learning-area
