@@ -1,7 +1,3 @@
-好的，这是根据我们之前的讨论生成的完整棕地增强架构文档。
-
----
-
 # MindGuard Brownfield Enhancement Architecture
 
 | 变更                               | 日期          | 版本 | 描述                                | 作者           |
