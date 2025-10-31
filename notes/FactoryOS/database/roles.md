@@ -1,19 +1,28 @@
 # roles
 
+**摘要**：公司内可分配的角色定义。
+
 | field_name | data_type | constraints | comment |
 | --- | --- | --- | --- |
 | id | uuid | PRIMARY KEY DEFAULT gen_random_uuid() | 角色唯一标识 |
 | company_id | uuid | NOT NULL REFERENCES companies(id) ON DELETE CASCADE | 所属公司 |
-| code | varchar(100) | NOT NULL | 角色编码（公司内唯一） |
-| name | varchar(150) | NOT NULL | 角色名称 |
-| description | text | NULL | 角色描述 |
-| is_system | boolean | NOT NULL DEFAULT false | 是否系统预置 |
-| metadata | jsonb | NOT NULL DEFAULT '{}'::jsonb | 附加配置（字段级权限等） |
+| code | varchar(50) | NOT NULL | 角色编码 |
+| name | varchar(100) | NOT NULL | 角色名称 |
+| description | text | NULL | 角色说明 |
+| scope | varchar(30) | NOT NULL DEFAULT 'global' | 作用域 |
 | created_at | timestamptz | NOT NULL DEFAULT CURRENT_TIMESTAMP | 创建时间 |
 | updated_at | timestamptz | NOT NULL DEFAULT CURRENT_TIMESTAMP | 更新时间 |
-| created_by | uuid | NULL REFERENCES users(id) | 创建人 |
-| updated_by | uuid | NULL REFERENCES users(id) | 最近更新人 |
 
-**Relationships**
-- 多对多关联 `users`（`user_roles`）
-- 多对多关联 `permissions`（`role_permissions`）
+## JSON 字段
+- 无
+
+## 索引与约束
+- UNIQUE (company_id, code)
+- INDEX idx_roles_scope (company_id, scope)
+
+## 关系
+- 一对多 -> role_permissions.role_id
+- 一对多 -> user_roles.role_id
+
+## 设计权衡
+保留 scope 字段满足项目级授权，但需业务约束防止过度碎片化。

@@ -1,18 +1,25 @@
 # role_permissions
 
+**摘要**：角色与权限的绑定关系。
+
 | field_name | data_type | constraints | comment |
 | --- | --- | --- | --- |
-| role_id | uuid | NOT NULL REFERENCES roles(id) ON DELETE CASCADE | 角色ID |
-| permission_id | uuid | NOT NULL REFERENCES permissions(id) ON DELETE CASCADE | 权限ID |
+| role_id | uuid | NOT NULL REFERENCES roles(id) ON DELETE CASCADE | 角色 |
+| permission_id | uuid | NOT NULL REFERENCES permissions(id) ON DELETE CASCADE | 权限 |
 | company_id | uuid | NOT NULL REFERENCES companies(id) ON DELETE CASCADE | 所属公司 |
-| created_at | timestamptz | NOT NULL DEFAULT CURRENT_TIMESTAMP | 分配时间 |
-| updated_at | timestamptz | NOT NULL DEFAULT CURRENT_TIMESTAMP | 更新时间 |
-| created_by | uuid | NULL REFERENCES users(id) | 分配操作人 |
-| updated_by | uuid | NULL REFERENCES users(id) | 最近更新人 |
+| granted_at | timestamptz | NOT NULL DEFAULT CURRENT_TIMESTAMP | 授权时间 |
+| granted_by | uuid | NULL REFERENCES users(id) | 授权人 |
 
-**Constraints**
+## JSON 字段
+- 无
+
+## 索引与约束
 - PRIMARY KEY (role_id, permission_id)
-- 保证 `company_id` 与两端实体一致（触发器或检查）
+- INDEX idx_role_permissions_company (company_id)
 
-**Relationships**
-- 连接 `roles` 与 `permissions`
+## 关系
+- 多对一 -> roles.id
+- 多对一 -> permissions.id
+
+## 设计权衡
+维持传统多对多表结构，查询直接但删除角色或权限需谨慎使用级联。
