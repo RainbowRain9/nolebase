@@ -240,9 +240,1082 @@
 
 ---
 
-### 2.2 项目管理模块 (Projects)
+### 2.2 客户管理模块 (Customers)
 
-#### 2.2.1 POST /api/v1/projects
+#### 2.2.1 GET /api/v1/customers
+- **描述**：查询客户/供应商列表，支持多租户过滤与关键字搜索。
+- **所需权限**：`customers:read`
+
+**请求**
+- Query：
+  | 字段 | 规则 |
+  | --- | --- |
+  | customer_type | optional enum:`supplier|customer|logistics|employee|other` |
+  | q | optional string，maxLength:100，用于名称/编码模糊匹配 |
+  | page | integer, default 1 |
+  | page_size | integer, default 20, max 100 |
+  | sort_by | enum:`name|created_at|updated_at`，默认 `updated_at` |
+  | sort_order | enum:`asc|desc` |
+
+**响应**
+- `200 OK`
+```json
+{
+  "code": 0,
+  "message": "ok",
+  "data": {
+    "items": [
+      {
+        "id": "c5f2a4f4-0d0a-4c60-9d3d-5f95b90b2e21",
+        "company_id": "83f4e4d2-5b4a-4a0d-9c98-99c75f0cc001",
+        "customer_code": "WB-CUST-2025-010",
+        "name": "福建微柏自动化设备有限公司",
+        "customer_type": "customer",
+        "tax_id": "91350503M1234567X",
+        "contact_name": "林颖",
+        "contact_phone": "139****1820",
+        "bank_account_name": "福建微柏自动化设备有限公司",
+        "bank_name": "中国工商银行泉州城东支行",
+        "bank_account": "6222023500001234567",
+        "address": "福建省泉州市洛江区智能制造园 2 号厂房",
+        "payment_terms": "net_30",
+        "metadata": {
+          "primary_industry": "automation",
+          "preferred_currency": "CNY"
+        },
+        "created_by": "f4b902dd-9ce4-43fa-9f2a-612f4df4ab9f",
+        "updated_by": "f4b902dd-9ce4-43fa-9f2a-612f4df4ab9f",
+        "created_at": "2025-10-25T03:15:22Z",
+        "updated_at": "2025-10-30T09:42:10Z"
+      },
+      {
+        "id": "9f6b36b8-77fd-4c7d-83ce-50c8b511da79",
+        "company_id": "a5d2c153-62bf-4dfc-bc33-1f3d8a91d0a2",
+        "customer_code": "LD-SUP-2025-003",
+        "name": "成都鲤东智能物流有限公司",
+        "customer_type": "logistics",
+        "tax_id": "91510100M87654321Q",
+        "contact_name": "罗琪",
+        "contact_phone": "028-88886666",
+        "bank_account_name": "成都鲤东智能物流有限公司",
+        "bank_name": "招商银行成都分行营业部",
+        "bank_account": "6214852100009876543",
+        "address": "四川省成都市龙泉驿区智造大道 18 号",
+        "payment_terms": "logistics_dap",
+        "metadata": {
+          "service_scope": ["整车运输", "仓配一体"],
+          "sla_hours": 24
+        },
+        "created_by": "d67cc7d4-6c18-4f3a-b7f8-201463f33b00",
+        "updated_by": "d67cc7d4-6c18-4f3a-b7f8-201463f33b00",
+        "created_at": "2025-10-12T01:55:10Z",
+        "updated_at": "2025-10-29T11:05:35Z"
+      }
+    ]
+  },
+  "meta": {
+    "request_id": "8d6ce13a-bc0d-45b6-8a7e-58f6f71d1cdb",
+    "timestamp": "2025-10-31T04:10:00Z",
+    "page": 1,
+    "page_size": 20,
+    "total": 42
+  },
+  "error": null
+}
+```
+- 错误：`400 INVALID_SORT_FIELD`、`403 PERMISSION_DENIED`
+
+**业务逻辑**
+- 依据 `X-Company-Code` 过滤 `customers.company_id`。
+- 支持对 `metadata` 中的行业、区域等关键字段建立 JSONB 索引，并在 `filters` 扩展参数中开放（预留）。
+- 默认返回最近更新的客户，可通过 `sort_by=name` 快速用于前端下拉框。
+
+**性能与安全**
+- 速率限制：`60 req/min/user`。
+- 结果集可开启 30 秒缓存（相同查询条件）并带 `ETag`，前端可做条件请求。
+
+---
+
+#### 2.2.2 POST /api/v1/customers
+- **描述**：创建客户或供应商档案，作为订单与财务的统一往来主数据。
+- **所需权限**：`customers:create`
+
+**请求**
+- Header：`Idempotency-Key`
+- Body：
+```json
+{
+  "customer_code": "FJ-SUP-2025-021",
+  "name": "福建鲤东精工机械有限公司",
+  "customer_type": "supplier",
+  "tax_id": "91350582M1098765Y",
+  "contact_name": "黄梓",
+  "contact_phone": "0595-66668888",
+  "bank_account_name": "福建鲤东精工机械有限公司",
+  "bank_name": "中国建设银行晋江支行",
+  "bank_account": "6236682100005566778",
+  "address": "福建省晋江市五里工业区 6 号",
+  "payment_terms": "net_45",
+  "metadata": {
+    "preferred_currency": "CNY",
+    "delivery_windows": ["weekday"],
+    "quality_rating": "A"
+  }
+}
+```
+
+| 字段 | 类型 | 规则 |
+| --- | --- | --- |
+| customer_code | string | optional, maxLength:50，同租户唯一 |
+| name | string | required, maxLength:255 |
+| customer_type | string | required, enum 同数据库约束 |
+| tax_id | string | optional, maxLength:50 |
+| contact_name | string | optional, maxLength:100 |
+| contact_phone | string | optional, maxLength:30 |
+| bank_account_name | string | optional, maxLength:255 |
+| bank_name | string | optional, maxLength:255 |
+| bank_account | string | optional, maxLength:100 |
+| address | string | optional, maxLength:255 |
+| payment_terms | string | optional, maxLength:100 |
+| metadata | object | optional, JSON，最大 4KB |
+
+**响应**
+- `201 Created` 返回 `customer` 对象。
+- 错误：
+  - `409 CUSTOMER_CODE_DUPLICATE`
+  - `422 INVALID_BANK_ACCOUNT`
+
+**业务逻辑**
+- 写入 `customers` 表，自动记录 `created_by`、`updated_by`。
+- 若 `customer_type='supplier'`，同步生成基础供应商标签，供审批与采购流程引用。
+- 创建成功触发事件，回写至订单与财务模块的搜索索引。
+
+**性能与安全**
+- 同一 `Idempotency-Key` 在 24 小时内幂等。
+- 敏感字段（银行账号、税号）按角色脱敏展示，静态加密存储。
+
+---
+
+#### 2.2.3 GET /api/v1/customers/{customer_id}
+- **描述**：获取客户/供应商详情及关联概览。
+- **所需权限**：`customers:read`
+
+**请求**
+- Path：`customer_id` (uuid, required)
+- Query：`include_summary`(bool, default=true)
+
+**响应**
+- `200 OK`
+```json
+{
+  "code": 0,
+  "data": {
+    "customer": {
+      "id": "c5f2a4f4-0d0a-4c60-9d3d-5f95b90b2e21",
+      "company_id": "83f4e4d2-5b4a-4a0d-9c98-99c75f0cc001",
+      "customer_code": "WB-CUST-2025-010",
+      "name": "福建微柏自动化设备有限公司",
+      "customer_type": "customer",
+      "tax_id": "91350503M1234567X",
+      "contact_name": "林颖",
+      "contact_phone": "139****1820",
+      "bank_account_name": "福建微柏自动化设备有限公司",
+      "bank_name": "中国工商银行泉州城东支行",
+      "bank_account": "6222023500001234567",
+      "address": "福建省泉州市洛江区智能制造园 2 号厂房",
+      "payment_terms": "net_30",
+      "metadata": {
+        "primary_industry": "automation",
+        "preferred_currency": "CNY"
+      },
+      "created_by": "f4b902dd-9ce4-43fa-9f2a-612f4df4ab9f",
+      "updated_by": "f4b902dd-9ce4-43fa-9f2a-612f4df4ab9f",
+      "created_at": "2025-10-25T03:15:22Z",
+      "updated_at": "2025-10-30T09:42:10Z"
+    },
+    "summary": {
+      "open_orders": 5,
+      "last_order_id": "7a5a6c1d-5a4f-4f42-9df1-1c7d76b69350",
+      "outstanding_amount": "582000.00",
+      "last_financial_record_at": "2025-10-30T01:22:00Z"
+    }
+  },
+  "meta": { "request_id": "5fb6cf0b-8d43-4e5b-bff2-04f5d7d76f0a", "timestamp": "2025-10-31T04:12:00Z" },
+  "error": null
+}
+```
+- 错误：`404 CUSTOMER_NOT_FOUND`
+
+**业务逻辑**
+- `summary` 聚合来自 `orders`、`financial_records`，仅在 `include_summary=true` 时计算。
+- 返回的银行信息根据权限自动脱敏（无权限显示 `****567`）。
+
+**性能与安全**
+- 速率限制：`30 req/min/user`。
+- 详情可配置 5 分钟缓存；若客户被更新，通过事件驱动刷新。
+
+---
+
+#### 2.2.4 PUT /api/v1/customers/{customer_id}
+- **描述**：更新客户/供应商档案。
+- **所需权限**：`customers:update`
+
+**请求**
+- Header：`Idempotency-Key`
+- Path：`customer_id`
+- Body（部分字段示例）：
+```json
+{
+  "contact_name": "林颖",
+  "contact_phone": "139****8888",
+  "payment_terms": "net_45",
+  "metadata": {
+    "preferred_currency": "USD",
+    "credit_limit": 1200000
+  }
+}
+```
+
+| 字段 | 规则 |
+| --- | --- |
+| contact_name | optional string, maxLength:100 |
+| contact_phone | optional string, maxLength:30 |
+| bank_account_name/bank_name/bank_account | optional string |
+| address | optional string |
+| payment_terms | optional string |
+| metadata | optional object, merge 更新，最大 4KB |
+
+**响应**
+- `200 OK` 返回更新后的 `customer`。
+- 错误：
+  - `404 CUSTOMER_NOT_FOUND`
+  - `409 PAYMENT_TERMS_CONFLICT`（存在未完成订单使用旧条款）
+
+**业务逻辑**
+- 更新 `customers` 表并写入 `updated_by`；同步刷新订单、财务模块使用的缓存。
+- 若修改银行账号，生成审计日志并通知财务负责人复核。
+
+**性能与安全**
+- 速率限制：`20 req/min/user`。
+- 使用乐观锁：若 `If-Unmodified-Since` < `updated_at`，返回 `412 PRECONDITION_FAILED`。
+
+---
+
+### 2.3 产品管理模块 (Products)
+
+#### 2.3.1 GET /api/v1/products
+- **描述**：查询产品及其工艺、BOM 配置。
+- **所需权限**：`products:read`
+
+**请求**
+- Query：
+  | 字段 | 规则 |
+  | --- | --- |
+  | product_type | optional string，默认返回全部 |
+  | is_active | optional boolean |
+  | q | optional string，maxLength:100，用于编码/名称/规格搜索 |
+  | page | integer, default 1 |
+  | page_size | integer, default 20, max 100 |
+  | sort_by | enum:`product_code|name|updated_at`，默认 `updated_at` |
+  | sort_order | enum:`asc|desc` |
+
+**响应**
+- `200 OK`
+```json
+{
+  "code": 0,
+  "data": {
+    "items": [
+      {
+        "id": "2c0fba3f-6eb5-4e55-b5c0-7d8b9555c122",
+        "company_id": "83f4e4d2-5b4a-4a0d-9c98-99c75f0cc001",
+        "product_code": "WB-LINE-800",
+        "name": "微柏自动化装配线",
+        "specification": "8 工位 · 柔性输送",
+        "product_type": "equipment",
+        "unit": "套",
+        "default_process_flow": {
+          "steps": [
+            { "name": "结构件装配", "sequence": 10 },
+            { "name": "电控调试", "sequence": 20 }
+          ]
+        },
+        "metadata": {
+          "bom": [
+            { "component_code": "WB-CTRL-01", "quantity": 2 },
+            { "component_code": "WB-CONV-02", "quantity": 6 }
+          ],
+          "lifecycle_state": "design"
+        },
+        "is_active": true,
+        "created_at": "2025-09-18T06:20:00Z",
+        "updated_at": "2025-10-30T09:12:11Z"
+      },
+      {
+        "id": "6f437a6c-0c1f-4e15-9f06-777685c96c21",
+        "company_id": "a5d2c153-62bf-4dfc-bc33-1f3d8a91d0a2",
+        "product_code": "LD-AXLE-500",
+        "name": "鲤东后桥壳总成",
+        "specification": "500mm · Q345",
+        "product_type": "component",
+        "unit": "件",
+        "default_process_flow": {
+          "steps": [
+            { "name": "粗车", "sequence": 10 },
+            { "name": "精车", "sequence": 20 },
+            { "name": "探伤", "sequence": 30 }
+          ]
+        },
+        "metadata": {
+          "bom": [
+            { "component_code": "LD-AXLE-500-BLANK", "quantity": 1 },
+            { "component_code": "LD-BOLT-M12", "quantity": 8 }
+          ],
+          "quality_standard": "QC/T1234-2024"
+        },
+        "is_active": true,
+        "created_at": "2025-08-02T02:30:00Z",
+        "updated_at": "2025-10-28T15:30:45Z"
+      }
+    ]
+  },
+  "meta": {
+    "request_id": "6d22a3b5-66f1-4a7d-b625-567580541f2b",
+    "timestamp": "2025-10-31T04:14:00Z",
+    "page": 1,
+    "page_size": 20,
+    "total": 128
+  }
+}
+```
+
+**业务逻辑**
+- 支持按 `metadata->>'bom'` 的组件编码建立倒排索引，便于 BOM 反查。
+- 默认仅返回 `is_active=true`，若显式传入 `is_active=false` 则包含停用产品。
+
+**性能与安全**
+- 速率限制：`60 req/min/user`。
+- 列表响应支持列裁剪（`fields` 参数待扩展），避免大型 `default_process_flow` 带来的 payload 膨胀。
+
+---
+
+#### 2.3.2 POST /api/v1/products
+- **描述**：创建产品档案并登记默认工艺与 BOM。
+- **所需权限**：`products:create`
+
+**请求**
+- Header：`Idempotency-Key`
+- Body：
+```json
+{
+  "product_code": "CD-MOTOR-AXLE-120",
+  "name": "鲤东电机轴 120",
+  "specification": "φ120mm · 42CrMo",
+  "product_type": "component",
+  "unit": "件",
+  "default_process_flow": {
+    "steps": [
+      { "name": "粗车", "sequence": 10 },
+      { "name": "热处理", "sequence": 20 },
+      { "name": "精磨", "sequence": 30 }
+    ]
+  },
+  "bom": [
+    { "component_code": "LD-STEEL-120", "description": "42CrMo 圆钢", "quantity": 1 },
+    { "component_code": "LD-PKG-BAG", "description": "防锈包装袋", "quantity": 1 }
+  ],
+  "metadata": {
+    "lifecycle_state": "pilot",
+    "design_owner": "uuid",
+    "documentation": [
+      { "attachment_id": "94b96c6f-3f98-4705-8756-1f13f13a6340", "type": "drawing" }
+    ]
+  }
+}
+```
+
+| 字段 | 类型 | 规则 |
+| --- | --- | --- |
+| product_code | string | required, maxLength:100，同租户唯一 |
+| name | string | required, maxLength:255 |
+| specification | string | optional, maxLength:255 |
+| product_type | string | required，建议枚举：`equipment|component|service|assembly` |
+| unit | string | required, maxLength:20 |
+| default_process_flow | object | required, JSON，最大 8KB |
+| bom | array | optional；存入 `metadata.bom`，每项包含 `component_code`、`quantity` |
+| metadata | object | optional，最大 8KB；与 `bom` 合并存储 |
+
+**响应**
+- `201 Created` 返回 `product`。
+- 错误：
+  - `409 PRODUCT_CODE_DUPLICATE`
+  - `422 INVALID_PROCESS_FLOW`
+
+**业务逻辑**
+- 写入 `products` 表，`bom` 字段写入 `metadata.bom`，保持与数据库结构一致。
+- 若 `metadata.documentation` 提供附件，自动建立附件引用。
+- 创建成功后向生产模块推送可选工艺模板。
+
+**性能与安全**
+- 幂等：同一 `Idempotency-Key` 重试返回首次结果。
+- 校验 `default_process_flow.steps` 不超过 50 个节点，防止异常数据。
+
+---
+
+#### 2.3.3 GET /api/v1/products/{product_id}
+- **描述**：获取产品详情、默认工艺与 BOM。
+- **所需权限**：`products:read`
+
+**请求**
+- Path：`product_id` (uuid)
+- Query：`include_inactive`(bool, default=false)
+
+**响应**
+- `200 OK`
+```json
+{
+  "code": 0,
+  "data": {
+    "product": {
+      "id": "6f437a6c-0c1f-4e15-9f06-777685c96c21",
+      "company_id": "a5d2c153-62bf-4dfc-bc33-1f3d8a91d0a2",
+      "product_code": "LD-AXLE-500",
+      "name": "鲤东后桥壳总成",
+      "specification": "500mm · Q345",
+      "product_type": "component",
+      "unit": "件",
+      "default_process_flow": {
+        "steps": [
+          { "name": "粗车", "sequence": 10 },
+          { "name": "精车", "sequence": 20 },
+          { "name": "探伤", "sequence": 30 }
+        ]
+      },
+      "metadata": {
+        "bom": [
+          { "component_code": "LD-AXLE-500-BLANK", "quantity": 1 },
+          { "component_code": "LD-BOLT-M12", "quantity": 8 }
+        ],
+        "quality_standard": "QC/T1234-2024"
+      },
+      "is_active": true,
+      "created_at": "2025-08-02T02:30:00Z",
+      "updated_at": "2025-10-28T15:30:45Z"
+    },
+    "related_summary": {
+      "active_work_orders": 12,
+      "open_orders": 4,
+      "last_work_order_id": "b315b894-3bd2-42f4-9fb8-7cb0e6d6ed91"
+    }
+  },
+  "meta": { "request_id": "aa78d6f6-9c66-4b8b-8ec9-407c51adc901", "timestamp": "2025-10-31T04:16:00Z" }
+}
+```
+- 错误：`404 PRODUCT_NOT_FOUND`
+
+**业务逻辑**
+- `related_summary` 聚合来自 `orders` 与 `work_orders`，便于评估产能需求。
+- 若产品被停用且 `include_inactive=false`，返回 404。
+
+**性能与安全**
+- 速率限制：`30 req/min/user`。
+- 对 JSON 字段启用压缩，避免下游响应过大。
+
+---
+
+#### 2.3.4 PUT /api/v1/products/{product_id}
+- **描述**：更新产品基础信息、工艺或 BOM。
+- **所需权限**：`products:update`
+
+**请求**
+- Header：`Idempotency-Key`
+- Path：`product_id`
+- Body（部分字段示例）：
+```json
+{
+  "specification": "φ120mm · 42CrMo · 镀铬",
+  "is_active": true,
+  "default_process_flow": {
+    "steps": [
+      { "name": "粗车", "sequence": 10 },
+      { "name": "热处理", "sequence": 20 },
+      { "name": "镀铬", "sequence": 25 },
+      { "name": "精磨", "sequence": 30 }
+    ]
+  },
+  "bom": [
+    { "component_code": "LD-STEEL-120", "quantity": 1 },
+    { "component_code": "LD-COATING-01", "quantity": 0.2 }
+  ]
+}
+```
+
+| 字段 | 规则 |
+| --- | --- |
+| specification | optional string |
+| is_active | optional boolean |
+| default_process_flow | optional object，全量替换 |
+| bom | optional array，覆盖 `metadata.bom` |
+| metadata | optional object，按 key merge |
+
+**响应**
+- `200 OK` 返回更新后的 `product`。
+- 错误：
+  - `404 PRODUCT_NOT_FOUND`
+  - `409 PROCESS_IN_USE`（存在生产工单使用旧工艺）
+
+**业务逻辑**
+- 更新 `products` 表，同时生成工艺版本快照写入 `metadata.process_versions`。
+- 若工艺变更，关联生产工单进入校验队列，提示生产计划确认。
+
+**性能与安全**
+- 速率限制：`15 req/min/user`。
+- 更新操作记录审计（事件 `product.updated`），供审批与质量追踪。
+
+---
+
+### 2.4 订单管理模块 (Orders)
+
+#### 2.4.1 GET /api/v1/orders
+- **描述**：查询销售/采购订单，支持按客户、状态筛选。
+- **所需权限**：`orders:read`
+
+**请求**
+- Query：
+  | 字段 | 规则 |
+  | --- | --- |
+  | order_type | optional enum:`freight_payment|ap_payment|ar_refund|other` |
+  | order_status | optional string，默认返回全部，建议枚举：`draft|pending_approval|approved|in_production|shipping|completed|cancelled` |
+  | customer_id | optional uuid |
+  | approval_status | optional enum:`pending|approved|rejected` |
+  | start_date / end_date | optional date，`end_date >= start_date`，跨度 ≤ 180 天 |
+  | q | optional string，maxLength:100，用于编号/摘要搜索 |
+  | page | integer, default 1 |
+  | page_size | integer, default 20, max 100 |
+  | sort_by | enum:`order_code|payment_date|created_at|amount_total`，默认 `created_at` |
+  | sort_order | enum:`asc|desc` |
+
+**响应**
+- `200 OK`
+```json
+{
+  "code": 0,
+  "data": {
+    "items": [
+      {
+        "id": "7a5a6c1d-5a4f-4f42-9df1-1c7d76b69350",
+        "company_id": "83f4e4d2-5b4a-4a0d-9c98-99c75f0cc001",
+        "order_code": "SO-WB-2025-1031-001",
+        "order_type": "ap_payment",
+        "order_status": "in_production",
+        "approval_status": "approved",
+        "customer_id": "c5f2a4f4-0d0a-4c60-9d3d-5f95b90b2e21",
+        "amount_total": "582000.00",
+        "tax_amount": "75960.00",
+        "currency": "CNY",
+        "payment_method": "transfer",
+        "payment_date": "2025-11-15",
+        "summary": "泉州物流输送线备料",
+        "line_items": [
+          {
+            "product_id": "2c0fba3f-6eb5-4e55-b5c0-7d8b9555c122",
+            "product_name": "微柏自动化装配线",
+            "specification": "8 工位 · 柔性输送",
+            "quantity": 1,
+            "unit_price": "582000.00",
+            "currency": "CNY"
+          }
+        ],
+        "attachments": [],
+        "created_at": "2025-10-30T02:30:00Z",
+        "updated_at": "2025-10-30T08:10:10Z"
+      }
+    ]
+  },
+  "meta": {
+    "request_id": "91a1fbba-8d9a-4c3e-8f8b-4360b3c70324",
+    "timestamp": "2025-10-31T04:18:00Z",
+    "page": 1,
+    "page_size": 20,
+    "total": 86
+  }
+}
+```
+
+**业务逻辑**
+- 列表聚合 `customer_id` 对应名称，前端可开启 `expand=customer` 获取快照。
+- 订单状态与工单、财务记录联动：`order_status=in_production` 时展示关联工单数量。
+
+**性能与安全**
+- 速率限制：`60 req/min/user`。
+- 支持 `prefer: async` 触发离线导出（CSV），返回 `202 Accepted`。
+
+---
+
+#### 2.4.2 POST /api/v1/orders
+- **描述**：创建订单，支持写入行项目与审批引用。
+- **所需权限**：`orders:create`
+
+**请求**
+- Header：`Idempotency-Key`
+- Body：
+```json
+{
+  "order_code": "PO-LD-2025-1101-005",
+  "order_type": "freight_payment",
+  "customer_id": "9f6b36b8-77fd-4c7d-83ce-50c8b511da79",
+  "amount_total": "8600.00",
+  "tax_amount": "1118.00",
+  "currency": "CNY",
+  "payment_method": "transfer",
+  "payment_date": "2025-11-05",
+  "approval_request_id": "cf5b5d1e-5b6b-41d9-934b-5f64c0a67aa2",
+  "summary": "成都鲤东物流干线运输",
+  "line_items": [
+    {
+      "product_id": "6f437a6c-0c1f-4e15-9f06-777685c96c21",
+      "product_name": "鲤东后桥壳总成",
+      "specification": "500mm · Q345",
+      "quantity": 200,
+      "unit_price": "43.00",
+      "currency": "CNY",
+      "metadata": {
+        "delivery_plan": "2025-11-12",
+        "warehouse": "成都一期成品库"
+      }
+    }
+  ],
+  "attachments": [
+    { "attachment_id": "7e5f8c0d-1ad7-4a6f-9f6e-7fae5561d21c" }
+  ],
+  "source_payload": {
+    "dify_conversation_id": "a1b2c3",
+    "form_snapshot": { "budget": 9000 }
+  }
+}
+```
+
+| 字段 | 类型 | 规则 |
+| --- | --- | --- |
+| order_code | string | required, maxLength:50，同租户唯一 |
+| order_type | string | required，enum 同数据库约束 |
+| customer_id | uuid | optional，存在于 `customers.id` |
+| amount_total | numeric | required, decimal(18,2) >0 |
+| tax_amount | numeric | optional, decimal(18,2) >=0 |
+| currency | string | required, ISO 4217 |
+| payment_method | string | optional, maxLength:30 |
+| payment_date | date | optional |
+| approval_request_id | uuid | optional，存在于 `approval_requests.id` |
+| summary | string | optional, maxLength:2000 |
+| line_items | array | required，存入 `orders.line_items` JSONB |
+| line_items[].product_id | uuid | optional，存在于 `products.id` |
+| line_items[].quantity | number | required，>=0 |
+| line_items[].unit_price | string | optional |
+| attachments | array | optional，引用 `attachments` |
+| source_payload | object | optional，最大 8KB |
+
+**响应**
+- `201 Created` 返回 `order`。
+- 错误：
+  - `409 ORDER_CODE_DUPLICATE`
+  - `422 LINE_ITEM_INVALID`
+
+**业务逻辑**
+- 写入 `orders` 表；若传入 `approval_request_id`，同步 `approval_requests.primary_order_id`。
+- 自动根据 `line_items[].product_id` 生成生产需求草稿（事件 `order.created`）。
+- 若金额超限，触发财务预警校验（`financial_records` 预生成草稿）。
+
+**性能与安全**
+- 幂等：同一 `Idempotency-Key` 返回首次结果。
+- 订单行 JSON 控制在 100 项以内，超过则拒绝写入。
+
+---
+
+#### 2.4.3 GET /api/v1/orders/{order_id}
+- **描述**：获取订单详情，包括客户和产品明细。
+- **所需权限**：`orders:read`
+
+**请求**
+- Path：`order_id` (uuid)
+- Query：`include_financial`(bool, default=true)、`include_work_orders`(bool, default=false)
+
+**响应**
+- `200 OK`
+```json
+{
+  "code": 0,
+  "data": {
+    "order": {
+      "id": "7a5a6c1d-5a4f-4f42-9df1-1c7d76b69350",
+      "order_code": "SO-WB-2025-1031-001",
+      "order_type": "ap_payment",
+      "order_status": "in_production",
+      "approval_status": "approved",
+      "customer_id": "c5f2a4f4-0d0a-4c60-9d3d-5f95b90b2e21",
+      "amount_total": "582000.00",
+      "tax_amount": "75960.00",
+      "currency": "CNY",
+      "payment_method": "transfer",
+      "payment_date": "2025-11-15",
+      "summary": "泉州物流输送线备料",
+      "line_items": [
+        {
+          "product_id": "2c0fba3f-6eb5-4e55-b5c0-7d8b9555c122",
+          "product_name": "微柏自动化装配线",
+          "specification": "8 工位 · 柔性输送",
+          "quantity": 1,
+          "unit_price": "582000.00",
+          "currency": "CNY"
+        }
+      ],
+      "attachments": [],
+      "source_payload": {
+        "dify_conversation_id": "a1b2c3"
+      },
+      "created_at": "2025-10-30T02:30:00Z",
+      "updated_at": "2025-10-30T08:10:10Z"
+    },
+    "customer": {
+      "id": "c5f2a4f4-0d0a-4c60-9d3d-5f95b90b2e21",
+      "name": "福建微柏自动化设备有限公司",
+      "customer_type": "customer",
+      "contact_name": "林颖",
+      "contact_phone": "139****1820"
+    },
+    "financial_links": [
+      {
+        "financial_record_id": "b7d5e8bf-4f80-4ea7-8bcf-7f80d61d63fd",
+        "status": "pending",
+        "amount": "582000.00",
+        "occurred_at": "2025-10-30T08:15:00Z"
+      }
+    ],
+    "work_orders": [
+      {
+        "work_order_id": "b315b894-3bd2-42f4-9fb8-7cb0e6d6ed91",
+        "process_name": "电控调试",
+        "status": "in_progress"
+      }
+    ]
+  }
+}
+```
+- 错误：`404 ORDER_NOT_FOUND`
+
+**业务逻辑**
+- `financial_links` 来自 `financial_records` 表，仅在 `include_financial=true` 时返回。
+- `work_orders` 需请求方具有生产模块权限；默认不返回，降低负载。
+
+**性能与安全**
+- 速率限制：`30 req/min/user`。
+- 敏感字段（银行信息）根据角色脱敏。
+
+---
+
+#### 2.4.4 PUT /api/v1/orders/{order_id}/status
+- **描述**：更新订单业务状态或审批状态。
+- **所需权限**：`orders:update`
+
+**请求**
+- Header：`Idempotency-Key`
+- Path：`order_id`
+- Body：
+```json
+{
+  "order_status": "shipping",
+  "approval_status": "approved",
+  "status_note": "成都鲤东批次 3 已装车发运",
+  "next_step": "同步生成发运工单"
+}
+```
+
+| 字段 | 规则 |
+| --- | --- |
+| order_status | required string，遵循业务枚举 |
+| approval_status | optional enum:`pending|approved|rejected` |
+| status_note | optional string，maxLength:1000 |
+| next_step | optional string，maxLength:255 |
+
+**响应**
+- `200 OK` 返回更新后的 `order` 状态字段。
+- 错误：
+  - `404 ORDER_NOT_FOUND`
+  - `409 INVALID_STATUS_TRANSITION`
+
+**业务逻辑**
+- 校验状态流转（如 `completed` 之后禁止回退）。
+- 更新成功后触发事件：同步通知生产、财务和物流模块。
+
+**性能与安全**
+- 速率限制：`30 req/min/user`。
+- 写库操作使用乐观锁；冲突时返回 `409` 并附 `current_status`。
+
+---
+
+### 2.5 生产管理模块 (Manufacturing)
+
+#### 2.5.1 GET /api/v1/work-orders
+- **描述**：查询工单列表，掌握生产进度与质量。
+- **所需权限**：`work_orders:read`
+
+**请求**
+- Query：
+  | 字段 | 规则 |
+  | --- | --- |
+  | status | optional enum:`in_progress|completed|paused|cancelled` |
+  | product_id | optional uuid |
+  | related_order_id | optional uuid |
+  | process_name | optional string, maxLength:100 |
+  | work_date_start / work_date_end | optional date，跨度 ≤ 90 天 |
+  | page | integer, default 1 |
+  | page_size | integer, default 20, max 100 |
+  | sort_by | enum:`work_date|created_at|updated_at`，默认 `work_date` |
+  | sort_order | enum:`asc|desc` |
+
+**响应**
+- `200 OK`
+```json
+{
+  "code": 0,
+  "data": {
+    "items": [
+      {
+        "id": "b315b894-3bd2-42f4-9fb8-7cb0e6d6ed91",
+        "company_id": "83f4e4d2-5b4a-4a0d-9c98-99c75f0cc001",
+        "work_order_code": "WO-WB-2025-1031-003",
+        "approval_request_id": "cf5b5d1e-5b6b-41d9-934b-5f64c0a67aa2",
+        "related_order_id": "7a5a6c1d-5a4f-4f42-9df1-1c7d76b69350",
+        "product_id": "2c0fba3f-6eb5-4e55-b5c0-7d8b9555c122",
+        "product_name_snapshot": "微柏自动化装配线",
+        "specification_snapshot": "8 工位 · 柔性输送",
+        "batch_no": "WB-202510-LOT01",
+        "process_name": "电控调试",
+        "next_process": "整线联调",
+        "status": "in_progress",
+        "approval_status": "approved",
+        "metrics": {
+          "planned_qty": 1,
+          "qualified_qty": 0,
+          "scrap_qty": 0
+        },
+        "duration_hours": 12.5,
+        "operator_name": "陈浩",
+        "work_date": "2025-10-31",
+        "created_at": "2025-10-30T08:20:00Z",
+        "updated_at": "2025-10-30T11:40:00Z"
+      }
+    ]
+  },
+  "meta": {
+    "request_id": "5c0f13b5-0db0-495d-9421-348ebd4f8f3c",
+    "timestamp": "2025-10-31T04:20:00Z",
+    "page": 1,
+    "page_size": 20,
+    "total": 34
+  }
+}
+```
+
+**业务逻辑**
+- 列表根据 `status` 自动统计 `metrics.qualified_qty`、`metrics.scrap_qty`，用于前端显示合格率。
+- 若携带 `related_order_id`，返回订单编码、客户名称快照。
+
+**性能与安全**
+- 速率限制：`60 req/min/user`。
+- 支持 `prefer: minimal` 仅返回主字段，减少 JSON 体积。
+
+---
+
+#### 2.5.2 POST /api/v1/work-orders
+- **描述**：从订单生成工单，落实工序排产。
+- **所需权限**：`work_orders:create`
+
+**请求**
+- Header：`Idempotency-Key`
+- Body：
+```json
+{
+  "order_id": "7a5a6c1d-5a4f-4f42-9df1-1c7d76b69350",
+  "product_id": "6f437a6c-0c1f-4e15-9f06-777685c96c21",
+  "work_order_code": "WO-LD-2025-1101-007",
+  "process_name": "精磨",
+  "next_process": "探伤",
+  "batch_no": "LD-AXLE-500-20251101-01",
+  "work_date": "2025-11-01",
+  "operator_name": "王越",
+  "metrics": {
+    "planned_qty": 200,
+    "qualified_qty": 0,
+    "scrap_qty": 0
+  },
+  "duration_hours": 0,
+  "duration_details": [],
+  "attachments": [
+    { "attachment_id": "ab5c4e9f-7a00-4d4d-a91e-923bb1f7d2d9" }
+  ],
+  "metadata": {
+    "shift": "A",
+    "machine": "LD-GRINDER-02"
+  }
+}
+```
+
+| 字段 | 类型 | 规则 |
+| --- | --- | --- |
+| order_id | uuid | optional，存在于 `orders.id` |
+| product_id | uuid | optional，存在于 `products.id` |
+| work_order_code | string | required, maxLength:50，同租户唯一 |
+| process_name | string | required, maxLength:100 |
+| next_process | string | optional |
+| batch_no | string | optional, maxLength:100 |
+| work_date | date | optional |
+| operator_name | string | optional, maxLength:100 |
+| metrics | object | required，存入 JSONB |
+| duration_hours | number | optional, >=0 |
+| duration_details | array | optional |
+| attachments | array | optional |
+| metadata | object | optional |
+
+**响应**
+- `201 Created` 返回 `work_order`。
+- 错误：
+  - `409 WORK_ORDER_CODE_DUPLICATE`
+  - `422 ORDER_NOT_APPROVED`
+
+**业务逻辑**
+- 写入 `work_orders` 表，并将产品名称、规格快照写入 `*_snapshot` 字段，保证后续追溯。
+- 若来源订单处于 `approved` 以上状态，自动将 `order_status` 更新为 `in_production`。
+- 创建成功后向审批模块回写工序明细（若存在审批引用）。
+
+**性能与安全**
+- 速率限制：`20 req/min/user`。
+- 幂等：`Idempotency-Key` 防重复建单。
+
+---
+
+#### 2.5.3 GET /api/v1/work-orders/{work_order_id}
+- **描述**：查看工单详情及进度时间线。
+- **所需权限**：`work_orders:read`
+
+**请求**
+- Path：`work_order_id` (uuid)
+- Query：`include_timeline`(bool, default=true)
+
+**响应**
+- `200 OK`
+```json
+{
+  "code": 0,
+  "data": {
+    "work_order": {
+      "id": "b315b894-3bd2-42f4-9fb8-7cb0e6d6ed91",
+      "work_order_code": "WO-WB-2025-1031-003",
+      "approval_request_id": "cf5b5d1e-5b6b-41d9-934b-5f64c0a67aa2",
+      "related_order_id": "7a5a6c1d-5a4f-4f42-9df1-1c7d76b69350",
+      "product_id": "2c0fba3f-6eb5-4e55-b5c0-7d8b9555c122",
+      "product_name_snapshot": "微柏自动化装配线",
+      "specification_snapshot": "8 工位 · 柔性输送",
+      "batch_no": "WB-202510-LOT01",
+      "process_name": "电控调试",
+      "next_process": "整线联调",
+      "status": "in_progress",
+      "approval_status": "approved",
+      "metrics": {
+        "planned_qty": 1,
+        "qualified_qty": 0,
+        "scrap_qty": 0
+      },
+      "duration_hours": 12.5,
+      "duration_details": [
+        { "segment": "白班", "hours": 8 },
+        { "segment": "夜班", "hours": 4.5 }
+      ],
+      "operator_name": "陈浩",
+      "work_date": "2025-10-31",
+      "attachments": [],
+      "metadata": {
+        "shift": "B"
+      },
+      "created_at": "2025-10-30T08:20:00Z",
+      "updated_at": "2025-10-30T11:40:00Z"
+    },
+    "timeline": [
+      { "actor": "陈浩", "action": "start", "timestamp": "2025-10-30T08:20:00Z", "comment": "接到批次" },
+      { "actor": "质检机器人", "action": "inspection_passed", "timestamp": "2025-10-30T11:38:00Z", "comment": "初检合格" }
+    ]
+  }
+}
+```
+- 错误：`404 WORK_ORDER_NOT_FOUND`
+
+**业务逻辑**
+- `timeline` 来源于 `work_orders.metadata.timeline`（与审批追踪保持一致），包含上报与质检节点。
+- 若 `include_timeline=false`，不返回时间线以缩小 payload。
+
+**性能与安全**
+- 速率限制：`30 req/min/user`。
+- 时间线事件按时间倒序，默认返回最近 50 条。
+
+---
+
+#### 2.5.4 POST /api/v1/work-orders/{work_order_id}/progress
+- **描述**：报工或更新工序进度（产量、废品、耗时）。
+- **所需权限**：`work_orders:progress`
+
+**请求**
+- Header：`Idempotency-Key`
+- Path：`work_order_id`
+- Body：
+```json
+{
+  "metrics": {
+    "qualified_qty": 180,
+    "scrap_qty": 4,
+    "scrap_reasons": [
+      { "code": "Q-01", "description": "表面划伤", "quantity": 3 },
+      { "code": "Q-05", "description": "尺寸超差", "quantity": 1 }
+    ]
+  },
+  "duration_hours": 14.0,
+  "duration_details": [
+    { "segment": "白班", "hours": 8 },
+    { "segment": "夜班", "hours": 6 }
+  ],
+  "comment": "成都鲤东夜班加时完成，废品已返工",
+  "reported_at": "2025-11-01T03:00:00Z"
+}
+```
+
+| 字段 | 规则 |
+| --- | --- |
+| metrics | required object，merge 更新 `work_orders.metrics` |
+| metrics.qualified_qty | optional number >=0 |
+| metrics.scrap_qty | optional number >=0 |
+| metrics.scrap_reasons | optional array |
+| duration_hours | optional number >=0 |
+| duration_details | optional array，记录班次/机器等维度 |
+| comment | optional string, maxLength:1000 |
+| reported_at | optional datetime，默认当前时间 |
+
+**响应**
+- `200 OK` 返回最新 `work_order.metrics`。
+- 错误：
+  - `404 WORK_ORDER_NOT_FOUND`
+  - `409 WORK_ORDER_COMPLETED`
+
+**业务逻辑**
+- 更新 `metrics`、`duration_hours` 和 `duration_details`；追加时间线事件 `{actor, action:'progress_report', timestamp, comment}`。
+- 若报工后合格数达到计划数量，自动将 `status` 更新为 `completed`，并通知财务生成成本记录。
+
+**性能与安全**
+- 速率限制：`30 req/min/user`。
+- 报工操作写入审计日志（记录原始与新值），支持后续质量追踪。
+
+---
+
+### 2.6 项目管理模块 (Projects)
+
+#### 2.6.1 POST /api/v1/projects
 - **描述**：创建项目。
 - **所需权限**：`projects:create`
 
@@ -315,7 +1388,7 @@
 
 ---
 
-#### 2.2.2 GET /api/v1/projects
+#### 2.6.2 GET /api/v1/projects
 - **描述**：分页查询项目列表。
 - **所需权限**：`projects:read`
 
@@ -344,7 +1417,7 @@
 
 ---
 
-#### 2.2.3 GET /api/v1/projects/{project_id}
+#### 2.6.3 GET /api/v1/projects/{project_id}
 - **描述**：获取单个项目详情。
 - **所需权限**：`projects:read`
 
@@ -371,7 +1444,7 @@
 
 ---
 
-#### 2.2.4 POST /api/v1/projects/{project_id}/tasks
+#### 2.6.4 POST /api/v1/projects/{project_id}/tasks
 - **描述**：创建项目任务。
 - **所需权限**：`project_tasks:create`
 
@@ -433,7 +1506,7 @@
 
 ---
 
-#### 2.2.5 POST /api/v1/projects/{project_id}/weekly-deliveries
+#### 2.6.5 POST /api/v1/projects/{project_id}/weekly-deliveries
 - **描述**：生成或更新项目周交付报告。
 - **所需权限**：`project_reports:write`
 
@@ -489,7 +1562,7 @@
 
 ---
 
-#### 2.2.6 GET /api/v1/projects/{project_id}/weekly-deliveries
+#### 2.6.6 GET /api/v1/projects/{project_id}/weekly-deliveries
 - **描述**：查看项目的历史周交付报告。
 - **所需权限**：`project_reports:read`
 
@@ -521,7 +1594,7 @@
 
 ---
 
-#### 2.2.7 GET /api/v1/projects/{project_id}/cost-records
+#### 2.6.7 GET /api/v1/projects/{project_id}/cost-records
 - **描述**：查询项目的成本流水。
 - **所需权限**：`project_costs:read`
 
@@ -555,7 +1628,7 @@
 
 ---
 
-#### 2.2.8 GET /api/v1/projects/{project_id}/budget-snapshots
+#### 2.6.8 GET /api/v1/projects/{project_id}/budget-snapshots
 - **描述**：获取项目预算快照的历史记录。
 - **所需权限**：`project_budget:read`
 
@@ -584,10 +1657,10 @@
 
 ---
 
-### 2.3 财务管理模块 (Finance)
+### 2.7 财务管理模块 (Finance)
 
-#### 2.3.1 POST /api/v1/finance/records
-- **描述**：新增财务记录（如收入、支出、转账）。
+#### 2.7.1 POST /api/v1/finance/records
+- **描述**：新增统一财务流水，覆盖采购付款、运费、应收退款等场景。
 - **所需权限**：`finance:records:create`
 
 **请求**
@@ -595,55 +1668,140 @@
 - Body：
 ```json
 {
-  "record_date": "2025-10-28",
-  "type": "expense",
-  "category_id": "uuid",
-  "amount": "15820.00",
+  "record_code": "WB-FIN-2025-1031-001",
+  "record_type": "payment",
+  "flow_direction": "outflow",
+  "status": "pending",
+  "order_id": "7a5a6c1d-5a4f-4f42-9df1-1c7d76b69350",
+  "counterparty_id": "c5f2a4f4-0d0a-4c60-9d3d-5f95b90b2e21",
+  "amount": "268000.00",
   "currency": "CNY",
-  "description": "10 月差旅报销",
-  "source_system": "erp",
-  "source_reference": {
-    "external_id": "ERP-EXP-20251028-01"
+  "fx_rate": "1.000000",
+  "amount_base": "268000.00",
+  "occurred_at": "2025-10-30T08:15:00Z",
+  "recognized_at": "2025-10-31T02:00:00Z",
+  "reporting_window": "[2025-10-01,2025-10-31]",
+  "project_id": "f6e5d8c4-b7d5-4dd6-9b8e-889d04d2c0a2",
+  "department_id": "b87373d3-2d5a-4f3e-9d99-3f84f4269fb9",
+  "approval_request_id": "cf5b5d1e-5b6b-41d9-934b-5f64c0a67aa2",
+  "source": "approval",
+  "source_reference": "AP-2025-00089",
+  "source_payload": {
+    "template_code": "freight_payment",
+    "form_snapshot": { "driver": "刘强", "plates": "闽C12345" }
   },
-  "approval_request_id": "uuid",
-  "project_id": "uuid",
-  "metadata": {
-    "tax_rate": 0.13
-  }
+  "dimensions": {
+    "company_alias": "福建微柏",
+    "biz_unit": "automation"
+  },
+  "tags": ["freight", "chengdu-lidong"],
+  "alert_flags": {
+    "fx": "watch",
+    "threshold": false
+  },
+  "attachments": [
+    { "attachment_id": "7e5f8c0d-1ad7-4a6f-9f6e-7fae5561d21c", "description": "运费发票" }
+  ]
 }
 ```
 
-| 字段 | 类型 | 校验规则 |
+| 字段 | 类型 | 规则 |
 | --- | --- | --- |
-| record_date | date | required |
-| type | string | required, enum:`income|expense|transfer` |
-| category_id | uuid | required, exists `financial_categories.id` 同公司 |
-| amount | numeric | required, decimal(18,2), >0 |
-| currency | string | required, iso4217 |
-| description | string | maxLength:2000 |
-| source_system | string | required, maxLength:50 |
-| source_reference | object | optional |
-| approval_request_id | uuid | optional, exists `approval_requests.id` |
-| project_id | uuid | optional, exists `projects.id` |
-| metadata | object | optional, max 4KB |
+| record_code | string | required, maxLength:50，同租户唯一 |
+| record_type | string | required, maxLength:30，业务自定义分类 |
+| flow_direction | string | required, enum:`inflow|outflow` |
+| status | string | optional, default `pending` |
+| order_id | uuid | optional，存在于 `orders.id` |
+| counterparty_id | uuid | optional，存在于 `customers.id` |
+| amount | numeric | required, decimal(18,2) >0 |
+| currency | string | required，ISO 4217 |
+| fx_rate | numeric | optional, decimal(12,6) >=0 |
+| amount_base | numeric | optional, decimal(18,2) |
+| occurred_at | datetime | required，ISO 8601 |
+| recognized_at | datetime | optional |
+| reporting_window | daterange | optional，字符串形式符合 PostgreSQL `daterange` 语法 |
+| project_id | uuid | optional，存在于 `projects.id` |
+| department_id | uuid | optional，存在于 `departments.id` |
+| approval_request_id | uuid | optional，存在于 `approval_requests.id` |
+| source | string | optional, default `manual` |
+| source_reference | string | optional, maxLength:100 |
+| source_payload | object | optional, JSON，最大 8KB |
+| dimensions | object | optional, JSON，最大 4KB |
+| tags | array | optional, 每项 maxLength:50 |
+| alert_flags | object | optional, JSON，最大 2KB |
+| attachments | array | optional，引用 `attachments` |
 
 **响应**
-- `201 Created` 返回 `financial_record`。
+- `201 Created`
+```json
+{
+  "code": 0,
+  "message": "ok",
+  "data": {
+    "financial_record": {
+      "id": "b7d5e8bf-4f80-4ea7-8bcf-7f80d61d63fd",
+      "company_id": "83f4e4d2-5b4a-4a0d-9c98-99c75f0cc001",
+      "record_code": "WB-FIN-2025-1031-001",
+      "record_type": "payment",
+      "flow_direction": "outflow",
+      "status": "pending",
+      "order_id": "7a5a6c1d-5a4f-4f42-9df1-1c7d76b69350",
+      "counterparty_id": "c5f2a4f4-0d0a-4c60-9d3d-5f95b90b2e21",
+      "amount": "268000.00",
+      "currency": "CNY",
+      "fx_rate": "1.000000",
+      "amount_base": "268000.00",
+      "occurred_at": "2025-10-30T08:15:00Z",
+      "recognized_at": "2025-10-31T02:00:00Z",
+      "reporting_window": "[2025-10-01,2025-10-31]",
+      "project_id": "f6e5d8c4-b7d5-4dd6-9b8e-889d04d2c0a2",
+      "department_id": "b87373d3-2d5a-4f3e-9d99-3f84f4269fb9",
+      "approval_request_id": "cf5b5d1e-5b6b-41d9-934b-5f64c0a67aa2",
+      "source": "approval",
+      "source_reference": "AP-2025-00089",
+      "source_payload": {
+        "template_code": "freight_payment",
+        "form_snapshot": { "driver": "刘强", "plates": "闽C12345" }
+      },
+      "ingestion_snapshot": {},
+      "dimensions": {
+        "company_alias": "福建微柏",
+        "biz_unit": "automation"
+      },
+      "tags": ["freight", "chengdu-lidong"],
+      "alert_flags": {
+        "fx": "watch",
+        "threshold": false
+      },
+      "attachments": [
+        { "attachment_id": "7e5f8c0d-1ad7-4a6f-9f6e-7fae5561d21c", "description": "运费发票" }
+      ],
+      "created_by": "f4b902dd-9ce4-43fa-9f2a-612f4df4ab9f",
+      "updated_by": "f4b902dd-9ce4-43fa-9f2a-612f4df4ab9f",
+      "created_at": "2025-10-31T04:05:00Z",
+      "updated_at": "2025-10-31T04:05:00Z"
+    }
+  },
+  "meta": { "request_id": "d2b2742f-1d30-4495-83ad-1e309a6250b3", "timestamp": "2025-10-31T04:25:00Z" },
+  "error": null
+}
+```
 - 错误：
-  - `422 CATEGORY_INACTIVE`
-  - `409 DUPLICATE_SOURCE_REFERENCE`
+  - `409 FINANCIAL_RECORD_DUPLICATE`（`record_code` 或 `source_reference` 已存在）
+  - `422 INVALID_DIMENSION_SCHEMA`
 
 **业务逻辑**
-- 写入 `financial_records`；若 `approval_request_id` 为空且金额超过阈值，会自动生成审批草稿。
-- 更新项目成本统计、财务仪表盘缓存；同步触发预警检测。
+- 写入 `financial_records` 表；若 `order_id` 存在，自动回写订单最新状态与应付余额。
+- 同步生成 BI/报表所需的扁平化索引（物化视图刷新任务）。
+- 当金额超过租户阈值或 `alert_flags` 标记风险时，触发风控告警并推送给财务主管。
 
 **性能与安全**
-- 速率限制：`20 req/min/company`。
-- 金额字段保留两位小数；敏感数据（描述）做脱敏。
+- 幂等：同一 `Idempotency-Key` 与 `record_code` 组合 24 小时内只创建一次。
+- 敏感数据（银行账号、tax_id）在持久化前做加密；响应按权限脱敏。
 
 ---
 
-#### 2.3.2 GET /api/v1/finance/records
+#### 2.7.2 GET /api/v1/finance/records
 - **描述**：分页查询财务记录。
 - **所需权限**：`finance:records:read`
 
@@ -664,7 +1822,7 @@
 
 ---
 
-#### 2.3.3 POST /api/v1/finance/report-runs
+#### 2.7.3 POST /api/v1/finance/report-runs
 - **描述**：执行财务报表生成。
 - **所需权限**：`finance:reports:run`
 
@@ -710,7 +1868,7 @@
 
 ---
 
-#### 2.3.4 GET /api/v1/finance/alert-events
+#### 2.7.4 GET /api/v1/finance/alert-events
 - **描述**：查询财务预警事件。
 - **所需权限**：`finance:alerts:read`
 
@@ -730,8 +1888,8 @@
 
 ---
 
-#### 2.3.5 GET /api/v1/finance/report-templates
-- **描述**：查询财务报表模板及其配置。
+#### 2.7.5 GET /api/v1/finance/report-templates
+- **描述**：查询财务报表模板、调度策略以及聚合后的运行历史。
 - **所需权限**：`finance:reports:read`
 
 **请求**
@@ -744,21 +1902,72 @@
   | page_size | integer, default 20, max 100 |
 
 **响应**
-- `200 OK`，返回 `financial_report_templates` 列表，包含 `parameters_schema`、`delivery_channels`。
+- `200 OK`
+```json
+{
+  "code": 0,
+  "data": {
+    "items": [
+      {
+        "id": "3a2c9b03-41d6-4fcb-9e56-d3f1c5d7b201",
+        "template_code": "cash_flow_daily",
+        "name": "每日现金流报表",
+        "description": "汇总三家公司日现金流",
+        "status": "active",
+        "report_scope": "company",
+        "layout": { "type": "table", "columns": ["date", "inflow", "outflow"] },
+        "filters": { "company_set": ["WB", "FJLD", "CDLD"] },
+        "schedule": { "cron": "0 6 * * *", "timezone": "Asia/Shanghai" },
+        "subscriptions": [
+          { "user_id": "f4b902dd-9ce4-43fa-9f2a-612f4df4ab9f", "channel": "email" }
+        ],
+        "alert_rules": [
+          { "metric": "net_outflow", "threshold": -500000, "severity": "high" }
+        ],
+        "run_history": [
+          {
+            "run_id": "cf3429e1-8714-4d91-905d-dc6acb3df50c",
+            "status": "success",
+            "triggered_at": "2025-10-30T22:00:00Z",
+            "finished_at": "2025-10-30T22:02:31Z",
+            "triggered_by": "f4b902dd-9ce4-43fa-9f2a-612f4df4ab9f",
+            "parameters": { "period_start": "2025-10-30", "period_end": "2025-10-30" },
+            "output": { "type": "file", "path": "/reports/cash-flow/2025-10-30.xlsx" }
+          },
+          {
+            "run_id": "873c1f0f-2223-4a48-9da1-1b8beb1fe4c2",
+            "status": "failed",
+            "triggered_at": "2025-10-29T22:00:00Z",
+            "finished_at": "2025-10-29T22:01:05Z",
+            "error": "SOURCE_TIMEOUT"
+          }
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "request_id": "d6f59e0c-2719-4c7f-9c0f-ec0f7ad3f010",
+    "timestamp": "2025-10-31T04:30:00Z",
+    "page": 1,
+    "page_size": 20,
+    "total": 8
+  }
+}
+```
 - 错误：`403 PERMISSION_DENIED`
 
 **业务逻辑**
-- 按租户过滤；若模板包含敏感指标，仅财务主管可见详细参数。
-- 支持在响应中附带最近一次 `report_run` 快照。
+- 数据源自 `financial_report_templates`，其中 `run_history`、`alert_history`、`schedule` 等聚合信息均为 JSONB 字段；接口返回时保持结构不变，便于前端差分渲染。
+- 若模板包含敏感指标（如资金余额），未授权用户仍可看到模板列表，但自动剔除 `filters`、`subscriptions` 等敏感字段。
 
 **性能与安全**
 - 速率限制：`30 req/min/user`。
-- 模板内容需签名缓存，防止被篡改。
+- 模板内容提供 `ETag`，前端可使用条件请求；响应内的 JSON 字段需签名校验以防篡改。
 
 ---
 
-#### 2.3.6 GET /api/v1/finance/report-runs
-- **描述**：查看报表执行历史。
+#### 2.7.6 GET /api/v1/finance/report-runs
+- **描述**：查看报表执行历史，基于模板的 `run_history` JSON 聚合展开。
 - **所需权限**：`finance:reports:read`
 
 **请求**
@@ -771,24 +1980,65 @@
   | start_at / end_at | optional datetime，`end_at >= start_at` |
   | page | integer, default 1 |
   | page_size | integer, default 20, max 100 |
+  | include_payload | optional boolean, default false |
 
 **响应**
-- `200 OK`，`items` 为 `financial_report_runs` 字段，含执行状态、输出位置。
+- `200 OK`
+```json
+{
+  "code": 0,
+  "data": {
+    "items": [
+      {
+        "template_id": "3a2c9b03-41d6-4fcb-9e56-d3f1c5d7b201",
+        "template_name": "每日现金流报表",
+        "run_id": "cf3429e1-8714-4d91-905d-dc6acb3df50c",
+        "status": "success",
+        "triggered_at": "2025-10-30T22:00:00Z",
+        "finished_at": "2025-10-30T22:02:31Z",
+        "triggered_by": "f4b902dd-9ce4-43fa-9f2a-612f4df4ab9f",
+        "parameters": { "period_start": "2025-10-30", "period_end": "2025-10-30" },
+        "output": { "type": "file", "path": "/reports/cash-flow/2025-10-30.xlsx" },
+        "run_history_index": 0
+      },
+      {
+        "template_id": "3a2c9b03-41d6-4fcb-9e56-d3f1c5d7b201",
+        "template_name": "每日现金流报表",
+        "run_id": "873c1f0f-2223-4a48-9da1-1b8beb1fe4c2",
+        "status": "failed",
+        "triggered_at": "2025-10-29T22:00:00Z",
+        "finished_at": "2025-10-29T22:01:05Z",
+        "error": "SOURCE_TIMEOUT",
+        "run_history_index": 1
+      }
+    ]
+  },
+  "meta": {
+    "request_id": "f531d9d4-41f1-4b3f-9f2e-71c24bc7d3ab",
+    "timestamp": "2025-10-31T04:32:00Z",
+    "page": 1,
+    "page_size": 20,
+    "total": 12
+  }
+}
+```
 - 错误：
   - `400 INVALID_DATE_RANGE`
   - `403 PERMISSION_DENIED`
 
 **业务逻辑**
-- 若 `status=failed`，会附带 `error_message` 与 `retry_token`。
-- 对于 `output_location.type=file`，前端需再次调用下载接口获取临时链接。
+- 读取 `financial_report_templates.run_history` JSON，按时间倒序展开为行；`run_history_index` 保留在模板数组中的原始位置。
+- 若查询传入 `template_id`，仅展开该模板的 `run_history`；`status` 过滤在展开后执行。
+- 当 `include_payload=true` 时，将在 `parameters`、`output` 外追加 `payload` 字段（如缓存的导出数据），响应体需 gzip。
+- 不再维护独立的 `financial_report_runs` 表，历史数据统一在模板 JSON 内管理，接口层负责分页与过滤。
 
 **性能与安全**
 - 速率限制：`30 req/min/user`。
-- 历史数据超过 180 天默认归档，可通过 `include_archived=true`（将来扩展）。
+- 对大体量历史（>500 条），后端通过游标分页；若模板的 `run_history` 超过上限（默认 1000 条）会自动归档到离线存储。
 
 ---
 
-#### 2.3.7 GET /api/v1/finance/alert-rules
+#### 2.7.7 GET /api/v1/finance/alert-rules
 - **描述**：获取财务预警规则配置。
 - **所需权限**：`finance:alerts:read`
 
@@ -814,7 +2064,7 @@
 
 ---
 
-#### 2.3.8 GET /api/v1/finance/data-sources
+#### 2.7.8 GET /api/v1/finance/data-sources
 - **描述**：查询财务数据源连接配置。
 - **所需权限**：`finance:data-sources:read`
 
@@ -835,9 +2085,9 @@
 
 ---
 
-### 2.4 审批管理模块 (Approvals)
+### 2.8 审批管理模块 (Approvals)
 
-#### 2.4.1 POST /api/v1/approval-requests
+#### 2.8.1 POST /api/v1/approval-requests
 - **描述**：创建审批单（草稿或直接提交）。
 - **所需权限**：`approvals:requests:create`
 
@@ -900,7 +2150,7 @@
 
 ---
 
-#### 2.4.2 GET /api/v1/approval-requests
+#### 2.8.2 GET /api/v1/approval-requests
 - **描述**：分页查询当前用户发起的审批单。
 - **所需权限**：`approvals:requests:read`
 
@@ -934,34 +2184,91 @@
 
 ---
 
-#### 2.4.3 GET /api/v1/approval-requests/{request_id}
-- **描述**：查看审批单详情。
+#### 2.8.3 GET /api/v1/approval-requests/{request_id}
+- **描述**：查看审批单详情，以及标准化的时间线（包含所有历史记录）。
 - **所需权限**：`approvals:requests:read`
 
 **请求**
 - Path：`request_id` (uuid)
-- Query：`include_history`(bool)，`include_audit`(bool)
+- Query：`include_history`(bool, default=true)，`include_audit`(bool, default=false)
 
 **响应**
-- `200 OK`，包含：
-  - `request`: `approval_requests` 字段
-  - `steps`: `approval_request_steps`
-  - `actions`: `approval_request_actions`
-  - `attachments`: `approval_request_attachments`
-  - `audit_logs`: (可选)
+- `200 OK`
+```json
+{
+  "code": 0,
+  "data": {
+    "request": {
+      "id": "cf5b5d1e-5b6b-41d9-934b-5f64c0a67aa2",
+      "request_code": "AP-2025-00089",
+      "title": "成都鲤东运费付款申请",
+      "workflow_id": "9b784c13-2b7e-4e2c-8c3b-2150897a5ed1",
+      "workflow_revision": 4,
+      "requester_id": "f4b902dd-9ce4-43fa-9f2a-612f4df4ab9f",
+      "priority": "medium",
+      "status": "running",
+      "approval_result": "pending",
+      "current_stage": "财务复核",
+      "submitted_at": "2025-10-30T08:10:00Z",
+      "due_at": "2025-10-31T12:00:00Z",
+      "form_payload": {
+        "amount": 268000,
+        "currency": "CNY",
+        "counterparty": "福建微柏自动化设备有限公司"
+      },
+      "primary_order_id": "7a5a6c1d-5a4f-4f42-9df1-1c7d76b69350",
+      "timeline": [
+        {
+          "actor_id": "f4b902dd-9ce4-43fa-9f2a-612f4df4ab9f",
+          "actor_name": "林颖",
+          "action": "submitted",
+          "timestamp": "2025-10-30T08:10:00Z",
+          "comment": "Dify 对话生成草稿后提交"
+        },
+        {
+          "actor_id": "e24655c1-5e6c-4a4f-9aa8-4c1d8268e3d2",
+          "actor_name": "张伟",
+          "action": "approved",
+          "timestamp": "2025-10-30T09:05:00Z",
+          "comment": "采购经理复核通过"
+        }
+      ],
+      "active_assignments": [
+        {
+          "assignee_id": "67a2f5e9-1e66-43a1-baa1-0555f2a43c2b",
+          "role_type": "finance",
+          "due_at": "2025-10-31T12:00:00Z"
+        }
+      ]
+    },
+    "attachments": [
+      { "attachment_id": "7e5f8c0d-1ad7-4a6f-9f6e-7fae5561d21c", "file_name": "运费发票.pdf" }
+    ],
+    "audit_logs": [
+      {
+        "id": "2dd8a94c-1a50-4a1f-816d-2fba8d7f65e3",
+        "event": "approval.timeline.insert",
+        "timestamp": "2025-10-30T09:05:01Z"
+      }
+    ]
+  },
+  "meta": { "request_id": "35f780e4-2af1-429e-9d28-cc792efb2e4f", "timestamp": "2025-10-31T04:34:00Z" }
+}
+```
 - 错误：`404 REQUEST_NOT_FOUND`
 
 **业务逻辑**
-- 校验访问权限（申请人、审批人、被授权查看者）。
-- 字段级脱敏：根据权限隐藏敏感字段。
+- 时间线数据直接来源于 `approval_requests.timeline` JSONB，按时间顺序返回；若 `include_history=false`，仅返回 `request` 和 `active_assignments`。
+- `timeline` 统一包含 `actor`、`action`、`timestamp`、`comment`，应用端无需再拼装 `steps` 与 `actions`。
+- 若 `include_audit=true`，追加最近 100 条审计记录，含字段级变更摘要。
 
 **性能与安全**
 - 限流：`40 req/min/user`。
-- 返回审计数据时默认按最近 100 条。
+- 详情响应可开启 5 分钟缓存；敏感字段按权限脱敏（如金额、银行账号）。
 
 ---
 
-#### 2.4.4 GET /api/v1/approvals/inbox
+#### 2.8.4 GET /api/v1/approvals/inbox
 - **描述**：审批待办列表。
 - **所需权限**：`approvals:tasks:read`
 
@@ -982,7 +2289,7 @@
 
 ---
 
-#### 2.4.5 POST /api/v1/approvals/{step_id}/actions
+#### 2.8.5 POST /api/v1/approvals/{step_id}/actions
 - **描述**：对审核节点执行动作（同意、驳回、转办、加签、催办、评论）。
 - **所需权限**：根据 `action_type` 校验，如 `approvals:tasks:approve`。
 
@@ -1027,7 +2334,7 @@
 
 ---
 
-#### 2.4.6 GET /api/v1/approvals/history
+#### 2.8.6 GET /api/v1/approvals/history
 - **描述**：查询我处理过的审批历史及操作明细。
 - **所需权限**：`approvals:tasks:read`
 
@@ -1059,7 +2366,7 @@
 
 ---
 
-#### 2.4.7 GET /api/v1/approval-workflows
+#### 2.8.7 GET /api/v1/approval-workflows
 - **描述**：获取审批流程定义及版本信息。
 - **所需权限**：`approvals:workflows:read`
 
@@ -1085,7 +2392,7 @@
 
 ---
 
-#### 2.4.8 GET /api/v1/approval-rules/{version_id}
+#### 2.8.8 GET /api/v1/approval-rules/{version_id}
 - **描述**：查看指定流程版本的规则明细，供前端解释审批逻辑。
 - **所需权限**：`approvals:workflows:read`
 
@@ -1112,9 +2419,9 @@
 
 ---
 
-### 2.5 人事管理模块 (HR)
+### 2.9 人事管理模块 (HR)
 
-#### 2.5.1 GET /api/v1/hr/employees
+#### 2.9.1 GET /api/v1/hr/employees
 - **描述**：查询员工档案。
 - **所需权限**：`hr:employees:read`
 
@@ -1134,7 +2441,7 @@
 
 ---
 
-#### 2.5.2 GET /api/v1/hr/employees/{user_id}
+#### 2.9.2 GET /api/v1/hr/employees/{user_id}
 - **描述**：查看单个员工的全量档案。
 - **所需权限**：`hr:employees:read`
 
@@ -1166,7 +2473,7 @@
 
 ---
 
-#### 2.5.3 PUT /api/v1/hr/employees/{user_id}
+#### 2.9.3 PUT /api/v1/hr/employees/{user_id}
 - **描述**：更新员工档案，触发审批。
 - **所需权限**：`hr:employees:update`
 
@@ -1216,7 +2523,7 @@
 
 ---
 
-#### 2.5.4 POST /api/v1/hr/efficiency-reports
+#### 2.9.4 POST /api/v1/hr/efficiency-reports
 - **描述**：生成效率报告（个人/团队/周期）。
 - **所需权限**：`hr:efficiency:create`
 
@@ -1265,7 +2572,7 @@
 
 ---
 
-#### 2.5.5 GET /api/v1/hr/efficiency-scores
+#### 2.9.5 GET /api/v1/hr/efficiency-scores
 - **描述**：查询员工效率评分及趋势。
 - **所需权限**：`hr:efficiency:read`
 
@@ -1296,32 +2603,7 @@
 
 ---
 
-#### 2.5.6 GET /api/v1/hr/skills
-- **描述**：获取技能分类与技能字典。
-- **所需权限**：`hr:skills:read`
-
-**请求**
-- Query：
-  | 字段 | 规则 |
-  | --- | --- |
-  | is_active | optional boolean |
-  | category_id | optional uuid |
-
-**响应**
-- `200 OK`，返回 `skill_categories` 与 `skills` 列表。
-- 错误：`403 PERMISSION_DENIED`
-
-**业务逻辑**
-- 根据 `is_active` 过滤；支持返回技能与能力等级映射。
-- 可用于前端筛选和员工资质管理。
-
-**性能与安全**
-- 速率限制：`40 req/min/user`。
-- 响应缓存 10 分钟。
-
----
-
-#### 2.5.7 GET /api/v1/hr/org-tree
+#### 2.9.6 GET /api/v1/hr/org-tree
 - **描述**：获取公司组织树结构。
 - **所需权限**：`hr:org:read`
 
@@ -1346,9 +2628,9 @@
 
 ---
 
-### 2.6 资料库模块 (Knowledge)
+### 2.10 资料库模块 (Knowledge)
 
-#### 2.6.1 GET /api/v1/knowledge/assets
+#### 2.10.1 GET /api/v1/knowledge/assets
 - **描述**：分页检索知识资产元数据。
 - **所需权限**：`knowledge:assets:read`
 
@@ -1382,7 +2664,7 @@
 
 ---
 
-#### 2.6.2 POST /api/v1/knowledge/assets
+#### 2.10.2 POST /api/v1/knowledge/assets
 - **描述**：上传知识资产元数据（实际文件由对象存储提供）。
 - **所需权限**：`knowledge:assets:create`
 
@@ -1432,7 +2714,7 @@
 
 ---
 
-#### 2.6.3 GET /api/v1/knowledge/assets/{attachment_id}
+#### 2.10.3 GET /api/v1/knowledge/assets/{attachment_id}
 - **描述**：获取单个知识资产详情。
 - **所需权限**：`knowledge:assets:read`
 
@@ -1459,7 +2741,7 @@
 
 ---
 
-#### 2.6.4 POST /api/v1/knowledge/assets/{attachment_id}/share-links
+#### 2.10.4 POST /api/v1/knowledge/assets/{attachment_id}/share-links
 - **描述**：生成资料分享链接或更新已有分享。
 - **所需权限**：`knowledge:assets:share`
 
@@ -1498,7 +2780,7 @@
 
 ---
 
-#### 2.6.5 POST /api/v1/knowledge/search
+#### 2.10.5 POST /api/v1/knowledge/search
 - **描述**：语义检索知识资产。
 - **所需权限**：`knowledge:assets:search`
 

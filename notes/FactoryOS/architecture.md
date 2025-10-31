@@ -101,100 +101,98 @@ factoryos/
 
 ### Information Architecture & Navigation
 
-为支持“AI 融合式、非独立助手”的交互理念，信息架构按业务域分层，所有模块的第一个子项固定为“对话（模块）”。顶栏统一提供“命令面板/全局搜索”。
-
-- 工作台：今日概览、待办/我发起/我参与、最近活动与通知、全局搜索/命令面板
-- 项目管理：对话（项目）、项目列表、甘特图、看板、成本分析、周交付、报表与仪表盘、模板中心
-- 财务管理：对话（财务）、报表（日/周/月）、指标预警、历史采购对比、财务仪表盘
-- 申请管理：发起申请、我发起的/申请历史
-- 审批管理：对话（审批）、待我处理、审批历史、流程配置与规则
-- 员工管理：对话（人事）、组织架构、员工档案、效率评估、报告生成（周报/月报）、技能矩阵
-- 资料库：对话（资料）、方案资料库、设计零件资料库、PLC 设计资料库、智能检索、上传与版本
-- 目标与 BI：对话（目标）、目标管理、目标审核、业务数据挖掘、宣传材料生成、业务智能仪表盘
-- 数据与集成：对话（数据）、钉钉集成、数据库连接器、同步调度、统一数据访问层、数据质量
-- 设置与安全：对话（设置）、公司切换、权限与角色、数据源配置、安全与认证、审计日志
-- 帮助与支持：对话（帮助）、使用指南、反馈与工单、版本与更新、关于
-- 个人中心：我的资料、偏好设置（默认“智能模式”）、我的收藏、最近访问
-
-路由策略：每个模块至少包含 `chat` 与若干 `view` 路由，`chat` 为默认路由；命令面板与全局搜索可直达任意路由并支持参数化跳转。公司上下文切换后，所有视图与搜索结果即时收敛至当前公司可见数据。
-
-#### 审批与申请：路由与查询参数（对齐 PRD FR40/FR42A/FR42B/FR43）
-
-- 路由（前端）
-  - 对话（审批）：`/approvals/chat`（FR40）
-  - 对话（申请）：`/requests/chat`（智能申请助手）
-  - 发起申请：`/requests/create` 可带 `type=leave|travel|reimburse|seal|custom`（FR41）
-  - 我发起/申请历史：`/requests/mine`（FR42B）
-  - 待我处理（审批待办）：`/approvals/inbox`（FR42A）
-  - 审批历史：`/approvals/history`（FR42A）
-  - 流程配置与规则：`/approvals/definitions`、`/approvals/rules`（FR43）
-
-- 查询参数（前端 Query Schema）
-- 我发起/申请历史（FR42B，`/requests/mine`）
-    - `status`: draft|running|approved|rejected|withdrawn
-    - `type`: leave|travel|reimburse|seal|custom
-    - `startAt`, `endAt`: ISO 日期（发起/完成时间，配合 `timeKind=created|finished`）
-    - `amountMin`, `amountMax`: 金额区间
-    - `initiator`, `deptId`: 发起人/部门
-    - `q`: 关键字
-    - `page`, `pageSize`, `sortBy`, `sortOrder`
-  - 审批待办/审批历史（FR42A，`/approvals/inbox|/approvals/history`）
-    - `status`: pending|approved|returned|withdrawn
-    - `priority`: low|medium|high|urgent
-    - `sla`: "<12h"、">24h"（或分钟数）
-    - `node`: 流程节点标识
-    - `initiator`, `deptId`, `businessType`
-    - `startAt`, `endAt`, `amountMin`, `amountMax`
-    - `q`, `page`, `pageSize`, `sortBy`, `sortOrder`
-
-- API 契约（后端，示例）
-  - 列表（分页）统一响应：
-    ```json
-    {
-      "list": [ { /* Item */ } ],
-      "page": 1,
-      "pageSize": 20,
-      "total": 120
-    }
-    ```
-  - 我发起/申请历史（FR42B）：
-    - GET `/api/requests/mine` 查询参数同前端 Query Schema
-    - Item 字段建议：`id, code, title, type, initiator, dept, amount, status, createdAt, finishedAt`
-  - 审批待办（FR42A）：
-    - GET `/api/approvals/inbox` 查询参数同前端 Query Schema
-    - Item 字段建议：`id, code, title, type, node, initiator, dept, amount, status, slaRemaining, createdAt, updatedAt`
-  - 审批历史（FR42A）：
-    - GET `/api/approvals/history` 参数同 inbox，少 `sla`
-  - 动作接口（审批）：
-    - POST `/api/approvals/{id}/approve`
-    - POST `/api/approvals/{id}/reject`
-    - POST `/api/approvals/{id}/transfer`（转办）
-    - POST `/api/approvals/{id}/consign`（加签）
-    - POST `/api/approvals/{id}/urge`（催办）
-  - 申请接口：
-    - POST `/api/requests`（创建草稿/提交，支持附件）
-    - GET `/api/requests/{id}`、PUT `/api/requests/{id}`、POST `/api/requests/{id}/withdraw`
-  - 流程配置与规则（FR43）：
-    - GET `/api/workflow/definitions` 列出流程与节点权限
-    - GET `/api/workflow/rules/{ruleId}` 规则详情
-    - GET `/api/workflow/rules/{ruleId}/explain?context=...` 规则来源与影响解释
-
-##### 申请对话（/requests/chat）参数透传与回填
-
-- Dify iframe 参数（与 ai-assistant/chat 对齐）
-  - `url`：完整 iframe 地址（优先）
-  - `base` + `token`：拼接为 `${base}/chatbot/${token}`
-  - `inputs`：对象或 JSON 字符串；前端自动对每个字段执行 `gzip + base64 + encodeURIComponent` 后作为查询拼接
-  - `hideBrand`：true/1 时遮挡品牌角标（需许可）
-
-- 从对话回填到创建表单的两种方式（示例约定）
-  1) URL 直传：`/requests/create?prefill={...}&type=leave`
-  2) 会话存储：对话页写入 `sessionStorage.setItem('requests:prefill', JSON.stringify(payload))`，随后跳转 `/requests/create`
-
-- 创建页消费规则（示例实现）
-  - 优先读取 `route.query.prefill`（JSON）；否则读取 `sessionStorage['requests:prefill']`
-  - 解析成功后进行“回填提示”与“应用回填”操作（当无实际表单时，可先以占位展示）
-  - 应用后可清理会话存储，避免重复使用
+- 工作台
+  - 今日概览（智能摘要与下一步建议）
+  - 待办/我发起/我参与
+  - 最近活动与通知
+  - 全局搜索/命令面板
+- 项目管理
+  - 对话（项目）：自然语言创建/查询/调整进度与成本
+  - 项目列表
+  - 甘特图
+  - 看板
+  - 成本分析
+  - 周交付
+  - 报表与仪表盘
+  - 模板中心
+- 财务管理
+  - 对话（财务）：自然语言生成报表/解读指标/告警溯因
+  - 报表（日/周/月）
+  - 指标预警
+  - 历史采购对比
+  - 财务仪表盘
+- 客户管理
+  - 对话（客户）：同步客户/供应商档案、应收应付风险提醒
+  - 客户/供应商档案
+  - 银行账户与收款信息
+  - 合作标签与跟进记录
+- 产品中心
+  - 对话（产品）：维护产品规格、BOM、变更记录
+  - 产品目录
+  - BOM 与工艺配置
+  - 版本与合规检查
+- 订单中心
+  - 对话（订单）：创建/查询销售与采购订单、跟踪状态
+  - 销售订单列表
+  - 采购订单列表
+  - 发货与收货进度
+- 生产管理
+  - 对话（生产）：工单排程、工序进度、异常提醒
+  - 工单排程
+  - 工序产量上报
+  - 质量与废品统计
+- 审批管理
+  - 对话（审批）：发起/催办/回撤/解释规则
+  - 发起申请
+  - 待我处理
+  - 我发起的
+  - 审批历史
+  - 流程配置与规则
+- 员工管理
+  - 对话（人事）：查档、变更、周/月报生成、绩效问答
+  - 组织架构
+  - 员工档案
+  - 效率评估
+  - 报告生成（周报/月报）
+- 资料库
+  - 对话（资料）：语义检索/对比/引用与版本建议
+  - 方案资料库
+  - 设计零件资料库
+  - PLC 设计资料库
+  - 智能检索
+  - 上传与版本
+- 目标与 BI
+  - 对话（目标）：目标拆解/校验/跟踪与复盘
+  - 目标管理
+  - 目标审核
+  - 业务数据挖掘
+  - 宣传材料生成
+  - 业务智能仪表盘
+- 数据与集成
+  - 对话（数据）：同步状态问答/排障/调度建议
+  - 钉钉集成
+  - 数据库连接器
+  - 同步调度
+  - 统一数据访问层
+  - 数据质量
+- 设置与安全
+  - 对话（设置）：权限解释/最小授权建议/异常排查
+  - 公司切换
+  - 权限与角色
+  - 数据源配置
+  - 安全与认证
+  - 审计日志
+- 帮助与支持
+  - 对话（帮助）：问文档/提工单/诊断报告
+  - 使用指南
+  - 反馈与工单
+  - 版本与更新
+  - 关于
+- 个人中心
+  - 我的资料
+  - 偏好设置（默认“智能模式”）
+  - 我的收藏
+  - 最近访问
 
 ### Implementation Milestones（与 PRD 对齐）
 
@@ -256,100 +254,86 @@ factoryos/
 ### High Level Architecture Diagram
 
 ```mermaid
-graph TB
-    subgraph "用户层"
-        U1[福建微柏用户]
-        U2[福建鲤东用户]
-        U3[成都鲤东用户]
-        U4[移动端用户]
+flowchart LR
+    subgraph Client Layer
+        WebApp["Web App (Vue 3 + Ant Design)"]
+        CommandPanel["Command Panel & Conversation Shell"]
     end
 
-    subgraph "CDN/负载均衡层"
-        CDN[CDN/CloudFront]
-        LB[负载均衡器]
+    subgraph Edge Layer
+        APIGateway["API Gateway / BFF"]
+        DifyProxy["Dify Secure Proxy"]
     end
 
-    subgraph "前端应用层"
-        WEB[Web应用<br/>Vue3 + Ant Design]
-        MOBILE[移动端<br/>响应式设计]
+    subgraph Service Layer
+        AuthService["Auth Service"]
+        WorkflowService["Workflow Service"]
+        ProjectService["Project Service"]
+        FinanceService["Finance Service"]
+        CustomerService["Customer Service"]
+        ProductService["Product & BOM Service"]
+        OrderService["Order Service"]
+        ManufacturingService["Manufacturing Service"]
+        HRService["HR Service"]
+        KnowledgeService["Knowledge Service"]
+        IntegrationService["Integration Service
+(Dingtalk / Connectors)"]
     end
 
-    subgraph "API网关层"
-        GATEWAY[API Gateway<br/>Express + Kong]
-        AUTH[认证中间件<br/>JWT + RBAC]
+    subgraph Data Layer
+        MultiTenantDB["PostgreSQL (Multi-tenant)"]
+        Cache["Redis"]
+        ObjectStore["OSS/S3"]
     end
 
-    subgraph "微服务层"
-        AI[AI集成服务<br/>Dify Integration]
-        FINANCE[财务服务<br/>Multi-DB]
-        WORKFLOW[工作流服务<br/>Approval Engine]
-        PROJECT[项目服务<br/>Gantt Charts]
-        DINGTALK[钉钉集成<br/>API Sync]
-        REPORT[报表服务<br/>Auto Generation]
+    subgraph AI Layer
+        Dify["Dify Cloud"]
+        VectorStore["Vector Store / Embeddings"]
     end
 
-    subgraph "数据层"
-        subgraph "业务数据库"
-            DB1[(MySQL<br/>福建微柏)]
-            DB2[(PostgreSQL<br/>福建鲤东)]
-            DB3[(SQL Server<br/>成都鲤东)]
-        end
+    WebApp --> CommandPanel
+    CommandPanel --> APIGateway
+    WebApp --> DifyProxy
+    DifyProxy --> Dify
 
-        subgraph "共享数据库"
-            SHARED[(PostgreSQL<br/>共享数据)]
-            CACHE[(Redis<br/>缓存)]
-        end
+    APIGateway --> AuthService
+    APIGateway --> WorkflowService
+    APIGateway --> CustomerService
+    APIGateway --> ProductService
+    APIGateway --> OrderService
+    APIGateway --> ManufacturingService
+    APIGateway --> FinanceService
+    APIGateway --> ProjectService
+    APIGateway --> HRService
+    APIGateway --> KnowledgeService
+    APIGateway --> IntegrationService
 
-        subgraph "文件存储"
-            FILES[OSS/S3<br/>文件存储]
-            BACKUP[备份存储]
-        end
-    end
+    OrderService -- uses --> CustomerService
+    OrderService -- references --> ProductService
+    OrderService -- posts --> FinanceService
+    OrderService -- triggers --> WorkflowService
+    ManufacturingService -- pulls --> OrderService
+    ManufacturingService -- consumes --> ProductService
+    ProjectService -- aligns --> OrderService
 
-    subgraph "外部集成"
-        DIFY[Dify AI平台<br/>iframe集成]
-        DD[钉钉API<br/>企业通信]
-        BANK[银行API<br/>财务数据]
-    end
+    AuthService --> MultiTenantDB
+    CustomerService --> MultiTenantDB
+    ProductService --> MultiTenantDB
+    OrderService --> MultiTenantDB
+    ManufacturingService --> MultiTenantDB
+    FinanceService --> MultiTenantDB
+    WorkflowService --> MultiTenantDB
+    HRService --> MultiTenantDB
+    KnowledgeService --> ObjectStore
 
-    U1 --> CDN
-    U2 --> CDN
-    U3 --> CDN
-    U4 --> CDN
+    CustomerService --> Cache
+    ProductService --> Cache
+    OrderService --> Cache
+    ManufacturingService --> Cache
+    IntegrationService --> Cache
 
-    CDN --> LB
-    LB --> WEB
-    LB --> MOBILE
-
-    WEB --> GATEWAY
-    MOBILE --> GATEWAY
-
-    GATEWAY --> AUTH
-    AUTH --> AI
-    AUTH --> FINANCE
-    AUTH --> WORKFLOW
-    AUTH --> PROJECT
-    AUTH --> DINGTALK
-    AUTH --> REPORT
-
-    AI --> DIFY
-    FINANCE --> DB1
-    FINANCE --> DB2
-    FINANCE --> DB3
-    FINANCE --> BANK
-    WORKFLOW --> SHARED
-    PROJECT --> SHARED
-    DINGTALK --> DD
-    REPORT --> CACHE
-
-    AI --> FILES
-    WORKFLOW --> FILES
-    REPORT --> FILES
-
-    DB1 --> BACKUP
-    DB2 --> BACKUP
-    DB3 --> BACKUP
-    FILES --> BACKUP
+    Dify <--> VectorStore
+    DifyProxy --> VectorStore
 ```
 
 ### Architectural Patterns
@@ -956,16 +940,20 @@ export const assistantRoutes: RouteRecordRaw = {
 
 ### 服务与模块对齐
 
-- 项目服务：计划、任务、依赖、进度、成本、报告；与聊天动作“创建项目/任务、更新进度、生成周报/图表”对齐。
-- 财务服务：凭证、对账、报表、指标预警、采购历史；与聊天动作“生成报表、解释指标、溯因预警”对齐。
-- 审批服务：发起、待办、历史、规则配置；与聊天动作“发起/催办/回撤、解释规则”对齐。
-- 人事服务：组织、档案、效率、周/月报、绩效问答；与聊天动作“查档、变更、生成报告、问绩效”对齐。
-- 资料库服务：方案、零件、PLC、语义检索、版本；与聊天动作“检索/对比/引用/版本建议”对齐。
-- 目标与 BI 服务：目标拆解/校验/审核、数据挖掘、宣传材料、仪表盘；与聊天动作“拆解/校验/复盘/生成”对齐。
-- 集成服务：钉钉、数据库连接器、同步调度、统一数据访问层、数据质量。
-- 设置与安全：公司切换、权限与角色、数据源配置、安全与认证、审计日志；支持“对话（设置）”。
-
----
+| 服务 / 组件            | 对应 PRD 模块                                   | 关键对话动作与业务场景                                                                                                                                     |
+| ---------------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Customer Service       | 客户管理（CRM）                                 | “对话（客户）”维护档案、校验银行信息；生成信用预警卡片；支撑运费付款申请中的客户检索。                                                                    |
+| Product Service        | 产品中心（PIM/PLM）                             | “对话（产品）”录入规格、BOM、工艺；推送变更影响分析；支持微柏机器人手臂、鲤东后桥壳等实例。                                                              |
+| Order Service          | 订单中心（OMS）、项目管理（Projects）           | “对话（订单）”创建销售/采购订单；自动将高价值订单同步到项目里程碑；和审批、财务联动。                                                                    |
+| Manufacturing Service  | 生产管理（MES）                                 | “对话（生产）”排程工单，采集吴维丁工序产量；当废品超阈触发审批与财务预警。                                                                                |
+| Finance Service        | 财务管理（Finance）                             | “对话（财务）”回溯付款、成本与订单关联；触发业财一体化对账。                                                                                              |
+| Workflow Service       | 审批管理（Approvals）                           | 大额采购订单、新产品入库、生产工单变更触发审批；与对话式审批联动。                                                                                        |
+| Project Service        | 项目管理（Projects）                            | 基于订单进度生成项目节点，尤其针对微柏自动化项目的交付；提供周报/成本卡片。                                                                                |
+| Integration Service    | 数据与集成                                       | 钉钉消息、数据库同步；对话触发调度或诊断建议。                                                                                                            |
+| AI Conversation Shell  | 全局与交互框架、命令面板                         | 提供统一的对话入口、命令面板、卡片操作，连接到各业务服务的 Action Endpoint。                                                                               |
+| Auth / HR Service      | 员工管理（HR）、设置与安全、权限/多公司策略     | 对话解析“为什么没有权限”等问题；同步员工档案与效率评估。                                                                                                 |
+| Knowledge Service      | 资料库、帮助与支持                               | 对话检索资料、生成诊断报告；输出使用指南卡片。                                                                                                            |
+| Dify Proxy + Vector    | AI 层                                            | 提供安全上下文、Embedding 检索，支撑微柏/鲤东场景化问答。                                                                                                |
 
 ## Tech Stack
 
@@ -1017,1442 +1005,324 @@ export const assistantRoutes: RouteRecordRaw = {
 
 ## Data Models
 
-### User (用户模型)
+```ts
+export type ISODateTime = string;
+export type UUID = string;
 
-**Purpose:** 表示系统用户，支持多公司架构和权限管理
-
-**Key Attributes:**
-
-- id: string - 用户唯一标识符
-- email: string - 邮箱地址（登录用）
-- username: string - 用户名
-- profile: UserProfile - 用户档案信息
-- companyId: string - 所属公司ID
-- departmentId: string - 所属部门ID
-- roles: Role[] - 用户角色列表
-- permissions: Permission[] - 用户权限列表
-- status: UserStatus - 用户状态（活跃/停用/锁定）
-- lastLoginAt: Date - 最后登录时间
-- createdAt: Date - 创建时间
-- updatedAt: Date - 更新时间
-
-#### TypeScript Interface
-
-```typescript
-interface User {
-  id: string;
-  email: string;
-  username: string;
-  profile: UserProfile;
-  companyId: string;
-  departmentId: string;
-  roles: Role[];
-  permissions: Permission[];
-  status: 'active' | 'inactive' | 'locked';
-  lastLoginAt: Date;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-interface UserProfile {
-  firstName: string;
-  lastName: string;
-  avatar?: string;
-  phone?: string;
-  position: string;
-  employeeId: string;
-  managerId?: string;
-}
-```
-
-#### Relationships
-
-- 关联 Company (多对一)
-- 关联 Department (多对一)
-- 拥有多个 Role (多对多)
-- 拥有多个 Permission (多对多)
-- 拥有多个 EfficiencyRecord (一对多)
-
-### Company (公司模型)
-
-**Purpose:** 表示三家公司实体，支持数据隔离和独立配置
-
-**Key Attributes:**
-
-- id: string - 公司唯一标识符
-- name: string - 公司名称
-- code: string - 公司代码（用于数据路由）
-- type: CompanyType - 公司类型（微柏/鲤东）
-- settings: CompanySettings - 公司配置
-- databases: DatabaseConfig[] - 数据库配置
-- status: CompanyStatus - 公司状态
-- subscriptionExpiresAt: Date - 订阅到期时间
-- createdAt: Date - 创建时间
-- updatedAt: Date - 更新时间
-
-#### TypeScript Interface
-
-```typescript
-interface Company {
-  id: string;
+export interface Customer {
+  id: UUID;
+  companyId: UUID;
+  customerCode?: string;
   name: string;
-  code: string;
-  type: 'weibo' | 'lidong_fujian' | 'lidong_chengdu';
-  settings: CompanySettings;
-  databases: DatabaseConfig[];
-  status: 'active' | 'suspended' | 'trial';
-  subscriptionExpiresAt: Date;
-  createdAt: Date;
-  updatedAt: Date;
+  customerType: 'supplier' | 'customer' | 'logistics' | 'employee' | 'other';
+  contactName?: string;
+  contactPhone?: string;
+  contactEmail?: string;
+  taxId?: string;
+  status: 'potential' | 'negotiating' | 'active' | 'paused';
+  bankAccounts: BankAccount[];
+  tags: string[];
+  metadata: Record<string, unknown>;
+  createdBy?: UUID;
+  updatedBy?: UUID;
+  createdAt: ISODateTime;
+  updatedAt: ISODateTime;
 }
 
-interface CompanySettings {
-  timezone: string;
+export interface BankAccount {
+  bankName: string;
+  accountName: string;
+  accountNumber: string;
   currency: string;
-  workingDays: number[];
-  workingHours: {
-    start: string;
-    end: string;
+  isDefault?: boolean;
+}
+
+export interface Product {
+  id: UUID;
+  companyId: UUID;
+  productCode: string;
+  name: string;
+  specification?: string;
+  productType: 'assembly' | 'component' | 'service';
+  unit: string;
+  lifecycleStatus: 'design' | 'pilot' | 'mass' | 'retired';
+  defaultProcessFlow?: ProcessFlow;
+  bom?: BomNode[];
+  documents: ProductDocument[];
+  metadata: Record<string, unknown>;
+  createdBy?: UUID;
+  updatedBy?: UUID;
+  createdAt: ISODateTime;
+  updatedAt: ISODateTime;
+}
+
+export interface ProcessFlow {
+  steps: Array<{
+    stepCode: string;
+    name: string;
+    durationHours?: number;
+    workstation?: string;
+  }>;
+}
+
+export interface BomNode {
+  itemId: UUID;
+  itemCode: string;
+  itemName: string;
+  quantity: number;
+  unit: string;
+  children?: BomNode[];
+}
+
+export interface ProductDocument {
+  fileId: UUID;
+  title: string;
+  version?: string;
+  type: 'spec' | 'drawing' | 'qa' | 'other';
+}
+
+export interface Order {
+  id: UUID;
+  companyId: UUID;
+  orderCode: string;
+  orderType: 'sales' | 'purchase';
+  status: 'draft' | 'approving' | 'scheduled' | 'in_progress' | 'shipped' | 'completed' | 'canceled';
+  approvalStatus: 'pending' | 'approved' | 'rejected';
+  customerId: UUID;
+  projectId?: UUID;
+  currency: string;
+  amountTotal: number;
+  taxAmount?: number;
+  paymentTerms?: string;
+  summary?: string;
+  lineItems: OrderLineItem[];
+  attachments: AttachmentRef[];
+  invoiceStatus: 'pending' | 'in_progress' | 'issued';
+  paymentMethod?: string;
+  paymentDate?: string;
+  sourcePayload: Record<string, unknown>;
+  createdBy?: UUID;
+  updatedBy?: UUID;
+  createdAt: ISODateTime;
+  updatedAt: ISODateTime;
+}
+
+export interface OrderLineItem {
+  productId: UUID;
+  productNameSnapshot: string;
+  specificationSnapshot?: string;
+  quantity: number;
+  unitPrice: number;
+  currency: string;
+  discountRate?: number;
+  taxRate?: number;
+  metadata?: Record<string, unknown>;
+}
+
+export interface WorkOrder {
+  id: UUID;
+  companyId: UUID;
+  workOrderCode: string;
+  orderId: UUID;
+  productId: UUID;
+  productNameSnapshot: string;
+  specificationSnapshot?: string;
+  batchNo?: string;
+  processName: string;
+  nextProcess?: string;
+  status: 'planned' | 'in_progress' | 'paused' | 'completed' | 'canceled';
+  approvalStatus: 'pending' | 'approved' | 'rejected';
+  metrics: {
+    plannedQuantity?: number;
+    actualQuantity?: number;
+    qualifiedQuantity?: number;
+    scrap?: {
+      material?: number;
+      process?: number;
+    };
   };
-  approvalSettings: ApprovalSettings;
-  aiSettings: AISettings;
-}
-```
-
-#### Relationships
-
-- 拥有多个 User (一对多)
-- 拥有多个 Department (一对多)
-- 拥有多个 Project (一对多)
-- 拥有多个 FinancialRecord (一对多)
-
-### Project (项目模型)
-
-**Purpose:** 表示项目信息，支持甘特图和成本管理
-
-**Key Attributes:**
-
-- id: string - 项目唯一标识符
-- name: string - 项目名称
-- description: string - 项目描述
-- companyId: string - 所属公司ID
-- managerId: string - 项目经理ID
-- status: ProjectStatus - 项目状态
-- priority: Priority - 优先级
-- budget: ProjectBudget - 项目预算
-- timeline: ProjectTimeline - 项目时间线
-- team: ProjectMember[] - 项目团队
-- progress: ProjectProgress - 项目进度
-- deliverables: Deliverable[] - 交付物
-- createdAt: Date - 创建时间
-- updatedAt: Date - 更新时间
-
-#### TypeScript Interface
-
-```typescript
-interface Project {
-  id: string;
-  name: string;
-  description: string;
-  companyId: string;
-  managerId: string;
-  status: 'planning' | 'active' | 'on_hold' | 'completed' | 'cancelled';
-  priority: 'low' | 'medium' | 'high' | 'critical';
-  budget: ProjectBudget;
-  timeline: ProjectTimeline;
-  team: ProjectMember[];
-  progress: ProjectProgress;
-  deliverables: Deliverable[];
-  createdAt: Date;
-  updatedAt: Date;
+  durationHours?: number;
+  operatorName?: string;
+  workDate?: string;
+  attachments: AttachmentRef[];
+  metadata: Record<string, unknown>;
+  createdBy?: UUID;
+  updatedBy?: UUID;
+  createdAt: ISODateTime;
+  updatedAt: ISODateTime;
 }
 
-interface ProjectTimeline {
-  startDate: Date;
-  endDate: Date;
-  milestones: Milestone[];
-  tasks: Task[];
-  dependencies: TaskDependency[];
-}
-
-interface ProjectBudget {
-  totalBudget: number;
-  allocatedBudget: number;
-  spentBudget: number;
-  currency: string;
-  costBreakdown: CostBreakdown[];
-}
-```
-
-#### Relationships
-
-- 关联 Company (多对一)
-- 关联 User (项目经理，多对一)
-- 拥有多个 Task (一对多)
-- 拥有多个 Deliverable (一对多)
-- 拥有多个 CostRecord (一对多)
-
-### AIConversation (AI对话模型)
-
-**Purpose:** 记录与AI助手的对话，支持多轮对话和上下文管理
-
-**Key Attributes:**
-
-- id: string - 对话唯一标识符
-- userId: string - 用户ID
-- agentType: AIAgentType - AI助手类型
-- sessionId: string - 会话ID
-- messages: ConversationMessage[] - 消息列表
-- context: ConversationContext - 对话上下文
-- status: ConversationStatus - 对话状态
-- metadata: ConversationMetadata - 元数据
-- createdAt: Date - 创建时间
-- updatedAt: Date - 更新时间
-
-#### TypeScript Interface
-
-```typescript
-interface AIConversation {
-  id: string;
-  userId: string;
-  agentType: 'document' | 'video' | 'finance' | 'technical' | 'legal';
-  sessionId: string;
-  messages: ConversationMessage[];
-  context: ConversationContext;
-  status: 'active' | 'completed' | 'archived';
-  metadata: ConversationMetadata;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-interface ConversationMessage {
-  id: string;
-  role: 'user' | 'assistant';
-  content: string;
-  timestamp: Date;
-  attachments?: MessageAttachment[];
-  metadata?: MessageMetadata;
-}
-
-interface ConversationContext {
-  currentProject?: string;
-  currentDocument?: string;
-  userPreferences: UserPreferences;
-  sessionVariables: Record<string, any>;
-}
-```
-
-#### Relationships
-
-- 关联 User (多对一)
-- 关联 AIConfiguration (多对一)
-- 拥有多个 ConversationMessage (一对多)
-
-### FinancialRecord (财务记录模型)
-
-**Purpose:** 表示财务数据，支持多数据库和报表生成
-
-**Key Attributes:**
-
-- id: string - 记录唯一标识符
-- companyId: string - 公司ID
-- type: FinancialType - 财务类型
-- category: FinancialCategory - 财务分类
-- amount: number - 金额
-- currency: string - 货币
-- description: string - 描述
-- date: Date - 财务日期
-- source: FinancialSource - 数据源
-- metadata: FinancialMetadata - 财务元数据
-- approvedBy?: string - 审批人ID
-- approvedAt?: Date - 审批时间
-- createdAt: Date - 创建时间
-- updatedAt: Date - 更新时间
-
-#### TypeScript Interface
-
-```typescript
-interface FinancialRecord {
-  id: string;
-  companyId: string;
-  type: 'income' | 'expense' | 'transfer';
-  category: FinancialCategory;
+export interface FinancialRecord {
+  id: UUID;
+  companyId: UUID;
+  orderId?: UUID;
+  counterpartyId?: UUID;
+  recordCode: string;
+  recordType: 'payment' | 'receipt' | 'cost' | 'adjustment';
+  status: 'pending' | 'posted' | 'void';
+  flowDirection: 'inflow' | 'outflow';
   amount: number;
   currency: string;
-  description: string;
-  date: Date;
-  source: FinancialSource;
-  metadata: FinancialMetadata;
-  approvedBy?: string;
-  approvedAt?: Date;
-  createdAt: Date;
-  updatedAt: Date;
+  occurredAt: ISODateTime;
+  reportingWindow?: string;
+  sourcePayload: Record<string, unknown>;
+  dimensions: Record<string, unknown>;
+  alertFlags: Record<string, unknown>;
+  attachments: AttachmentRef[];
+  createdBy?: UUID;
+  updatedBy?: UUID;
+  createdAt: ISODateTime;
+  updatedAt: ISODateTime;
 }
 
-interface FinancialCategory {
-  id: string;
-  name: string;
-  code: string;
-  parentId?: string;
-  level: number;
-  type: 'income' | 'expense';
+export interface ApprovalRequest {
+  id: UUID;
+  companyId: UUID;
+  workflowId: UUID;
+  requestCode: string;
+  title: string;
+  requesterId: UUID;
+  status: 'draft' | 'in_progress' | 'completed' | 'canceled';
+  approvalResult: 'pending' | 'approved' | 'rejected';
+  formPayload: Record<string, unknown>;
+  timeline: ApprovalTimelineEntry[];
+  linkedResources: {
+    orderId?: UUID;
+    workOrderId?: UUID;
+    customerId?: UUID;
+    productId?: UUID;
+    financialRecordId?: UUID;
+  };
+  attachments: AttachmentRef[];
+  resultPayload?: Record<string, unknown>;
+  submittedAt?: ISODateTime;
+  decidedAt?: ISODateTime;
+  createdAt: ISODateTime;
+  updatedAt: ISODateTime;
 }
 
-interface FinancialSource {
-  databaseId: string;
-  tableName: string;
-  recordId: string;
-  lastSyncAt: Date;
+export interface ApprovalTimelineEntry {
+  actorId: UUID;
+  actorName: string;
+  action: 'submit' | 'approve' | 'reject' | 'comment' | 'transfer' | 'notify';
+  comment?: string;
+  createdAt: ISODateTime;
+  metadata?: Record<string, unknown>;
+}
+
+export interface AttachmentRef {
+  attachmentId: UUID;
+  fileName: string;
+  url?: string;
+  category?: string;
 }
 ```
-
-#### Relationships
-
-- 关联 Company (多对一)
-- 关联 FinancialCategory (多对一)
-- 关联 User (审批人，多对一)
-- 关联 ApprovalRequest (一对多)
-
-**设计决策理由：**
-
-- **多租户支持**： 所有核心模型都包含 companyId，确保数据隔离
-- **审计追踪**： 包含创建时间、更新时间、审批信息等
-- **扩展性**： 使用元数据字段支持未来业务扩展
-- **类型安全**： 完整的 TypeScript 接口定义
-- **关系完整性**： 清晰的模型关系定义
-
----
 
 ## API Specification
 
-### REST API Specification
+- 认证
+  - `POST /auth/login`
+  - `POST /auth/refresh`
+  - `POST /auth/logout`
+  - `GET /auth/codes`
+- 客户管理
+  - `GET /customers`
+  - `POST /customers`
+  - `GET /customers/{id}`
+  - `PUT /customers/{id}`
+- 产品中心
+  - `GET /products`
+  - `POST /products`
+  - `GET /products/{id}`
+  - `PUT /products/{id}`
+- 订单中心
+  - `GET /orders`
+  - `POST /orders`
+  - `GET /orders/{id}`
+  - `PATCH /orders/{id}/status`
+- 生产管理
+  - `GET /work-orders`
+  - `POST /work-orders`
+  - `GET /work-orders/{id}`
+  - `PATCH /work-orders/{id}/report`
+- 财务管理
+  - `GET /financial-records`
+  - `POST /financial-records`
+- 审批管理
+  - `GET /approval-requests`
+  - `POST /approval-requests`
+- AI 对话
+  - `POST /ai/conversation`
 
-```yaml
-openapi: 3.0.0
-info:
-  title: FactoryOS 企业级 AI 协作平台 API
-  version: 1.0.0
-  description: |
-    为三家公司（福建微柏、福建鲤东、成都鲤东）提供统一的企业级AI协作平台API。
-    支持项目管理、财务报表、AI助手集成、审批流程等核心功能。
-
-    ## 认证方式
-    使用 Bearer Token (JWT) 进行身份认证：
-    `Authorization: Bearer <token>`
-
-    ## 多租户支持
-    通过 Header 指定公司上下文：
-    `X-Company-Code: weibo|lidong_fujian|lidong_chengdu`
-
-    ## 错误处理
-    所有API响应遵循统一的错误格式，详见错误处理部分。
-
-servers:
-  - url: https://api.factoryos.com/v1
-    description: 生产环境
-  - url: https://staging-api.factoryos.com/v1
-    description: 测试环境
-  - url: http://localhost:3000/v1
-    description: 开发环境
-
-security:
-  - BearerAuth: []
-
-components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-
-  schemas:
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        email:
-          type: string
-          format: email
-        username:
-          type: string
-        profile:
-          $ref: '#/components/schemas/UserProfile'
-        companyId:
-          type: string
-        departmentId:
-          type: string
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/Role'
-        status:
-          type: string
-          enum: [active, inactive, locked]
-        lastLoginAt:
-          type: string
-          format: date-time
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-
-    UserProfile:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        avatar:
-          type: string
-        phone:
-          type: string
-        position:
-          type: string
-        employeeId:
-          type: string
-        managerId:
-          type: string
-
-    Company:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        code:
-          type: string
-        type:
-          type: string
-          enum: [weibo, lidong_fujian, lidong_chengdu]
-        settings:
-          $ref: '#/components/schemas/CompanySettings'
-        status:
-          type: string
-          enum: [active, suspended, trial]
-        subscriptionExpiresAt:
-          type: string
-          format: date-time
-
-    Project:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        description:
-          type: string
-        companyId:
-          type: string
-        managerId:
-          type: string
-        status:
-          type: string
-          enum: [planning, active, on_hold, completed, cancelled]
-        priority:
-          type: string
-          enum: [low, medium, high, critical]
-        budget:
-          $ref: '#/components/schemas/ProjectBudget'
-        timeline:
-          $ref: '#/components/schemas/ProjectTimeline'
-        progress:
-          $ref: '#/components/schemas/ProjectProgress'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-
-    AIConversation:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        userId:
-          type: string
-        agentType:
-          type: string
-          enum: [document, video, finance, technical, legal]
-        sessionId:
-          type: string
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConversationMessage'
-        status:
-          type: string
-          enum: [active, completed, archived]
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-
-    ConversationMessage:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        role:
-          type: string
-          enum: [user, assistant]
-        content:
-          type: string
-        timestamp:
-          type: string
-          format: date-time
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/MessageAttachment'
-
-    ApiResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        data:
-          type: object
-        message:
-          type: string
-        timestamp:
-          type: string
-          format: date-time
-        requestId:
-          type: string
-
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-            details:
-              type: object
-            timestamp:
-              type: string
-              format: date-time
-            requestId:
-              type: string
-
-paths:
-  # 认证相关 API
-  /auth/login:
-    post:
-      summary: 用户登录
-      tags:
-        - Authentication
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                password:
-                  type: string
-                companyCode:
-                  type: string
-                  enum: [weibo, lidong_fujian, lidong_chengdu]
-              required:
-                - email
-                - password
-                - companyCode
-      responses:
-        '200':
-          description: 登录成功
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          user:
-                            $ref: '#/components/schemas/User'
-                          token:
-                            type: string
-                          refreshToken:
-                            type: string
-                          expiresIn:
-                            type: number
-        '401':
-          description: 认证失败
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-
-  /auth/refresh:
-    post:
-      summary: 刷新Token
-      tags:
-        - Authentication
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                refreshToken:
-                  type: string
-              required:
-                - refreshToken
-      responses:
-        '200':
-          description: Token刷新成功
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          token:
-                            type: string
-                          refreshToken:
-                            type: string
-                          expiresIn:
-                            type: number
-
-  # 用户管理 API
-  /users:
-    get:
-      summary: 获取用户列表
-      tags:
-        - Users
-      parameters:
-        - name: page
-          in: query
-          schema:
-            type: integer
-            default: 1
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 20
-        - name: search
-          in: query
-          schema:
-            type: string
-        - name: departmentId
-          in: query
-          schema:
-            type: string
-        - name: status
-          in: query
-          schema:
-            type: string
-            enum: [active, inactive, locked]
-      responses:
-        '200':
-          description: 获取成功
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          users:
-                            type: array
-                            items:
-                              $ref: '#/components/schemas/User'
-                          pagination:
-                            $ref: '#/components/schemas/Pagination'
-
-    post:
-      summary: 创建用户
-      tags:
-        - Users
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                username:
-                  type: string
-                password:
-                  type: string
-                profile:
-                  $ref: '#/components/schemas/UserProfile'
-                roles:
-                  type: array
-                  items:
-                    type: string
-              required:
-                - email
-                - username
-                - password
-      responses:
-        '201':
-          description: 创建成功
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        $ref: '#/components/schemas/User'
-
-  /users/{id}:
-    get:
-      summary: 获取用户详情
-      tags:
-        - Users
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '200':
-          description: 获取成功
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        $ref: '#/components/schemas/User'
-
-    put:
-      summary: 更新用户信息
-      tags:
-        - Users
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                profile:
-                  $ref: '#/components/schemas/UserProfile'
-                roles:
-                  type: array
-                  items:
-                    type: string
-                status:
-                  type: string
-                  enum: [active, inactive, locked]
-      responses:
-        '200':
-          description: 更新成功
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        $ref: '#/components/schemas/User'
-
-  # 项目管理 API
-  /projects:
-    get:
-      summary: 获取项目列表
-      tags:
-        - Projects
-      parameters:
-        - name: page
-          in: query
-          schema:
-            type: integer
-            default: 1
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 20
-        - name: status
-          in: query
-          schema:
-            type: string
-            enum: [planning, active, on_hold, completed, cancelled]
-        - name: managerId
-          in: query
-          schema:
-            type: string
-        - name: priority
-          in: query
-          schema:
-            type: string
-            enum: [low, medium, high, critical]
-      responses:
-        '200':
-          description: 获取成功
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          projects:
-                            type: array
-                            items:
-                              $ref: '#/components/schemas/Project'
-                          pagination:
-                            $ref: '#/components/schemas/Pagination'
-
-    post:
-      summary: 创建项目
-      tags:
-        - Projects
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                description:
-                  type: string
-                managerId:
-                  type: string
-                priority:
-                  type: string
-                  enum: [low, medium, high, critical]
-                budget:
-                  $ref: '#/components/schemas/ProjectBudget'
-                timeline:
-                  $ref: '#/components/schemas/ProjectTimeline'
-              required:
-                - name
-                - managerId
-      responses:
-        '201':
-          description: 创建成功
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        $ref: '#/components/schemas/Project'
-
-  # AI 助手 API
-  /ai/conversations:
-    get:
-      summary: 获取AI对话列表
-      tags:
-        - AI Assistant
-      parameters:
-        - name: agentType
-          in: query
-          schema:
-            type: string
-            enum: [document, video, finance, technical, legal]
-        - name: status
-          in: query
-          schema:
-            type: string
-            enum: [active, completed, archived]
-        - name: page
-          in: query
-          schema:
-            type: integer
-            default: 1
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 20
-      responses:
-        '200':
-          description: 获取成功
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          conversations:
-                            type: array
-                            items:
-                              $ref: '#/components/schemas/AIConversation'
-                          pagination:
-                            $ref: '#/components/schemas/Pagination'
-
-    post:
-      summary: 创建新的AI对话
-      tags:
-        - AI Assistant
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                agentType:
-                  type: string
-                  enum: [document, video, finance, technical, legal]
-                initialMessage:
-                  type: string
-                context:
-                  type: object
-                  properties:
-                    currentProject:
-                      type: string
-                    currentDocument:
-                      type: string
-              required:
-                - agentType
-                - initialMessage
-      responses:
-        '201':
-          description: 对话创建成功
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        $ref: '#/components/schemas/AIConversation'
-
-  /ai/conversations/{id}/messages:
-    post:
-      summary: 发送消息到AI对话
-      tags:
-        - AI Assistant
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                content:
-                  type: string
-                attachments:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/MessageAttachment'
-              required:
-                - content
-      responses:
-        '200':
-          description: 消息发送成功
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          message:
-                            $ref: '#/components/schemas/ConversationMessage'
-                          response:
-                            $ref: '#/components/schemas/ConversationMessage'
-
-  # 财务管理 API
-  /finance/records:
-    get:
-      summary: 获取财务记录
-      tags:
-        - Finance
-      parameters:
-        - name: startDate
-          in: query
-          schema:
-            type: string
-            format: date
-        - name: endDate
-          in: query
-          schema:
-            type: string
-            format: date
-        - name: type
-          in: query
-          schema:
-            type: string
-            enum: [income, expense, transfer]
-        - name: category
-          in: query
-          schema:
-            type: string
-        - name: page
-          in: query
-          schema:
-            type: integer
-            default: 1
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 20
-      responses:
-        '200':
-          description: 获取成功
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          records:
-                            type: array
-                            items:
-                              $ref: '#/components/schemas/FinancialRecord'
-                          pagination:
-                            $ref: '#/components/schemas/Pagination'
-                          summary:
-                            $ref: '#/components/schemas/FinancialSummary'
-
-  /finance/reports:
-    post:
-      summary: 生成财务报表
-      tags:
-        - Finance
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                type:
-                  type: string
-                  enum: [daily, weekly, monthly]
-                startDate:
-                  type: string
-                  format: date
-                endDate:
-                  type: string
-                  format: date
-                format:
-                  type: string
-                  enum: [pdf, excel, json]
-                includeCharts:
-                  type: boolean
-                  default: false
-              required:
-                - type
-                - startDate
-                - endDate
-      responses:
-        '202':
-          description: 报表生成任务已创建
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          taskId:
-                            type: string
-                          estimatedCompletion:
-                            type: string
-                            format: date-time
-
-  # 审批流程 API
-  /approvals:
-    get:
-      summary: 获取审批列表
-      tags:
-        - Approvals
-      parameters:
-        - name: status
-          in: query
-          schema:
-            type: string
-            enum: [pending, approved, rejected, cancelled]
-        - name: type
-          in: query
-          schema:
-            type: string
-        - name: role
-          in: query
-          schema:
-            type: string
-            enum: [requester, approver, observer]
-        - name: page
-          in: query
-          schema:
-            type: integer
-            default: 1
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 20
-      responses:
-        '200':
-          description: 获取成功
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          approvals:
-                            type: array
-                            items:
-                              $ref: '#/components/schemas/ApprovalRequest'
-                          pagination:
-                            $ref: '#/components/schemas/Pagination'
-
-  # 钉钉集成 API
-  /integration/dingtalk/sync:
-    post:
-      summary: 同步钉钉数据
-      tags:
-        - Integrations
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                syncType:
-                  type: string
-                  enum: [users, departments, attendance, workrecords]
-                dateRange:
-                  type: object
-                  properties:
-                    startDate:
-                      type: string
-                      format: date
-                    endDate:
-                      type: string
-                      format: date
-              required:
-                - syncType
-      responses:
-        '202':
-          description: 同步任务已创建
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ApiResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          syncId:
-                            type: string
-                          status:
-                            type: string
-                            enum: [queued, processing, completed, failed]
+所有列表接口遵循统一分页返回结构：
+```json
+{
+  "list": [],
+  "page": 1,
+  "pageSize": 20,
+  "total": 0
+}
 ```
-
-**API 设计理由：**
-
-- **RESTful 设计**： 遵循 REST 原则，使用标准 HTTP 方法
-- **统一响应格式**： 所有 API 使用统一的响应结构
-- **分页支持**： 列表接口支持分页，避免大数据量问题
-- **多租户**： 通过 Header 实现公司数据隔离
-- **错误处理**： 标准化的错误响应格式
-- **文档化**： 完整的 OpenAPI 3.0 规范，便于生成文档和 SDK
-
----
 
 ## Components
 
 ### Component List
 
-**API Gateway (API 网关)**
+| 组件 / 服务             | 职责描述                                                                                                                                                                                        |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| API Gateway / BFF       | 聚合前端请求、统一认证、注入 companyId / tenant 上下文、做请求级缓存与速率限制。                                                                                                              |
+| Auth Service            | 账户、会话、RBAC/ABAC 判定，多公司隔离策略。                                                                                                                                                     |
+| Workflow Service        | 审批流程配置与执行、SLA 监控，与订单、产品、工单同步。                                                                                                                                          |
+| Project Service         | 以“按订单立项”为核心，跟踪微柏自动化项目、鲤东交付的里程碑。                                                                                                                                     |
+| Finance Service         | 财务凭证、报表、预警，与订单和工单生成的数据对齐。                                                                                                                                              |
+| Customer Service        | 客户/供应商档案、银行及税务信息、信用标签，服务微柏自动化项目与鲤东供应链。                                                                                                                     |
+| Product Service         | 产品目录、BOM、工艺流程、变更管理，支撑微柏机器人、鲤东零部件等产品线。                                                                                                                         |
+| Order Service           | 销售/采购订单生命周期管理，与客户、产品、项目、财务及审批联动。                                                                                                                                 |
+| Manufacturing Service   | 生产工单排程、工序产量、废品/质检记录，覆盖鲤东汽车零部件生产与成都鲤东调度。                                                                                                                   |
+| HR Service              | 人员档案、效率评估、排班，支撑多公司人力协同。                                                                                                                                                  |
+| Knowledge Service       | 资料、设计库、文档检索与版本管理。                                                                                                                                                              |
+| Integration Service     | 钉钉、数据库连接器、Webhook、消息队列等外围集成。                                                                                                                                               |
+| Dify Proxy              | Dify 安全集成、Token 签名、上下文裁剪、消息审计。                                                                                                                                               |
+| AI Conversation Shell   | 前端对话层、命令面板、卡片渲染、ActionBus。                                                                                                                                                     |
+| PostgreSQL / Redis / OSS| 多租户数据存储、缓存、文件与版本管理。                                                                                                                                                         |
 
-- **Responsibility**: 统一入口处理所有 API 请求，实现认证、限流、路由和监控
-- **Key Interfaces**: HTTP/HTTPS 入口端点, JWT 认证中间件, 请求路由规则, 限流和熔断机制, 请求/响应日志记录
-- **Dependencies**: 认证服务、配置中心、监控系统
-- **Technology Stack**: Kong + Express.js 中间件 + Redis
-
-**Authentication Service (认证服务)**
-
-- **Responsibility**: 处理用户身份认证、授权和会话管理
-- **Key Interfaces**: /auth/login, /auth/refresh, /auth/logout, /auth/verify, /permissions/check
-- **Dependencies**: 用户数据库、Redis 缓存、邮件服务
-- **Technology Stack**: Node.js + Express.js + JWT + bcrypt + Redis
-
-**AI Integration Service (AI 集成服务)**
-
-- **Responsibility**: 管理与 Dify 平台的集成，处理 AI 对话和内容生成
-- **Key Interfaces**: /ai/conversations, /ai/agents/config, /ai/webhook/dify, PostMessage 通信接口, 文件上传/下载接口
-- **Dependencies**: Dify 平台、文件存储、对话数据库
-- **Technology Stack**: Node.js + Express.js + PostMessage API + iframe 沙箱
-
-**Multi-Database Access Layer (多数据库访问层)**
-
-- **Responsibility**: 提供统一的多数据库访问接口，支持不同公司的数据库连接
-- **Key Interfaces**: 数据库连接管理器, 查询路由器（基于公司代码）, 数据同步接口, 事务管理器, 连接池管理
-- **Dependencies**: MySQL、PostgreSQL、SQL Server、Redis
-- **Technology Stack**: Prisma ORM + TypeORM + 连接池管理器
-
-**Workflow Engine (工作流引擎)**
-
-- **Responsibility**: 管理审批流程、业务流程自动化和状态机控制
-- **Key Interfaces**: 流程定义接口, 流程实例管理, 任务分配和处理, 条件判断和路由, 流程监控接口
-- **Dependencies**: 用户服务、通知服务、数据库
-- **Technology Stack**: BPMN.js + Node.js + 状态机库
-
-**Financial Service (财务服务)**
-
-- **Responsibility**: 处理财务数据管理、报表生成和财务分析
-- **Key Interfaces**: 财务记录 CRUD, 报表生成接口, 数据同步接口, 财务分析接口, 预警通知接口
-- **Dependencies**: 多数据库连接器、报表引擎、通知服务
-- **Technology Stack**: Node.js + Excel.js + PDFKit + 数据分析库
-
-**Project Management Service (项目管理服务)**
-
-- **Responsibility**: 管理项目信息、甘特图、成本分析和团队协作
-- **Key Interfaces**: 项目 CRUD 操作, 甘特图数据接口, 成本分析接口, 团队管理接口, 进度跟踪接口
-- **Dependencies**: 用户服务、财务服务、通知服务
-- **Technology Stack**: Node.js + 甘特图库 + 数据分析库
-
-**DingTalk Integration Service (钉钉集成服务)**
-
-- **Responsibility**: 处理与钉钉 API 的集成，同步用户、组织架构和工作数据
-- **Key Interfaces**: 用户同步接口, 组织架构同步, 考勤数据获取, 工作记录同步, 消息推送接口
-- **Dependencies**: 钉钉 API、用户服务、数据库
-- **Technology Stack**: Node.js + 钉钉 SDK + HTTP 客户端
-
-**File Management Service (文件管理服务)**
-
-- **Responsibility**: 管理文件上传、存储、下载和版本控制
-- **Key Interfaces**: 文件上传/下载, 文件元数据管理, 版本控制接口, 权限检查接口, 文件预览接口
-- **Dependencies**: 阿里云 OSS、数据库、权限服务
-- **Technology Stack**: Node.js + OSS SDK + 文件处理库
-
-**Notification Service (通知服务)**
-
-- **Responsibility**: 管理系统通知、邮件发送和消息推送
-- **Key Interfaces**: 通知创建和发送, 邮件发送接口, 消息推送接口, 通知模板管理, 通知历史查询
-- **Dependencies**: 邮件服务、钉钉 API、数据库
-- **Technology Stack**: Node.js + Nodemailer + 消息队列
-
-**Frontend Application (前端应用)**
-
-- **Responsibility**: 提供用户界面，处理用户交互和状态管理
-- **Key Interfaces**: Vue 3 组件接口, 路由管理接口, 状态管理接口, API 客户端接口, 主题和配置接口
-- **Dependencies**: API 网关、AI 集成服务、文件服务
-- **Technology Stack**: Vue 3 + TypeScript + Pinia + Ant Design Vue + Vite
-
-### Component Diagrams
-
-#### C4 Container Diagram
-
-```C4Context
-title FactoryOS 系统上下文图
-
-Person(user, "系统用户", "使用 FactoryOS 平台的三家公司员工")
-Person(admin, "系统管理员", "负责系统维护和配置")
-System(dingtalk, "钉钉系统", "企业通信和协作平台")
-System(dify, "Dify AI平台", "提供AI对话能力")
-System(banks, "银行系统", "财务数据来源")
-
-System_Ext(factoryos, "FactoryOS 企业级AI协作平台", "为三家公司提供统一的AI协作平台") {
-    Container(webapp, "Web应用", "Vue3 + TypeScript", "用户界面和应用逻辑")
-    Container(apigateway, "API网关", "Kong + Express", "统一入口和认证")
-    Container(auth, "认证服务", "Node.js + JWT", "用户认证和授权")
-    Container(ai, "AI集成服务", "Node.js + iframe", "Dify平台集成")
-    Container(finance, "财务服务", "Node.js + 多数据库", "财务数据管理和报表")
-    Container(project, "项目服务", "Node.js", "项目管理和甘特图")
-    Container(workflow, "工作流引擎", "BPMN.js", "审批流程管理")
-    Container(dingtalk_svc, "钉钉集成", "Node.js + SDK", "钉钉API集成")
-    ContainerDb(db1, "业务数据库", "PostgreSQL", "统一业务数据存储")
-    ContainerDb(db2, "公司数据库", "MySQL/PostgreSQL/SQL Server", "三家公司财务数据")
-    ContainerDb(cache, "缓存", "Redis", "会话和缓存数据")
-}
-
-Rel(user, webapp, "使用", "HTTPS")
-Rel(admin, webapp, "管理", "HTTPS")
-Rel(webapp, apigateway, "调用API", "HTTPS")
-Rel(apigateway, auth, "认证请求", "HTTP")
-Rel(apigateway, ai, "AI对话", "HTTP")
-Rel(apigateway, finance, "财务操作", "HTTP")
-Rel(apigateway, project, "项目管理", "HTTP")
-Rel(apigateway, workflow, "工作流操作", "HTTP")
-Rel(apigateway, dingtalk_svc, "钉钉同步", "HTTP")
-
-Rel(ai, dify, "AI对话", "iframe + PostMessage")
-Rel(dingtalk_svc, dingtalk, "API调用", "HTTPS")
-Rel(finance, banks, "获取数据", "HTTPS")
-
-Rel(auth, db1, "用户数据", "SQL")
-Rel(ai, db1, "对话数据", "SQL")
-Rel(finance, db2, "财务数据", "SQL")
-Rel(project, db1, "项目数据", "SQL")
-Rel(workflow, db1, "流程数据", "SQL")
-Rel(dingtalk_svc, db1, "同步数据", "SQL")
-
-Rel(auth, cache, "会话缓存", "Redis")
-Rel(apigateway, cache, "限流缓存", "Redis")
-```
-
-#### Component Interaction Diagram
+### Component Interaction Diagram
 
 ```mermaid
-graph TD
-    subgraph "前端层"
-        UI[用户界面]
-        Store[Pinia Store]
-        Router[Vue Router]
-    end
+sequenceDiagram
+    participant Web as Web App
+    participant Gateway as API Gateway
+    participant Auth as Auth Service
+    participant Customer as Customer Service
+    participant Product as Product Service
+    participant Order as Order Service
+    participant MFG as Manufacturing Service
+    participant Finance as Finance Service
+    participant Workflow as Workflow Service
+    participant Project as Project Service
+    participant DB as PostgreSQL
+    participant Cache as Redis
 
-    subgraph "API网关层"
-        Gateway[API Gateway]
-        AuthMW[认证中间件]
-        RateMW[限流中间件]
-        LogMW[日志中间件]
-    end
+    Web->>Gateway: POST /orders
+    Gateway->>Auth: Validate token & permissions
+    Auth-->>Gateway: OK (tenant context)
+    Gateway->>Customer: Verify customer & credit
+    Gateway->>Product: Fetch product & BOM snapshot
+    Gateway->>Order: Create order with line items
+    Order->>Workflow: Trigger approval if needed
+    Order->>Project: Sync milestone (order-driven project)
+    Order->>Finance: Reserve amount & payment schedule
+    Order->>DB: Persist order aggregate
+    Order->>Cache: Warm status cache
 
-    subgraph "服务层"
-        AuthSvc[认证服务]
-        AISvc[AI集成服务]
-        FinanceSvc[财务服务]
-        ProjectSvc[项目服务]
-        WorkflowSvc[工作流服务]
-        DingTalkSvc[钉钉服务]
-    end
-
-    subgraph "数据层"
-        MainDB[(主数据库)]
-        CompanyDBs[(公司数据库)]
-        Cache[(Redis缓存)]
-        Files[(文件存储)]
-    end
-
-    subgraph "外部服务"
-        Dify[Dify平台]
-        DingTalk[钉钉API]
-        Banks[银行API]
-    end
-
-    UI --> Store
-    UI --> Router
-    Store --> Gateway
-    Router --> Gateway
-
-    Gateway --> AuthMW
-    AuthMW --> RateMW
-    RateMW --> LogMW
-
-    LogMW --> AuthSvc
-    LogMW --> AISvc
-    LogMW --> FinanceSvc
-    LogMW --> ProjectSvc
-    LogMW --> WorkflowSvc
-    LogMW --> DingTalkSvc
-
-    AuthSvc --> MainDB
-    AuthSvc --> Cache
-
-    AISvc --> MainDB
-    AISvc --> Files
-    AISvc --> Dify
-
-    FinanceSvc --> CompanyDBs
-    FinanceSvc --> MainDB
-    FinanceSvc --> Banks
-
-    ProjectSvc --> MainDB
-    ProjectSvc --> Files
-
-    WorkflowSvc --> MainDB
-    WorkflowSvc --> Cache
-
-    DingTalkSvc --> MainDB
-    DingTalkSvc --> DingTalk
+    Web->>Gateway: POST /work-orders/report
+    Gateway->>Auth: Validate token & scope
+    Gateway->>MFG: Record process metrics
+    MFG->>Order: Update fulfillment progress
+    MFG->>Product: Reference process flow & quality rules
+    MFG->>Finance: Update WIP/成本
+    MFG->>DB: Persist work order metrics
 ```
-
-**组件设计理由：**
-
-- **单一职责**： 每个组件都有明确的职责边界
-- **松耦合**： 组件间通过标准接口通信，降低依赖
-- **高内聚**： 相关功能聚合在同一组件内
-- **可扩展**： 支持独立部署和水平扩展
-- **可测试**： 清晰的接口便于单元测试和集成测试
-
----
 
 ## External APIs
 
